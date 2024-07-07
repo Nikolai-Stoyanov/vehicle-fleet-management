@@ -1,0 +1,11 @@
+{
+  "backend": {
+    "baseUrl": "http://localhost:8080"
+  },
+  "environment": {
+    "name": "local"
+  },
+  "appName": "Vehicle Fleet Management",
+  "appVersion": "1.0.0",
+  "debugIsEnabled": "true"
+}

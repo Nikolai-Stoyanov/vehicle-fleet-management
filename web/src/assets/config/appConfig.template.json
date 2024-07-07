@@ -1,0 +1,11 @@
+{
+  "backend": {
+    "baseUrl": "$BACKEND_URL"
+  },
+  "environment": {
+    "name": "$ENVIRONMENT_NAME"
+  },
+  "appName": "$APP_NAME",
+  "appVersion": "$APP_VERSION",
+  "debugIsEnabled": "$DEBUG_IS_ENABLED"
+}
