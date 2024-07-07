@@ -1,8 +1,19 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import {provideHttpClient} from "@angular/common/http";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 import { routes } from './app.routes';
+import {appBootstrap} from "./app-bootstrap";
+import {AppConfigService} from "./app-config.service";
+import {httpInterceptorProviders} from "./http-interceptors";
+
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideAnimations(),
+   AppConfigService, appBootstrap, httpInterceptorProviders,
+  ]
 };

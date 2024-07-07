@@ -1,0 +1,34 @@
+<nz-layout class="app-layout">
+  <nz-header>
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/images/car.png" alt="logo" />
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+      <li nz-menu-item nzSelected routerLink="/home">Home</li>
+      <li nz-menu-item routerLink="/aboutUs">About us</li>
+      <li nz-menu-item routerLink="/contacts">Contacts</li>
+      <span class="greeting" >
+        <span>Hallo </span>
+        <span>User</span>
+      </span>
+      <li nz-menu-item *ngIf="isCollapsed">Login</li>
+      <li nz-menu-item *ngIf="isCollapsed">Register</li>
+      <li nz-menu-item *ngIf="!isCollapsed">Logout</li>
+    </ul>
+
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzWidth="200px" nzTheme="light" *ngIf="!isCollapsed">
+      <div class="menu">
+        <vfm-menu></vfm-menu>
+      </div>
+    </nz-sider>
+    <nz-layout class="inner-layout">
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
