@@ -1,8 +1,6 @@
 package my.project.vehiclefleetmanagement.model.entity.car;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 @Entity
@@ -19,4 +17,8 @@ public class FuelCard extends BaseEntity {
     private String moneyLimit;
     @Column(nullable = false, name = "is_active")
     private boolean isActive;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "carRecord_id")
+    private CarRecord carRecord;
 }

@@ -1,10 +1,9 @@
 package my.project.vehiclefleetmanagement.model.entity.car;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.VehicleModel;
 
 import java.time.LocalDate;
 
@@ -22,4 +21,8 @@ public class RegistrationNumber extends BaseEntity {
 
     @Column(nullable = false)
     private boolean isActive;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "registration_certificate_data_id")
+    private RegistrationCertificateData registrationCertificateData;
 }

@@ -19,5 +19,8 @@ public class Vignette extends BaseCarDocumentEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "vignette_type")
     private VignetteType vignetteType;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "carRecord_id")
+    private CarRecord carRecord;
 
 }

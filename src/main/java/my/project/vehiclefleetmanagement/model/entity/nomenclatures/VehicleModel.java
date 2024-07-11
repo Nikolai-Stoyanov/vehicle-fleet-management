@@ -1,9 +1,6 @@
 package my.project.vehiclefleetmanagement.model.entity.nomenclatures;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 
@@ -23,5 +20,6 @@ public class VehicleModel extends BaseEntity {
     @Column()
     private LocalDate year;
     @ManyToOne(optional = false)
+    @JoinColumn(name = "make_id")
     private VehicleMake make;
 }

@@ -35,11 +35,12 @@ public class Owner extends BaseEntity {
     private String stay;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "person-responsible_id")
     private CarPerson personResponsible;
 
-    @ManyToMany()
+    @OneToMany(mappedBy = "owner")
     private List<CarPerson> drivers;
 
     @OneToMany(mappedBy = "owner")
-    private List<CarRecord> carIdList;
+    private List<CarRecord> carRecordsList;
 }

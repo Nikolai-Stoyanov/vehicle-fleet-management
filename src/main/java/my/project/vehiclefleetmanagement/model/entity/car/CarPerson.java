@@ -1,8 +1,6 @@
 package my.project.vehiclefleetmanagement.model.entity.car;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 @Entity
@@ -22,4 +20,7 @@ public class CarPerson extends BaseEntity {
     @Column(nullable = false, name = "is_active")
     private boolean isActive;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }

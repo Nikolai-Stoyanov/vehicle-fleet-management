@@ -18,10 +18,11 @@ import java.util.List;
 public class RegistrationCertificateData extends BaseEntity {
 
     @Column(name = "registration_number")
-    @OneToMany()
+    @OneToMany(mappedBy = "registrationCertificateData")
     private List<RegistrationNumber> registrationNumbers;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "model_id")
     private VehicleModel model;
 
     @Column(nullable = false,name = "frame_number")
@@ -51,8 +52,7 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(nullable = false,name = "load_capacity")
     private int loadCapacity;
 
-    @Column(name = "emission_standard")
-    @OneToMany()
+    @OneToMany(mappedBy = "registrationCertificateData")
     private List<EmissionStandard> emissionStandards;
 
     @Column(nullable = false,name = "first_registration_date")

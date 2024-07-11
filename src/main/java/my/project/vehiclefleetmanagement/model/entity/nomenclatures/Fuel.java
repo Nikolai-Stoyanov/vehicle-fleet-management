@@ -17,4 +17,8 @@ public class Fuel extends BaseEntity {
 
     @Column()
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "fuelSupplier_id")
+    private FuelSupplier fuelSupplier;
 }

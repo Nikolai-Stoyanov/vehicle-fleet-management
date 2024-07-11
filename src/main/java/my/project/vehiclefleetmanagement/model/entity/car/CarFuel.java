@@ -25,4 +25,8 @@ public class CarFuel extends BaseEntity {
 
     @Column(name = "money_limit")
     private int moneyLimit;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "carRecord_id")
+    private CarRecord carRecord;
 }

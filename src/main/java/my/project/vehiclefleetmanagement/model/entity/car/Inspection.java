@@ -15,4 +15,8 @@ public class Inspection extends BaseCarDocumentEntity {
     @Column(nullable = false, name = "document_type")
     private DocumentType documentType;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "carRecord_id")
+    private CarRecord carRecord;
+
 }

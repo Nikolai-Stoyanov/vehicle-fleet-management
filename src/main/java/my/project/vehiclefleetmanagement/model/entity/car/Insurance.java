@@ -14,4 +14,7 @@ public class Insurance extends BaseCarDocumentEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "document_type")
     private DocumentType documentType;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "carRecord_id")
+    private CarRecord carRecord;
 }

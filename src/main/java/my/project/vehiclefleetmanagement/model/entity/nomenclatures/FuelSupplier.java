@@ -18,6 +18,6 @@ public class FuelSupplier extends BaseEntity {
     @Column()
     private String description;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "fuelSupplier")
     private List<Fuel> fuelList;
 }

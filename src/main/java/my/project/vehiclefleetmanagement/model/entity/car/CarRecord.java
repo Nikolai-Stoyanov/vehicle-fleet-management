@@ -3,7 +3,6 @@ package my.project.vehiclefleetmanagement.model.entity.car;
 import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.VehicleType;
 import my.project.vehiclefleetmanagement.model.enums.DrivingCategoryType;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarRecord extends BaseEntity {
+
     @Column(nullable = false,name = "controlling_order")
     private String controllingOrder;
 
@@ -27,34 +27,27 @@ public class CarRecord extends BaseEntity {
     @Column()
     private String description;
 
-    @ManyToOne(optional = false)
-    private VehicleType vehicleType;
-
     @OneToOne(optional = false)
+    @JoinColumn(name = "registration_certificate_data_id", referencedColumnName = "id")
     private RegistrationCertificateData registrationCertificateData;
 
-    @OneToOne(optional = false)
-    private CarAdditionalInfo carAdditionalInfo;
-
-    @OneToMany()
+    @OneToMany(mappedBy = "carRecord")
     private List<CarFuel> fuelList;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "carRecord")
     private List<Inspection> inspectionList;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "carRecord")
     private List<Insurance> insuranceList;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "carRecord")
     private List<Vignette> vignetteList;
 
-    @ManyToMany()
-    private List<Norm> normList;
-
-    @OneToMany()
+    @OneToMany(mappedBy = "carRecord")
     private List<FuelCard> fuelCardList;
 
     @Column(name = "created_by")
@@ -65,13 +58,8 @@ public class CarRecord extends BaseEntity {
     private String updatedBy;
     @Column( name = "updated_at")
     private Long updatedAt;
-
     @OneToOne()
+    @JoinColumn(name = "mileage_id", referencedColumnName = "id")
     private Mileage mileage;
 
-    @OneToOne()
-    private EngineHour primaryEngine;
-
-    @OneToOne()
-    private EngineHour additionalEngine;
 }
