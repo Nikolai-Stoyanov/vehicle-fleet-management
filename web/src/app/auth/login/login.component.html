@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <h1 class="greetings">Log in</h1>
+  <div class="inner-content ">
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+      <vfm-form-item label="Username" [labelSpan]="6" [controlSpan]="18">
+        <vfm-text-input id="username" formControlName="username" prefixIcon="user"></vfm-text-input>
+      </vfm-form-item>
+
+      <vfm-form-item label="Password" [labelSpan]="6" [controlSpan]="18">
+        <vfm-text-input
+          [type]="passwordVisible ? 'text' : 'password'"
+          [suffix]="suffixTemplate"
+          formControlName="password"
+          [prefix]="prefixTemplate"
+          id="password"
+        ></vfm-text-input>
+      </vfm-form-item>
+
+      <ng-template #suffixTemplate>
+        <i
+          nz-icon
+          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+          (click)="passwordVisible = !passwordVisible"
+        ></i>
+      </ng-template>
+      <ng-template #prefixTemplate>
+        <i nz-icon nzType="lock" nzTheme="outline"></i>
+      </ng-template>
+      <div class="login-form-button">
+        <button nz-button [nzLoading]="loading" style="width: 100%" nzType="primary">
+          Login
+        </button>
+      </div>
+    </form>
+    <div class="register-text">
+      <span
+      > Don't have an account?
+        <span routerLink="/register">Register</span>
+      </span>
+    </div>
+  </div>
+</div>

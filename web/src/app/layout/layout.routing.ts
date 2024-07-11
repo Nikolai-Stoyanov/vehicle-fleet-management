@@ -16,8 +16,20 @@ const routes: Routes = [
         redirectTo: 'waybill',
       },
       {
+        path: 'login',
+        loadChildren: () => import('../auth/login/login.module').then((m) => m.LoginModule)
+      },
+      {
+        path: 'register',
+        loadChildren: () => import('../auth/register/register.module').then((m) => m.RegisterModule)
+      },
+      {
         path: 'home',
-        loadChildren: () => import('../home/home.module').then((m) => m.HomeModule)
+        loadChildren: () => import('../pages/home/home.module').then((m) => m.HomeModule)
+      },
+      {
+        path: 'cars-brands',
+        loadChildren: () => import('../pages/nomenclatures/cars-brands').then((m) => m.CarsBrandsModule)
       },
       {
         path: '**',

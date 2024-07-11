@@ -1,0 +1,22 @@
+<div
+  [ngClass]="{
+    'ant-form-item-has-error': control && control.invalid && (control.dirty || control.touched)
+  }"
+>
+  <nz-input-group [nzPrefixIcon]="prefixIcon" [nzPrefix]="prefix" [nzSuffixIcon]="suffixIcon" [nzSuffix]="suffix">
+    <input
+      [type]="type"
+      nz-input
+      ngDefaultControl
+      id="{{ id }}"
+      placeholder="{{ placeholder }}"
+      [disabled]="disabled"
+      [ngClass]="{
+        'ng-dirty ng-invalid': control && control.invalid && (control.dirty )
+      }"
+    />
+  </nz-input-group>
+  <div class="ant-form-item-explain-error" *ngIf="control && control.invalid && (control.dirty || control.touched)">
+    {{ control.errors | vfmValidationErrorI18N }}
+  </div>
+</div>

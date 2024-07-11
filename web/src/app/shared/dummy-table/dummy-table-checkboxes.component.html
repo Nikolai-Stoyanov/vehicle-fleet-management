@@ -1,0 +1,160 @@
+<nz-table
+  [nzData]="currentItems"
+  [nzFrontPagination]="true"
+  [nzShowSizeChanger]="false"
+  [nzShowQuickJumper]="true"
+  [nzPageSize]="50"
+  nzTitle="titleTemplate"
+  [nzScroll]="{ x: '100%', y: tableHeight }"
+  [nzLoading]="loading"
+  [nzBordered]="false"
+  [nzSize]="'small'"
+  [nzOuterBordered]="true"
+  [nzVirtualItemSize]="10"
+  [nzVirtualForTrackBy]="trackByFn"
+  [nzHideOnSinglePage]="true"
+>
+  <thead>
+    <tr>
+      <th
+        *ngIf="haveCheckboxes"
+        [nzWidth]="'40px'"
+        [(nzChecked)]="checked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="onAllChecked($event)"
+      ></th>
+      <ng-container *ngFor="let column of currentTableColumns">
+        <th
+          [nzAlign]="column?.align || 'left'"
+          [nzRight]="column.right === true"
+          [nzWidth]="column.width ? column.width : '100%'"
+          [nzShowSort]="column.showSortFn"
+          [nzSortFn]="column.sortFn!"
+          [nzFilters]="column.listOfFilter"
+          [nzFilterFn]="column.filterFn ? column.filterFn : null"
+        >
+          {{ column.title }}
+        </th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template nz-virtual-scroll let-currentItems let-index="index">
+      <tr
+        (dblclick)="haveEdit ? onDblClick(currentItems) : null"
+        [ngClass]="haveEdit ? 'rowCursor' : ''"
+      >
+        <td
+          *ngIf="haveCheckboxes"
+          id="action"
+          nzAlign="center"
+          [nzChecked]="setOfCheckedId.has(currentItems.id)"
+          (nzCheckedChange)="onItemChecked(currentItems.id, $event)"
+        ></td>
+        <ng-container *ngFor="let prop of currentTableColumns">
+          <td
+            [nzAlign]="prop.align ? prop.align : 'center'"
+            nzEllipsis
+            [ngSwitch]="prop.type"
+            [nzRight]="prop.right === true"
+          >
+            <ng-container
+              *ngSwitchCase="'boolean'"
+              [ngTemplateOutlet]="booleanTemplate"
+            >
+            </ng-container>
+            <ng-container
+              *ngSwitchCase="'date'"
+              [ngTemplateOutlet]="dateTemplate"
+            >
+            </ng-container>
+            <ng-container
+              *ngSwitchCase="'concatenation'"
+              [ngTemplateOutlet]="
+                concatenationTemplate
+                  ? concatenationTemplate
+                  : defaultConcatenationTemplate
+              "
+              [ngTemplateOutletContext]="{
+                $implicit: currentItems,
+                prop: prop
+              }"
+            >
+            </ng-container>
+            <ng-container
+              *ngSwitchCase="'action'"
+              [ngTemplateOutlet]="
+                actionTemplate ? actionTemplate : defaultActionTemplate
+              "
+              [ngTemplateOutletContext]="{
+                $implicit: currentItems,
+                prop: prop
+              }"
+            >
+            </ng-container>
+            <ng-container
+              *ngSwitchDefault
+              [ngTemplateOutlet]="defaultTemplate"
+            ></ng-container>
+
+            <ng-template #defaultTemplate>
+              <ng-container>
+                {{
+                  currentItems[prop.propsName]
+                }}
+              </ng-container>
+            </ng-template>
+
+            <ng-template #booleanTemplate>
+              <ng-container
+                *ngIf="currentItems[prop.propsName]; else falseTemplate"
+              >
+                <i
+                  nz-icon
+                  nzType="check-circle"
+                  nzTheme="twotone"
+                  nzTwotoneColor="#52c41a"
+                ></i>
+              </ng-container>
+              <ng-template #falseTemplate>
+                <i
+                  nz-icon
+                  nzType="stop"
+                  nzTheme="twotone"
+                  [nzTwotoneColor]="'#d70b4a'"
+                ></i>
+              </ng-template>
+            </ng-template>
+
+            <ng-template #dateTemplate>
+              <ng-container>
+                {{ currentItems[prop.propsName] }}
+              </ng-container>
+            </ng-template>
+
+            <ng-template #defaultConcatenationTemplate>
+              <ng-container>
+                {{
+                  currentItems[prop.propsName]
+                }}
+                -
+                {{ currentItems[prop.concatProp!] }}
+              </ng-container>
+            </ng-template>
+
+            <ng-template #defaultActionTemplate>
+              <i
+                nz-icon
+                nzType="eye"
+                nzTheme="twotone"
+                (click)="onClick(currentItems)"
+              ></i>
+            </ng-template>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>
+
+

@@ -1,0 +1,61 @@
+.resize-trigger {
+  width: 1px;
+  height: 100%;
+  background: #e8e8e8;
+}
+.nz-resizable-preview {
+  border-width: 0;
+  border-right-width: 1px;
+}
+
+.columnsMenu {
+  padding: 1em;
+  background: #f3f3f3;
+  &div {
+    display: block;
+  }
+
+  &::ng-deep .columnsMenuCheckbox {
+    padding-bottom: 0.5em;
+  }
+
+  &::ng-deep nz-divider {
+    margin: 12px 0;
+  }
+
+  &::ng-deep .columnsMenuButton {
+    display: flex;
+    justify-content: center;
+
+    &button {
+      background: #eaeaea;
+    }
+  }
+}
+
+.rowCursor {
+  cursor: pointer;
+}
+
+
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+
+::ng-deep .ant-pagination-options-quick-jumper > input {
+  border-radius: 10px;
+}

@@ -11,17 +11,17 @@
       <li nz-menu-item routerLink="/contacts">Contacts</li>
       <span class="greeting" >
         <span>Hallo </span>
-        <span>User</span>
+        <span>Guest</span>
       </span>
-      <li nz-menu-item *ngIf="isCollapsed">Login</li>
-      <li nz-menu-item *ngIf="isCollapsed">Register</li>
+      <li nz-menu-item routerLink="/login" *ngIf="isCollapsed">Login</li>
+      <li nz-menu-item routerLink="/register" *ngIf="isCollapsed">Register</li>
       <li nz-menu-item *ngIf="!isCollapsed">Logout</li>
     </ul>
 
   </nz-header>
   <nz-layout>
-    <nz-sider nzWidth="200px" nzTheme="light" *ngIf="!isCollapsed">
-      <div class="menu">
+    <nz-sider nzWidth="200px" nzTheme="light" *ngIf="isCollapsed">
+      <div class="sider-menu">
         <vfm-menu></vfm-menu>
       </div>
     </nz-sider>

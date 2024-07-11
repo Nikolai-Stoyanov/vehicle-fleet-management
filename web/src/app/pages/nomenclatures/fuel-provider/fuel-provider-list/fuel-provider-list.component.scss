@@ -1,0 +1,27 @@
+#tooltipTitleTemplate {
+  p {
+    margin-bottom: 1px;
+  }
+}
+
+.special-buttons {
+  border: none;
+  background: none;
+  color: inherit;
+  box-shadow: none;
+  &:hover {
+    color: #1890ff;
+  }
+}
+
+.disabled-buttons {
+  border: none;
+  background: none;
+  &:hover {
+    background: none;
+  }
+}
+
+.editButton {
+  cursor: pointer;
+}

@@ -1,0 +1,38 @@
+<div nz-row style="margin: 0.5em;">
+  <div nz-col nzSpan="8">
+    <button
+      nz-button
+      class="special-buttons"
+      type="button"
+      id="addFile"
+      nzType="default"
+      (click)="onEditClick()"
+    >
+      <span>Добави марка</span
+      ><i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+    </button>
+  </div>
+</div>
+
+<div style="margin: 0.5em;">
+  <lib-dummy-table-checkboxes
+    tableHeight="59vh"
+    [loading]="loading"
+    [haveEdit]="true"
+    [allItems]="currentItems"
+    [listOfColumns]="currentTableColumns"
+    (onItemDblClick)="onEditClick($event)"
+  >
+    <ng-template #actionTemplate let-prop="prop" let-item>
+      <ng-container *ngIf="prop.propsName === 'active'">
+        <i
+          nz-icon
+          [nzType]="item[prop.propsName] === true ? 'check-circle' : 'stop'"
+          [nzTheme]="'twotone'"
+          [twoToneColor]="item[prop.propsName] === true ? '#76d371' : 'red'"
+          [nz-tooltip]="item[prop.propsName] === true ? 'активен' : 'неактивен'"
+        ></i>
+      </ng-container>
+    </ng-template>
+  </lib-dummy-table-checkboxes>
+</div>
