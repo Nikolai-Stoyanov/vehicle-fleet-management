@@ -28,8 +28,16 @@ const routes: Routes = [
         loadChildren: () => import('../pages/home/home.module').then((m) => m.HomeModule)
       },
       {
-        path: 'cars-brands',
-        loadChildren: () => import('../pages/nomenclatures/cars-brands').then((m) => m.CarsBrandsModule)
+        path: 'car-brands',
+        loadChildren: () => import('../pages/nomenclatures/car-brands').then((m) => m.CarBrandsModule)
+      },
+      {
+        path: 'car-models',
+        loadChildren: () => import('../pages/nomenclatures/car-models').then((m) => m.CarModelsModule)
+      },
+      {
+        path: 'fuel',
+        loadChildren: () => import('../pages/nomenclatures/fuel').then((m) => m.FuelModule)
       },
       {
         path: '**',

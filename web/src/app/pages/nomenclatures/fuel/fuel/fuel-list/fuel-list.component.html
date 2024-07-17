@@ -1,0 +1,52 @@
+<div style="margin: 0.5em;">
+  <vfm-dummy-table-checkboxes
+    [tableHeight]="'72vh'"
+    [loading]="loading"
+    [haveEdit]="true"
+    [allItems]="currentItems"
+    [listOfColumns]="allTableColumns"
+    (onItemDblClick)="editFuel($event)"
+    (onItemClick)="currentItemSelect($event)"
+    [titleTemplate]="titleTemplate"
+  >
+  </vfm-dummy-table-checkboxes>
+  <div nz-row nzGutter="10"  style="margin: 0.5em;">
+    <div nz-col>
+      <button nz-button nzType="default" type="button" id="addButton" (click)="editFuel()">
+        <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        <span >Add fuel</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="editButton"
+        nz-button nzType="default"
+        (click)="editFuel(currentItem)"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <span >Edit</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="deleteButton"
+        nz-button
+        nzType="default"
+        nzDanger
+        (click)="removeFuel()"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        <span >Delete</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #titleTemplate>
+  <span style="font-weight: 900;font-style: italic">Fuels table</span>
+</ng-template>
+

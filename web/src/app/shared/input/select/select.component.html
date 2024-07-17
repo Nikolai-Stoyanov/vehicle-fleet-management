@@ -1,0 +1,12 @@
+<div
+  [ngClass]="{
+    'ant-form-item-has-error': control && control.invalid && (control.dirty || control.touched)
+  }"
+>
+  <nz-select [nzAllowClear]="allowClear" [nzShowSearch]="showSearch" [nzPlaceHolder]="placeHolder" [nzMode]="mode">
+    <nz-option *ngFor="let option of options" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+  </nz-select>
+  <div class="ant-form-item-explain-error" *ngIf="control && control.invalid && (control.dirty || control.touched)">
+    {{ control.errors | vfmValidationErrorI18N }}
+  </div>
+</div>

@@ -9,6 +9,7 @@ import {AppConfigService} from "./app-config.service";
 import {httpInterceptorProviders} from "./http-interceptors";
 import {environment} from "../environments/environment";
 import {ENVIRONMENT} from "./shared/shared";
+import {ZorroConfigModule} from "./zorro-config.module";
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
-   AppConfigService, appBootstrap, httpInterceptorProviders,
+   AppConfigService, appBootstrap, httpInterceptorProviders,ZorroConfigModule,
     { provide: ENVIRONMENT, useValue: environment }
   ]
 };

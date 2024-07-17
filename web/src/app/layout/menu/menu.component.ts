@@ -47,40 +47,32 @@ export class MenuComponent implements OnInit {
         {
           title: `Car brands`,
           icon: 'trademark',
-          routerLink: '/cars-brands'
+          routerLink: '/car-brands'
         },
         {
-          title: `Vehicle types`,
+          title: `Car models`,
           icon: 'car',
-          routerLink: '/cars-type'
+          routerLink: '/car-models'
         },
         {
-          title: `Fuel suppliers`,
+          title: `Fuel`,
           icon: 'shop',
-          routerLink: '/fuel-provider'
-        },
-        {
-          title: `Fuel types`,
-          icon: 'shop',
-          routerLink: '/fuel-provider'
+          routerLink: '/fuel'
         }
       ]
     },
   ];
   public openMap: { [name: string]: boolean } = {
-    Начало: false,
-    Администриране: false,
-    Автомобили: false,
-    Операции: false,
-    Номенклатури: false,
-    Справки: false
+    Cars: false,
+    Operations: false,
+    Nomenclatures: false,
   };
 
   @Input() public mode = 'vertical';
   @Input() public isCollapsed = false;
 
   constructor(
-    private router: Router 
+    private router: Router
   ) {}
 
   public ngOnInit() {
@@ -102,9 +94,9 @@ export class MenuComponent implements OnInit {
     } else if ( url.includes('declarations')) {
       this.openMap[`Operations`] = true;
     } else if (
-      url.includes('cars-type') ||
-      url.includes('cars-brands') ||
-      url.includes('fuel-provider')
+      url.includes('car-models') ||
+      url.includes('car-brands') ||
+      url.includes('fuel')
     ) {
       this.openMap[`Nomenclatures`] = true;
     }

@@ -14,6 +14,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 
 import { DummyTableCheckboxesComponent } from './dummy-table-checkboxes.component';
+import {ArrStringModule} from "../formatters/arr-string/arr-string.module";
+import {DateTimeModule} from "../formatters/date-time/date-time.module";
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { DummyTableCheckboxesComponent } from './dummy-table-checkboxes.componen
     NzDropDownModule,
     NzInputModule,
     NzToolTipModule,
-    NzGridModule
+    NzGridModule,
+    ArrStringModule,
+    DateTimeModule
   ],
   exports: [DummyTableCheckboxesComponent],
   declarations: [DummyTableCheckboxesComponent]

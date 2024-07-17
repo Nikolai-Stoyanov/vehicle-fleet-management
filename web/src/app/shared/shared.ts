@@ -19,3 +19,7 @@ export interface RuntimeConfiguration {
   buildDate: string;
   debugIsEnabled?: boolean;
 }
+
+export enum Status {
+  ACTIVE,DISABLED
+}

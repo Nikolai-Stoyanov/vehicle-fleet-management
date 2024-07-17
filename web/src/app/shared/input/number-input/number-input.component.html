@@ -1,0 +1,20 @@
+<div [ngClass]="{ 'has-error': control && control.invalid && (control.dirty || control.touched) }">
+  <nz-input-number
+    nzId="{{ id }}"
+    nzPlaceHolder="{{ placeholder }}"
+    [ngClass]="{ 'ng-dirty ng-invalid': control && control.invalid && (control.dirty || control.touched) }"
+    [nzMin]="min"
+    [nzMax]="max"
+    [nzStep]="step"
+    [nzFormatter]="formatter"
+    [nzDisabled]="disabled"
+    #input
+  >
+  </nz-input-number>
+  <div
+    class="ant-form-item-explain-error"
+    *ngIf="control && control.invalid && (control.dirty || control.touched)"
+  >
+    {{ control.errors | vfmValidationErrorI18N }}
+  </div>
+</div>

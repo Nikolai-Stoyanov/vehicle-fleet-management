@@ -1,0 +1,8 @@
+nz-select {
+  width: 100%;
+  &::ng-deep .ant-select-selector{
+    border-radius: 8px !important;
+  }
+}
+
+

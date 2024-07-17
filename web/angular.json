@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "vehicleFleetManagement": {
+      "i18n": {
+        "sourceLocale": "en"
+        },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +24,8 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -35,7 +39,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },

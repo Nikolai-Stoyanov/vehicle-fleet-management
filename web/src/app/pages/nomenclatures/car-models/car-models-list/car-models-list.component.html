@@ -1,0 +1,51 @@
+<div style="margin: 0.5em;">
+  <vfm-dummy-table-checkboxes
+    [tableHeight]="'72vh'"
+    [loading]="loading"
+    [haveEdit]="true"
+    [allItems]="currentItems"
+    [listOfColumns]="currentTableColumns"
+    (onItemDblClick)="editModel($event)"
+    (onItemClick)="currentItemSelect($event)"
+    [titleTemplate]="titleTemplate"
+  >
+  </vfm-dummy-table-checkboxes>
+  <div nz-row nzGutter="10"  style="margin: 0.5em;">
+    <div nz-col>
+      <button nz-button nzType="default" type="button" id="addButton" (click)="editModel()">
+        <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        <span >Add model</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="editButton"
+        nz-button nzType="default"
+        (click)="editModel(currentItem)"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <span >Edit</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="deleteButton"
+        nz-button
+        nzType="default"
+        nzDanger
+        (click)="removeModel()"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        <span >Delete</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #titleTemplate>
+  <span style="font-weight: 900;font-style: italic">Models table</span>
+</ng-template>

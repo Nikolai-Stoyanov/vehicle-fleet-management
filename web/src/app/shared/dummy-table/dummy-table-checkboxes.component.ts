@@ -15,9 +15,10 @@ import { TableColumnInterface } from './dummy-table-checkboxes';
 
 import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {Status} from "../shared";
 
 @Component({
-  selector: 'lib-dummy-table-checkboxes',
+  selector: 'vfm-dummy-table-checkboxes',
   templateUrl: './dummy-table-checkboxes.component.html',
   styleUrls: ['./dummy-table-checkboxes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,7 +27,7 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
   @Input() public tableHeight: string = '64vh';
   @Input() public loading: boolean = false;
   @Input() public allItems: any;
-  public currentItems: any;
+  @Input() titleTemplate: string | TemplateRef<any> | null=''
   @Input() public haveCheckboxes: boolean = false;
   @Input() public haveEdit: boolean = false;
   @Input() public listOfColumns!: TableColumnInterface[];
@@ -37,11 +38,9 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
   public setOfCheckedId = new Set<string>();
   public checked = false;
   public indeterminate = false;
-  public currentTableColumns: TableColumnInterface[] = [];
-  titleTemplate: string | undefined
-
-  public searchValue: any = null;
-  public visible = false;
+  public currentItems: any;
+  public selectedId=null
+  protected readonly Status = Status;
 
   @ContentChild('actionTemplate') actionTemplate!: TemplateRef<ElementRef>;
   @ContentChild('concatenationTemplate') concatenationTemplate!: TemplateRef<
@@ -51,12 +50,6 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.currentItems = this.allItems;
-    this.currentTableColumns = [];
-    this.listOfColumns.forEach((column: TableColumnInterface) => {
-      if (column.visible === true) {
-        this.currentTableColumns.push(column);
-      }
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -64,20 +57,6 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
       this.allItems = changes['allItems'].currentValue;
       this.currentItems = this.allItems;
     }
-
-    if (changes['listOfColumns'] && !changes['listOfColumns'].firstChange) {
-      this.currentTableColumns = [];
-      this.listOfColumns = changes['listOfColumns'].currentValue;
-      this.listOfColumns.forEach((column: TableColumnInterface) => {
-        if (column.visible === true) {
-          this.currentTableColumns.push(column);
-        }
-      });
-    }
-  }
-
-  changeColumns(e: any) {
-    this.currentTableColumns = e;
   }
 
   trackByFn(index: any, item: any) {
@@ -85,6 +64,11 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
   }
 
   onClick(item: any) {
+    if (item.id===this.selectedId){
+      this.selectedId=null
+    }else {
+      this.selectedId = item.id;
+    }
     this.onItemClick.emit(item);
   }
 
@@ -128,20 +112,5 @@ export class DummyTableCheckboxesComponent implements OnInit, OnChanges {
       !this.checked;
   }
 
-  search(query?: any): void {
-    this.currentItems = [];
-    if (query) {
-      const forSearch = query.trim().toLowerCase();
-      this.currentItems = this.allItems.filter((object: any) => {
-        return (
-          JSON.stringify(object)
-            .toString()
-            .toLowerCase()
-            .indexOf(forSearch) !== -1
-        );
-      });
-    } else {
-      this.currentItems = this.allItems;
-    }
-  }
+
 }
