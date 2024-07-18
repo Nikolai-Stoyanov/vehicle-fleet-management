@@ -14,18 +14,17 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 
+import { FormsModule as LibFormModule } from '../../../shared/forms';
 
-import { CarModelsFormComponent } from './car-models-form.component';
-import {FormsModule as SharedFormsModule} from "../../../../shared/forms";
-import {TextInputModule} from "../../../../shared/input";
-import {DatepickerModule} from "../../../../shared/input";
-import {SelectModule} from "../../../../shared/input";
-import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
-import {DateTimeModule} from "../../../../shared/formatters/date-time";
-import {DateTimePipe} from "../../../../shared/formatters/date-time";
+import { ReferenceListModule } from '../../../shared/reference-list/reference-list.module';
+
+
+import { CarRecordFormComponent } from './car-record-form.component';
+import {FormsModule as SharedForms} from "../../../shared/forms";
+import {DatepickerModule, NumberInputModule, SelectModule, TextInputModule} from "../../../shared/input";
 
 @NgModule({
-  declarations: [CarModelsFormComponent],
+  declarations: [CarRecordFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -40,14 +39,19 @@ import {DateTimePipe} from "../../../../shared/formatters/date-time";
     NzCardModule,
     NzDescriptionsModule,
     NzSpaceModule,
-    SharedFormsModule,
     TextInputModule,
+    LibFormModule,
     DatepickerModule,
-    SelectModule,
-    NzDatePickerComponent,
-    DateTimeModule
+    NumberInputModule,
+    ReferenceListModule,
+    SharedForms,
+    FormsModule,
+    TextInputModule,
+    NumberInputModule,
+    DatepickerModule,
+    SelectModule
   ],
-  exports: [CarModelsFormComponent],
-  providers: [NzModalService,DateTimePipe]
+  exports: [CarRecordFormComponent],
+  providers: [NzModalService]
 })
-export class CarModelsFormModule {}
+export class CarRecordFormModule {}

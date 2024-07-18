@@ -40,6 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/nomenclatures/fuel').then((m) => m.FuelModule)
       },
       {
+        path: 'car-record',
+        loadChildren: () => import('../pages/car-records').then((m) => m.CarRecordModule)
+      },
+      {
         path: '**',
         redirectTo: '',
       },

@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
         {
           title: `Car record`,
           icon: 'car',
-          routerLink: ['/cars']
+          routerLink: ['/car-record']
         }
       ]
     },
@@ -89,7 +89,7 @@ export class MenuComponent implements OnInit {
 
   initialOpenMenuHandler() {
     const url = this.router.url;
- if (url.includes('cars')) {
+ if (url.includes('car-record')) {
       this.openMap[`Cars`] = true;
     } else if ( url.includes('declarations')) {
       this.openMap[`Operations`] = true;

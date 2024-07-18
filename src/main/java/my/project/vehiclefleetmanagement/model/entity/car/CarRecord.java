@@ -14,15 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class CarRecord extends BaseEntity {
 
-    @Column(nullable = false,name = "controlling_order")
-    private String controllingOrder;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "driving_category")
     private DrivingCategoryType drivingCategory;
 
     @Column(nullable = false)
-    private String status;
+    private boolean status;
 
     @Column()
     private String description;

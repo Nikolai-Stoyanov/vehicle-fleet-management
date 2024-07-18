@@ -23,3 +23,13 @@ export interface RuntimeConfiguration {
 export enum Status {
   ACTIVE,DISABLED
 }
+
+export enum EditFormTypes {
+  VIGNETTES='Vignettes'
+  ,INSPECTIONS='Inspections'
+  ,INSURANCES='Insurances'
+  ,RESPONSIBLE='Responsible'
+  ,DRIVERS='Drivers'
+  ,REGISTRATIONNUMBER='Registration numbers'
+  ,FUELCARD='Fuel cards'
+}

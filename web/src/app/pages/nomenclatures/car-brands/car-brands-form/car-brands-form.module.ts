@@ -17,7 +17,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 import { CarBrandsFormComponent } from './car-brands-form.component';
 import {FormsModule as SharedFormsModule} from "../../../../shared/forms";
-import {TextInputModule} from "../../../../shared/input/text-input";
+import {TextInputModule} from "../../../../shared/input";
 
 @NgModule({
   declarations: [CarBrandsFormComponent],

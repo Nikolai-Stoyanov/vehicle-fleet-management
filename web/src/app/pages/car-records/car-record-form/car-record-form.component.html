@@ -1,0 +1,475 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+  <nz-card [nzTitle]="cardTitleTemplate">
+    <div nz-row nzGutter="24">
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Vehicle type" controlSpan="24">
+          <vfm-select id="vehicleType" formControlName="vehicleType" [options]="vehicleOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="8">
+        <vfm-form-item label="Description" controlSpan="24">
+          <vfm-text-input
+            id="description"
+            formControlName="description"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Brand" controlSpan="24">
+          <vfm-text-input
+            id="brand"
+            formControlName="brand"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Model" controlSpan="24">
+          <vfm-text-input
+            id="model"
+            formControlName="model"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Frame number" controlSpan="24">
+          <vfm-text-input
+            id="frameNumber"
+            formControlName="frameNumber"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Engine number" controlSpan="24">
+          <vfm-text-input
+            id="engineNumber"
+            formControlName="engineNumber"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Power (hp / kW)" controlSpan="24">
+          <nz-input-group nzCompact>
+            <vfm-number-input
+              [min]="0"
+              style="width: 45%"
+              id="horsePower"
+              formControlName="horsePower"
+            ></vfm-number-input>
+            <span style="width: 10%; text-align: center"> / </span>
+
+            <vfm-number-input
+              [min]="0"
+              style="width: 45%"
+              id="enginePower"
+              formControlName="enginePower"
+            ></vfm-number-input>
+          </nz-input-group>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Engine volume" controlSpan="24">
+          <vfm-number-input
+            id="engineVolume"
+            formControlName="engineVolume"
+          ></vfm-number-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item
+          label="Seating capacity"
+          controlSpan="24"
+          style="display: flex"
+        >
+          <nz-input-group
+            class="prefix"
+            [nzAddOnBefore]="prefixTemplate"
+          >
+            <vfm-number-input
+              [min]="0"
+              id="seatingCapacity"
+              formControlName="seatingCapacity"
+            ></vfm-number-input>
+          </nz-input-group>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Color (primary)" controlSpan="24">
+          <vfm-text-input
+            id="primaryColor"
+            formControlName="primaryColor"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Color (additional)" controlSpan="24">
+          <vfm-text-input
+            id="additionalColor"
+            formControlName="additionalColor"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Load capacity" controlSpan="24">
+          <vfm-number-input
+            [min]="0"
+            id="loadCapacity"
+            formControlName="loadCapacity"
+          ></vfm-number-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Total mileage" controlSpan="24">
+          <vfm-number-input
+            [min]="0"
+            id="totalMileage"
+            formControlName="totalMileage"
+          ></vfm-number-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Development (km) from / to" controlSpan="24">
+          <nz-input-group nzCompact>
+            <vfm-number-input
+              [min]="0"
+              style="width: 45%"
+              id="developmentFromMileage"
+              formControlName="developmentFromMileage"
+            ></vfm-number-input>
+            <span style="width: 10%; text-align: center"> / </span>
+
+            <vfm-number-input
+              [min]="0"
+              style="width: 45%"
+              id="developmentToMileage"
+              formControlName="developmentToMileage"
+            ></vfm-number-input>
+          </nz-input-group>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Owner" controlSpan="24">
+          <vfm-select id="ownerName" formControlName="ownerName" [options]="ownerNameOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Headquarters" controlSpan="24">
+          <vfm-select id="headquarters" formControlName="headquarters"
+                      [options]="headquartersOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Department" controlSpan="24">
+          <vfm-text-input
+            id="department"
+            formControlName="department"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Stay place" controlSpan="24">
+          <vfm-text-input
+            id="stay"
+            formControlName="stay"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="8">
+        <vfm-form-item label="Inspection Date" controlSpan="24">
+          <vfm-datepicker
+            id="inspectionDateTo"
+            formControlName="inspectionDateTo"
+          ></vfm-datepicker>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="8">
+        <vfm-form-item label="Vignette Date" controlSpan="24">
+          <vfm-datepicker
+            id="vignetteDateTo"
+            formControlName="vignetteDateTo"
+          ></vfm-datepicker>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="8">
+        <vfm-form-item label="Insurance Date" controlSpan="24">
+          <vfm-datepicker
+            id="insuranceDateTo"
+            formControlName="insuranceDateTo"
+          ></vfm-datepicker>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Created by" controlSpan="24">
+          <vfm-text-input
+            id="createdBy"
+            formControlName="createdBy"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Created date" controlSpan="24">
+          <vfm-text-input
+            id="createdDate"
+            formControlName="createdDate"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Modify by" controlSpan="24">
+          <vfm-text-input
+            id="modifyBy"
+            formControlName="modifyBy"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Modify date" controlSpan="24">
+          <vfm-text-input
+            id="modifyDate"
+            formControlName="modifyDate"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="" controlSpan="24">
+          <label nz-checkbox id="status" formControlName="status"
+          >Is active</label>
+        </vfm-form-item>
+      </div>
+    </div>
+
+    <nz-divider style="width: 100%; "></nz-divider>
+
+    <div nz-row nzGutter="24">
+      <div nz-col nzSpan="12">
+        <nz-card
+          nzTitle="Fuels"
+          [nzSize]="'small'"
+          [nzBodyStyle]="{ padding: '10px 15px' }"
+          [nzExtra]="extraTemplate"
+        >
+          <div
+            formArrayName="fuels"
+            *ngIf="form.value['fuels'].length > 0"
+          >
+            <div
+              nz-col
+              nzSpan="24"
+              class="container"
+              *ngFor="
+              let item of getFuelOptionsControls;
+              index as fuelOptionIndex
+            "
+            >
+              <div nz-row [formGroupName]="fuelOptionIndex" nzGutter="10">
+                <div nz-col nzSpan="6">
+                  <vfm-form-item label="Type">
+                    <vfm-select id="type{{ fuelOptionIndex }}"
+                                formControlName="type" [options]="fuelOptions"></vfm-select>
+                  </vfm-form-item>
+                </div>
+                <div nz-col nzSpan="5">
+                  <vfm-form-item label="Tank volume">
+                    <vfm-number-input
+                      id="tankVolume{{ fuelOptionIndex }}"
+                      formControlName="tankVolume"
+                    >
+                    </vfm-number-input>
+                  </vfm-form-item>
+                </div>
+                <div nz-col nzSpan="5">
+                  <vfm-form-item label="Distance limit">
+                    <vfm-number-input
+                      id="distanceLimit{{ fuelOptionIndex }}"
+                      formControlName="distanceLimit"
+                    >
+                    </vfm-number-input>
+                  </vfm-form-item>
+                </div>
+                <div nz-col nzSpan="5">
+                  <vfm-form-item label="Money limit">
+                    <vfm-number-input
+                      id="moneyLimit{{ fuelOptionIndex }}"
+                      formControlName="moneyLimit"
+                    >
+                    </vfm-number-input>
+                  </vfm-form-item>
+                </div>
+                <div nz-col>
+                  <vfm-form-item>
+                    <button
+                      type="button"
+                      nzDanger
+                      id="remove"
+                      nz-button
+                      nzType="default"
+                      (click)="removeFuelOption(fuelOptionIndex)"
+                    >
+                      <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    </button>
+                  </vfm-form-item>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div nz-col nzSpan="24" *ngIf="form.value['fuels'].length === 0">
+            Empty
+          </div>
+        </nz-card>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-card nzTitle="Additional">
+          <div nz-row nzGutter="12">
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Notes')"
+              >
+                Notes
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Vignettes')"
+              >
+                Vignettes
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Inspections')"
+              >
+                Inspections
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Insurances')"
+              >
+                Insurances
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Registration numbers')"
+              >
+                Registration numbers
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Responsible')"
+              >
+                Responsible
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Drivers')"
+              >
+                Drivers
+              </button>
+            </div>
+            <div nz-col nzXs="12" nzXXl="8">
+              <button
+                nz-button
+                type="button"
+                nzType="default"
+                class="extra-buttons"
+                (click)="showModal('Fuel cards')"
+              >
+                Fuel cards
+              </button>
+            </div>
+          </div>
+        </nz-card>
+      </div>
+    </div>
+  </nz-card>
+
+  <ng-template #cardTitleTemplate>
+    <div nz-row nzGutter="12">
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Id" labelSpan="4" controlSpan="20">
+          <vfm-text-input id="id" formControlName="id"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Registration number" labelSpan="12" controlSpan="12">
+          <vfm-text-input
+            id="registrationNumber"
+            formControlName="registrationNumber"
+          ></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Driving category" labelSpan="12" controlSpan="12">
+          <vfm-select id="category" formControlName="category" [options]="categoryOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="7">
+        <vfm-form-item label="First registration date" labelSpan="10" controlSpan="14">
+          <vfm-datepicker
+            id="firstRegistrationDate"
+            formControlName="firstRegistration"
+          ></vfm-datepicker>
+        </vfm-form-item>
+      </div>
+    </div>
+  </ng-template>
+
+  <div nz-row nzGutter="20" nzJustify="end" style="margin: 10px">
+    <div nz-col>
+      <button nz-button type="submit" nzType="primary">Save</button>
+    </div>
+  </div>
+</form>
+
+
+<ng-template #extraTemplate>
+  <button
+    type="button"
+    id="add"
+    nz-button
+    nzType="default"
+    (click)="addFuelOption()"
+    [disabled]="form.value['fuels'].length===2"
+  >
+    <i nz-icon nzType="plus"></i>
+    <span>Add Fuel</span>
+  </button>
+</ng-template>
+<ng-template #prefixTemplate>
+  <span>1 + </span>
+</ng-template>
