@@ -1,0 +1,70 @@
+<div style="margin: 0.5em;">
+  <vfm-dummy-table-checkboxes
+    [tableHeight]="'72vh'"
+    [loading]="loading"
+    [haveEdit]="true"
+    [allItems]="currentItems"
+    [listOfColumns]="allTableColumns"
+    (onItemDblClick)="editDeclaration($event)"
+    (onItemClick)="currentItemSelect($event)"
+  >
+  </vfm-dummy-table-checkboxes>
+  <div nz-row nzGutter="10"  style="margin: 0.5em;">
+    <div nz-col>
+      <button nz-button nzType="default" type="button" id="addButton" (click)="createModal()">
+        <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        <span >Add declaration</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="editButton"
+        nz-button nzType="default"
+        (click)="editDeclaration(currentItem)"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <span >Edit</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="deleteButton"
+        nz-button
+        nzType="default"
+        nzDanger
+        (click)="removeDeclaration()"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        <span >Delete</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div nz-row>
+  <div nz-col nzSpan="24">
+    <nz-modal
+      [(nzVisible)]="createModalVisible"
+      nzTitle="Select registration number"
+      (nzOnCancel)="closeModal()"
+      [nzFooter]="footerTemplate"
+      i18n-nzTitle
+    >
+      <ng-template #footerTemplate>
+        <div style="text-align: center">
+          <button nz-button nzType="default" (click)="closeModal()" i18n>Cancel</button>
+          <button nz-button nzType="primary" (click)="editDeclaration()" [disabled]="!currentRegistrationNumber" i18n>Find</button>
+        </div>
+      </ng-template>
+      <vfm-form-item *nzModalContent>
+        <vfm-select id="currentRegistrationNumber" [(ngModel)]="currentRegistrationNumber"
+                    [options]="registrationNumberOptions" i18n>
+        </vfm-select>
+      </vfm-form-item>
+    </nz-modal>
+  </div>
+</div>

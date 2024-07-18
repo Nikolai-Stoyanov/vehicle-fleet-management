@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Declaration extends BaseEntity {
-    @OneToOne()
+    @ManyToOne()
     private CarRecord carRecord;
 
     @Column(nullable = false)
@@ -29,21 +29,7 @@ public class Declaration extends BaseEntity {
     @Column( name = "new_mileage")
     private long newMileage;
 
-    @Column( name = "available_primary_fuel")
-    private long availablePrimaryFuel;
+    @OneToMany(mappedBy = "declaration")
+    private List<DeclarationFuel> fuels;
 
-    @Column(name = "available_additional_fuel")
-    private long availableAdditionalFuel;
-
-    @Column( name = "primary_engine_hour")
-    private long primaryEngineHour;
-
-    @Column(name = "primary_engine_min")
-    private long primaryEngineMin;
-
-    @Column(name = "additional_engine_hour")
-    private long additionalEngineHour;
-
-    @Column(name = "additional_engine_min")
-    private long additionalEngineMin;
 }

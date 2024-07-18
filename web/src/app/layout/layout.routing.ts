@@ -44,6 +44,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/car-records').then((m) => m.CarRecordModule)
       },
       {
+        path: 'declarations',
+        loadChildren: () => import('../pages/declarations').then((m) => m.DeclarationsModule)
+      },
+      {
         path: '**',
         redirectTo: '',
       },

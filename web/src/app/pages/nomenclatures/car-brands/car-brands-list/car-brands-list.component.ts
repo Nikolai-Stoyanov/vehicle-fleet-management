@@ -10,7 +10,7 @@ import {CarBrand} from "../car-brands";
 import { TableColumnInterface } from '../../../../shared/dummy-table';
 
 @Component({
-  selector: 'ap-car-models-list',
+  selector: 'vfm-car-models-list',
   templateUrl: './car-brands-list.component.html',
   styleUrls: ['./car-brands-list.component.scss'],
 })

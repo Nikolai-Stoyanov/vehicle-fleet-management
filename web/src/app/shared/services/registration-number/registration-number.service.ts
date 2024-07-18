@@ -35,6 +35,14 @@ export class RegistrationNumberService {
     },
   ];
 
+  public registrationNumbers=[
+    {registrationNumber: 'C0505TT',carId:1},
+    {registrationNumber: 'CC0654BB',carId:2},
+    {registrationNumber: 'CT2265AA',carId:3},
+    {registrationNumber: 'B8874BB',carId:4},
+    {registrationNumber: 'CA1111BE',carId:5},
+  ]
+
   constructor(private http: HttpClient) {
   }
 
@@ -56,6 +64,10 @@ export class RegistrationNumberService {
 
   create(body:any) {
     return this.http.post(`${this.endpoint}`, body);
+  }
+
+  fetchAllNumber() {
+    return of(this.registrationNumbers);
   }
 }
 
