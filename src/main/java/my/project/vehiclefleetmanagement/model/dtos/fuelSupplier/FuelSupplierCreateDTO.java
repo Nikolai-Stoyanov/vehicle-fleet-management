@@ -1,4 +1,4 @@
-package my.project.vehiclefleetmanagement.model.dtos.carBrand;
+package my.project.vehiclefleetmanagement.model.dtos.fuelSupplier;
 
 
 import jakarta.validation.constraints.NotEmpty;
@@ -14,14 +14,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarBrandEditDTO {
-  @NotEmpty
-  private long id;
+public class FuelSupplierCreateDTO {
   @NotEmpty
   @Size(min = 5, max = 20)
   private String name;
   private String description;
-  @NotEmpty
-  private String company;
-  private List<String> models;
+  private boolean status;
+  private List<Long> fuelList;
 }

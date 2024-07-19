@@ -1,4 +1,4 @@
-package my.project.vehiclefleetmanagement.model.dtos.carBrand;
+package my.project.vehiclefleetmanagement.model.dtos.fuel;
 
 
 import jakarta.validation.constraints.NotEmpty;
@@ -7,21 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
+import my.project.vehiclefleetmanagement.model.enums.FuelType;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarBrandEditDTO {
+public class FuelEditDTO {
   @NotEmpty
   private long id;
   @NotEmpty
-  @Size(min = 5, max = 20)
   private String name;
   private String description;
-  @NotEmpty
-  private String company;
-  private List<String> models;
+  private boolean status;
 }

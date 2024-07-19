@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,4 +21,5 @@ public class CarBrandCreateDTO {
   private String description;
   @NotEmpty
   private String company;
+  private List<String> models;
 }
