@@ -15,7 +15,7 @@ public class BaseCarDocumentEntity extends BaseEntity {
     @Column(nullable = false, name = "date_to")
     private Long dateTo;
     @Column(nullable = false)
-    private string description;
+    private String description;
     @Column(name = "created_by")
     private String createdBy;
     @Column( name = "created_at")

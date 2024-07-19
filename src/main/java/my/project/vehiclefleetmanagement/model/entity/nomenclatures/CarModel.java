@@ -7,11 +7,11 @@ import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "vehicle_models")
+@Table(name = "car_models")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleModel extends BaseEntity {
+public class CarModel extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -20,6 +20,6 @@ public class VehicleModel extends BaseEntity {
     @Column()
     private LocalDate year;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "make_id")
-    private VehicleMake make;
+    @JoinColumn(name = "brand_id")
+    private CarBrand brand;
 }

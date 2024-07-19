@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
+import my.project.vehiclefleetmanagement.model.entity.car.DeclarationFuel;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "declarations")

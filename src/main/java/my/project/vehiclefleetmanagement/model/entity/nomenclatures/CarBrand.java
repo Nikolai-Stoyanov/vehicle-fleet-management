@@ -7,11 +7,11 @@ import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import java.util.List;
 
 @Entity
-@Table(name = "vehicle_makes")
+@Table(name = "car_brands")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleMake extends BaseEntity {
+public class CarBrand extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -19,6 +19,6 @@ public class VehicleMake extends BaseEntity {
     private String description;
     @Column()
     private String company;
-    @OneToMany(mappedBy = "make")
-    private List<VehicleModel> models;
+    @OneToMany(mappedBy = "brand")
+    private List<CarModel> models;
 }

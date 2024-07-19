@@ -3,7 +3,6 @@ package my.project.vehiclefleetmanagement.model.entity.car;
 import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.VehicleModel;
 
 import java.time.LocalDate;
 

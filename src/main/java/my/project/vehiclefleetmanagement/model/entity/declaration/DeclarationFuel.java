@@ -3,6 +3,7 @@ package my.project.vehiclefleetmanagement.model.entity.car;
 import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
+import my.project.vehiclefleetmanagement.model.entity.declaration.Declaration;
 import my.project.vehiclefleetmanagement.model.enums.FuelType;
 
 @Entity
@@ -40,5 +41,5 @@ public class DeclarationFuel extends BaseEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "declaration_id")
-    private CarRecord declaration;
+    private Declaration declaration;
 }
