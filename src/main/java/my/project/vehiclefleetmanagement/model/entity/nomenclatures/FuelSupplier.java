@@ -3,9 +3,7 @@ package my.project.vehiclefleetmanagement.model.entity.nomenclatures;
 import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
-import my.project.vehiclefleetmanagement.model.entity.UserRole;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

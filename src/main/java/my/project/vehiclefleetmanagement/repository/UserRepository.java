@@ -1,6 +1,6 @@
 package my.project.vehiclefleetmanagement.repository;
 
-import my.project.vehiclefleetmanagement.model.entity.UserEntity;
+import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

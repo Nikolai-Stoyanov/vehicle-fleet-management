@@ -1,7 +1,7 @@
 package my.project.vehiclefleetmanagement.config;
 
 import my.project.vehiclefleetmanagement.repository.UserRepository;
-import my.project.vehiclefleetmanagement.service.impl.VfmUserDetailsService;
+import my.project.vehiclefleetmanagement.service.user.impl.VfmUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
