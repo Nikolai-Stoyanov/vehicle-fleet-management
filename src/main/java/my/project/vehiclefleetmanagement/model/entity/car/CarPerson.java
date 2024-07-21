@@ -17,8 +17,8 @@ public class CarPerson extends BaseEntity {
     @Column(nullable = false, name = "phone_number")
     private String phoneNumber;
 
-    @Column(nullable = false, name = "is_active")
-    private boolean isActive;
+    @Column(nullable = false)
+    private boolean status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id")

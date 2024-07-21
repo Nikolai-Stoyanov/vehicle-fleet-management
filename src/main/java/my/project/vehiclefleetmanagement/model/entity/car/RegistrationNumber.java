@@ -19,7 +19,7 @@ public class RegistrationNumber extends BaseEntity {
     private LocalDate registrationDate;
 
     @Column(nullable = false)
-    private boolean isActive;
+    private boolean status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "registration_certificate_data_id")

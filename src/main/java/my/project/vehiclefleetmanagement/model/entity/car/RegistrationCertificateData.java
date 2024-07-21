@@ -52,9 +52,6 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(nullable = false,name = "load_capacity")
     private int loadCapacity;
 
-    @OneToMany(mappedBy = "registrationCertificateData")
-    private List<EmissionStandard> emissionStandards;
-
     @Column(nullable = false,name = "first_registration_date")
     private LocalDate firstRegistrationDate;
 
