@@ -2,10 +2,18 @@ package my.project.vehiclefleetmanagement.model.entity.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 
 @Entity
 @Table(name = "roles")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRole {
 
   @Id
@@ -16,22 +24,4 @@ public class UserRole {
   @Column(unique = true)
   @Enumerated(EnumType.STRING)
   private UserRoleEnum role;
-
-  public Long getId() {
-    return id;
-  }
-
-  public UserRole setId(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  public UserRoleEnum getRole() {
-    return role;
-  }
-
-  public UserRole setRole(UserRoleEnum role) {
-    this.role = role;
-    return this;
-  }
 }

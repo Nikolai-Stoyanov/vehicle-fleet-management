@@ -22,4 +22,5 @@ public class CarBrandCreateDTO {
   @NotEmpty
   private String company;
   private List<String> models;
+  private boolean status;
 }

@@ -17,4 +17,5 @@ public class CarBrandDTO {
   private String description;
   private String company;
   private List<String> models;
+  private boolean status;
 }

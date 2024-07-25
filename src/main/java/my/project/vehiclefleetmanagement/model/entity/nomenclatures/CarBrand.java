@@ -21,4 +21,6 @@ public class CarBrand extends BaseEntity {
     private String company;
     @OneToMany(mappedBy = "brand")
     private List<CarModel> models;
+    @Column()
+    private boolean status;
 }

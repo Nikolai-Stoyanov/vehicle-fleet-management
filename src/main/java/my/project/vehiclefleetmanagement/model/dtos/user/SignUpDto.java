@@ -12,15 +12,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegistrationDTO {
-  @NotEmpty
-  @Size(min = 5, max = 20)
-  private String username;
-  @NotEmpty
-  private String confirmPassword;
-  @NotEmpty
-  private String password;
-  @NotEmpty
-  @Email
-  private String email;
+public class SignUpDto {
+    @NotEmpty
+    @Size(min = 5, max = 20)
+    private String username;
+    @NotEmpty
+    private String confirmPassword;
+    @NotEmpty
+    private String password;
+    @NotEmpty
+    @Email
+    private String email;
 }

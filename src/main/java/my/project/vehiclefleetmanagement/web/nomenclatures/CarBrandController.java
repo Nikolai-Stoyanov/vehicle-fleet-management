@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/carBrand")
-
+@CrossOrigin
 public class CarBrandController {
 
     private final CarBrandService carBrandService;
