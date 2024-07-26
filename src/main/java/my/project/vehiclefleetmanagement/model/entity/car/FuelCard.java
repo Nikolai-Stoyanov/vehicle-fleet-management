@@ -15,8 +15,8 @@ public class FuelCard extends BaseEntity {
     private String cardNumber;
     @Column(name = "money_limit")
     private String moneyLimit;
-    @Column(nullable = false, name = "is_active")
-    private boolean isActive;
+    @Column(nullable = false)
+    private boolean status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "carRecord_id")

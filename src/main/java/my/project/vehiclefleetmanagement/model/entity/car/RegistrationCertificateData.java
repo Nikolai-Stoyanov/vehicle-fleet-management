@@ -3,7 +3,7 @@ package my.project.vehiclefleetmanagement.model.entity.car;
 import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.VehicleModel;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
 import my.project.vehiclefleetmanagement.model.enums.VehicleTypeEnum;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class RegistrationCertificateData extends BaseEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "model_id")
-    private VehicleModel model;
+    private CarModel model;
 
     @Column(nullable = false,name = "frame_number")
     private String frameNumber;
@@ -51,9 +51,6 @@ public class RegistrationCertificateData extends BaseEntity {
 
     @Column(nullable = false,name = "load_capacity")
     private int loadCapacity;
-
-    @OneToMany(mappedBy = "registrationCertificateData")
-    private List<EmissionStandard> emissionStandards;
 
     @Column(nullable = false,name = "first_registration_date")
     private LocalDate firstRegistrationDate;

@@ -36,15 +36,6 @@ public class CarRecord extends BaseEntity {
     private Owner owner;
 
     @OneToMany(mappedBy = "carRecord")
-    private List<Inspection> inspectionList;
-
-    @OneToMany(mappedBy = "carRecord")
-    private List<Insurance> insuranceList;
-
-    @OneToMany(mappedBy = "carRecord")
-    private List<Vignette> vignetteList;
-
-    @OneToMany(mappedBy = "carRecord")
     private List<FuelCard> fuelCardList;
 
     @Column(name = "created_by")

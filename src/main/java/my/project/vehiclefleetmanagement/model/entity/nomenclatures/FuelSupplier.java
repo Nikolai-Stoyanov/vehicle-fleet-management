@@ -8,7 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "fuel-suppliers")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class FuelSupplier extends BaseEntity {
@@ -18,6 +19,14 @@ public class FuelSupplier extends BaseEntity {
     @Column()
     private String description;
 
-    @OneToMany(mappedBy = "fuelSupplier")
-    private List<Fuel> fuelList;
+    @ManyToMany()
+    @JoinTable(
+            name = "supplier_fuel",
+            joinColumns = @JoinColumn(name = "fuel_supplier_id"),
+            inverseJoinColumns = @JoinColumn(name = "fuel_id")
+    )
+    private List<FuelEntity> fuelList;
+
+    @Column()
+    private boolean status;
 }
