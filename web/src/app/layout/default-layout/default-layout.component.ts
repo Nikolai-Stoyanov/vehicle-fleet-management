@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../../auth/auth.service";
 
 // import { AppConfigService } from '@core/services/app-config.service';
 // import { AuthenticationService } from '@auth/auth.service';
@@ -11,22 +12,21 @@ import { Component, OnInit } from '@angular/core';
 export class DefaultLayoutComponent implements OnInit {
   public isCollapsed = true;
   public currentUser:any;
-  public appConfig:any;
+  public roles:any[]=[];
 
   constructor(
-    // public appConfigService: AppConfigService,
-    // private authService: AuthenticationService
+    private authService: AuthenticationService
   ) {
-    // this.currentUser = this.authService.currentUserValue;
-    // this.appConfig = this.appConfigService.config;
+    this.currentUser=this.authService.currentUserValue
+    // @ts-ignore
+    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.roles = this.currentUser?.roles || [];
   }
 
   ngOnInit(): void {}
 
   public onLogoutClick(e: Event) {
     e.stopPropagation();
-
-    // this.authService.invalidateToken().subscribe();
-    // this.authService.logoutFromApp();
+    this.authService.logout();
   }
 }

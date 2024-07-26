@@ -8,7 +8,7 @@ import bg from '@angular/common/locales/en';
 registerLocaleData(en);
 registerLocaleData(bg);
 
-import {NZ_I18N, bg_BG, en_US, NZ_DATE_LOCALE} from 'ng-zorro-antd/i18n';
+import {NZ_I18N, bg_BG, en_US, NZ_DATE_LOCALE, NZ_DATE_CONFIG} from 'ng-zorro-antd/i18n';
 
 @Component({
   template: `
@@ -32,7 +32,6 @@ const nzConfigFactory = (injector: Injector, resolver: ComponentFactoryResolver)
   };
 };
 
-let enUS;
 
 @NgModule({
   declarations: [GlobalTemplatesComponent],
@@ -52,7 +51,12 @@ let enUS;
       }
     },
     {provide: NZ_CONFIG, useFactory: nzConfigFactory, deps: [Injector, ComponentFactoryResolver]},
-    { provide: NZ_DATE_LOCALE, useValue: enUS }
+    {
+      provide: NZ_DATE_CONFIG,
+      useValue: {
+        firstDayOfWeek: 1 // week starts on Monday (Sunday is 0)
+      }
+    }
   ]
 })
 export class ZorroConfigModule {

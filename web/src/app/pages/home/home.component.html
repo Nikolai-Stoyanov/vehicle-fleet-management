@@ -1,1 +1,5 @@
-<h1 style="color: aquamarine">Hallo my friends</h1>
+<h1 style="color: aquamarine">
+  <span>Hallo my friend </span>
+  <span *ngIf="currentUser?.username">{{ currentUser?.username}}</span>
+  <span *ngIf="!currentUser?.username">Guest</span>
+</h1>

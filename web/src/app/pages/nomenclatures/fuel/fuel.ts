@@ -2,8 +2,9 @@ export interface FuelProviderType {
   id: number;
   name: string;
   description: string;
-  fuelOptions: any[];
+  fuelOptions?: any[];
   status: boolean;
+  fuelList?: any[];
 }
 
 export interface FuelType {

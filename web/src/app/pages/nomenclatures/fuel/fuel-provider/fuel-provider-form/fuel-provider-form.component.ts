@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {FuelService} from "../../fuel.service";
-import {FuelType} from "../../fuel";
+import {FuelProviderType, FuelType} from "../../fuel";
 
 @Component({
   selector: 'vfm-fuel-provider-form',
@@ -13,8 +13,8 @@ import {FuelType} from "../../fuel";
 })
 export class FuelProviderFormComponent implements OnInit {
   public form!: FormGroup;
-  @Input() public currentItem: any;
-  @Output() public submit = new EventEmitter<any>();
+  public currentItem: any;
+  public currentItemId
   public fuelOptions: any[]=[];
 
   constructor(
@@ -23,16 +23,26 @@ export class FuelProviderFormComponent implements OnInit {
     private modal: NzModalRef,
     private svc: FuelService,
   ) {
-    this.currentItem = this.modal['config'].nzData.currentItem;
+    this.currentItemId = this.modal['config'].nzData.id;
   }
 
   ngOnInit(): void {
-    this.svc.fetchLatestFuel().subscribe((res:FuelType[]) => {
+    this.svc.fetchLatestFuels().subscribe((res:FuelType[]) => {
       res.forEach(item => {
-        this.fuelOptions.push({value: item.id, label: item.name});
+        this.fuelOptions.push({ label: item.name,value: item});
       })
-
     })
+    if (this.currentItemId) {
+      this.svc.fetchSupplierById(this.currentItemId).subscribe((res:FuelProviderType) => {
+        this.currentItem = res;
+        this.getForm();
+      })
+    }else {
+      this.getForm();
+    }
+  }
+
+  getForm(){
     this.form = this.fb.group({
       id: this.fb.control({
         value: this.currentItem?.id || null,
@@ -46,25 +56,19 @@ export class FuelProviderFormComponent implements OnInit {
         this.currentItem?.description || null
       ),
       fuelOptions: this.fb.array(
-        this.currentItem?.fuelOptions
-          ? this.currentItem.fuelOptions.map((options: any) =>
-              this.fb.group({
-                id: this.fb.control(options.id || null,
-                  Validators.required),
-                name: this.fb.control(options.id  || null,
-                  Validators.required),
-                price: this.fb.control(options.price || null)
-              })
-            )
+        this.currentItem?.fuelList
+          ? this.currentItem.fuelList.map((options: any) =>
+            this.fb.group({
+              name: this.fb.control(options  || null,
+                Validators.required)
+            })
+          )
           : []
       ),
       status: this.fb.control(this.currentItem?.status || null)
     });
-
-    this.form.get('fuelOptions')?.valueChanges.subscribe((res)=>{
-      console.log(res);
-    })
   }
+
 
   get getFuelOptionsControls(): any {
     return (this.form.get('fuelOptions') as FormArray).controls;
@@ -73,9 +77,7 @@ export class FuelProviderFormComponent implements OnInit {
   public addFuelOption() {
     (this.form.get('fuelOptions') as FormArray).push(
       this.fb.group({
-        id: this.fb.control(null),
-        name: this.fb.control(null, Validators.required),
-        price: this.fb.control(null)
+        name: this.fb.control(null, Validators.required)
       })
     );
   }
@@ -85,11 +87,38 @@ export class FuelProviderFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-    // this.submit.emit(this.form.getRawValue());
-  }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return
+    }
 
-  onselectionchange(event:any){
-    console.log(event);
-  };
+    const formObject={
+      name:this.form.getRawValue().name,
+      id:this.form.getRawValue().id,
+      description:this.form.getRawValue().description,
+      status:this.form.getRawValue().status,
+      fuelList:this.form.getRawValue().fuelOptions.map((options: any) =>options.name.id),
+    }
+
+    if (!this.currentItem?.id) {
+      this.svc.createSupplier(formObject).subscribe({
+        next: () => {
+          this.modal.destroy();
+        },
+        error: (error: any) => {
+          this.message.error(error.status + ' ' + error.error.message);
+        }
+      })
+    }else {
+      this.svc.updateSupplier(this.currentItem?.id,formObject).subscribe({
+        next: () => {
+          this.modal.destroy();
+        },
+        error: (error: any) => {
+          this.message.error(error.status + ' ' + error.error.message);
+        }
+      })
+    }
+
+  }
 }

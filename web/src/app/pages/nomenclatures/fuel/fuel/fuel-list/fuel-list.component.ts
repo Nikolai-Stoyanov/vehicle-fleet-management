@@ -31,7 +31,7 @@ export class FuelListComponent implements OnInit {
     });
 
     this.loading = true;
-    this.svc.fetchLatestFuel().subscribe((res) => {
+    this.svc.fetchLatestFuels().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
     });
@@ -50,18 +50,19 @@ export class FuelListComponent implements OnInit {
       nzWidth: '40vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item,
+        id: item?.id,
       },
       nzFooter: null,
     });
     modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+      this.svc.fetchLatestFuels().subscribe((res) => {
+        this.currentItems = res;
+      });
     });
   }
 
   currentItemSelect(item: any) {
+
     if (item.id===this.currentItem?.id){
       this.currentItem=null
     }else {
@@ -79,7 +80,9 @@ export class FuelListComponent implements OnInit {
         const sub2 = this.svc.deleteFuel(this.currentItem?.id).subscribe({
           next: () => {
             this.message.create('success', `Fuel successfully deleted.`);
-            this.svc.fetchLatestFuel();
+            this.svc.fetchLatestFuels().subscribe((res) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {

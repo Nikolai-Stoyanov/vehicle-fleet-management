@@ -18,8 +18,8 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { EditFormComponent } from './edit-form.component';
 import {FormsModule as SharedFormsModule} from "../../forms";
 import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
-import {DateTimeModule} from "../../formatters/date-time";
-import {DateTimePipe} from "../../formatters/date-time";
+import {DateTimeModule} from "../../formatters";
+import {DateTimePipe} from "../../formatters";
 import {DatepickerModule, NumberInputModule, SelectModule, TextInputModule} from "../../input";
 
 @NgModule({

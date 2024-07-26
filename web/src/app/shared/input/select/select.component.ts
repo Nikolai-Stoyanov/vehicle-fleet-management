@@ -64,4 +64,8 @@ export class ClientSelectComponent implements OnInit, ControlValueAccessor {
   public setDisabledState(isDisabled: boolean) {
     this.select.setDisabledState(isDisabled);
   }
+
+  compareWith(item1:any, item2:any) {
+    return item1 && item2 && item1.id === item2.id;
+  }
 }

@@ -40,10 +40,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() public id!: string;
   @Input() public showTime: any; // { nzFormat: 'HH:mm' }
   @Input() currentPickerValue!: any;
-  @Input() disabledDates!: boolean;
-  @Input() disabledDatesAfterToday!: boolean;
   @Input() disabled!: boolean;
-  // tomorrow = new Date().setDate(new Date().getDate() + 1);
   today = new Date();
 
   public control!: AbstractControl | null;
@@ -61,45 +58,6 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
         this.controlContainer.control?.get(this.formControlName) || null;
     }
   }
-
-  public disabledDate = (current: Date): boolean => {
-    if (this.disabledDates) {
-      if (!current || !this.currentPickerValue?.value) {
-        if (this.disabledDatesAfterToday) {
-          return current > this.today;
-        }
-        return false;
-      }
-      if (this.currentPickerValue && this.currentPickerValue.value) {
-        if (this.currentPickerValue.picker === 'startDate') {
-          if (this.disabledDatesAfterToday) {
-            return (
-              differenceInCalendarDays(
-                current,
-                new Date(this.currentPickerValue.value)
-              ) < 0 ||
-              differenceInCalendarDays(current, new Date(this.today)) > 0
-            );
-          }
-          return (
-            differenceInCalendarDays(
-              current,
-              new Date(this.currentPickerValue.value)
-            ) < 0
-          );
-        }
-
-        return (
-          differenceInCalendarDays(
-            current,
-            new Date(this.currentPickerValue.value)
-          ) > 0
-        );
-      }
-      return false;
-    }
-    return false;
-  };
 
   public writeValue(value: any) {
     this.changeDetector.detectChanges();

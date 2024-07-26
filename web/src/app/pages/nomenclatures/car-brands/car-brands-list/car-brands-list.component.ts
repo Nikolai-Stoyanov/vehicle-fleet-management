@@ -10,7 +10,7 @@ import {CarBrand} from "../car-brands";
 import { TableColumnInterface } from '../../../../shared/dummy-table';
 
 @Component({
-  selector: 'vfm-car-models-list',
+  selector: 'vfm-users-list',
   templateUrl: './car-brands-list.component.html',
   styleUrls: ['./car-brands-list.component.scss'],
 })
@@ -56,10 +56,10 @@ export class CarBrandsListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+    modal.afterClose.subscribe(() => {
+        this.svc.fetchLatest().subscribe((res) => {
+          this.currentItems = res;
+        });
     });
   }
 
@@ -70,10 +70,12 @@ export class CarBrandsListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteBranch(this.currentItem?.id).subscribe({
+        const sub2 = this.svc.deleteBrand(this.currentItem?.id).subscribe({
           next: () => {
             this.message.create('success', `Brand successfully deleted.`);
-            this.svc.fetchLatest();
+            this.svc.fetchLatest().subscribe((res) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {

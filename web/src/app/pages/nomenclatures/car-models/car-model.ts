@@ -3,6 +3,6 @@ export interface CarModel{
   name: string;
   description: string;
   brand: number;
-  year: Date | string;
+  year: Date | string |null;
   status: boolean;
 }

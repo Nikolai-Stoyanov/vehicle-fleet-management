@@ -1,0 +1,45 @@
+<div style="margin: 0.5em;">
+  <vfm-dummy-table-checkboxes
+    [tableHeight]="'72vh'"
+    [loading]="loading"
+    [haveEdit]="true"
+    [allItems]="currentItems"
+    [listOfColumns]="allTableColumns"
+    (onItemDblClick)="editUser($event)"
+    (onItemClick)="currentItemSelect($event)"
+    [titleTemplate]="titleTemplate"
+  >
+  </vfm-dummy-table-checkboxes>
+  <div nz-row nzGutter="10"  style="margin: 0.5em;">
+    <div nz-col>
+      <button
+        type="button"
+        id="editButton"
+        nz-button nzType="default"
+        (click)="editUser(currentItem)"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <span >Edit</span>
+      </button>
+    </div>
+    <div nz-col>
+      <button
+        type="button"
+        id="deleteButton"
+        nz-button
+        nzType="default"
+        nzDanger
+        (click)="removeUser()"
+        [disabled]="!currentItem"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        <span >Delete</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #titleTemplate>
+  <span style="font-weight: 900;font-style: italic">Users table</span>
+</ng-template>

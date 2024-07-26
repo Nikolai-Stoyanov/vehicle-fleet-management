@@ -6,6 +6,7 @@
     <ng-container *ngFor="let menu of model">
       <ng-container *ngIf="!menu.children">
         <li
+
           nz-menu-item
           [nzDisabled]="!menu.routerLink"
           [nzSelected]="menu.selected"
@@ -22,6 +23,7 @@
       </ng-container>
       <ng-container *ngIf="menu.children">
         <li
+          *ngIf="roles.indexOf(menu.permission)>-1"
           nz-submenu
           [nzTitle]="menu.title"
           [nzIcon]="menu.icon"

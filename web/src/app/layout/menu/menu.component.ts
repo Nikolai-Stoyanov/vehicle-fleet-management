@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
     {
       title: `Cars`,
       icon: 'car',
+      permission: 'USER',
       children: [
         {
           title: `Car record`,
@@ -32,6 +33,7 @@ export class MenuComponent implements OnInit {
     {
       title: `Operations`,
       icon: 'audit',
+      permission: 'USER',
       children: [
         {
           title: `Declaration`,
@@ -43,21 +45,30 @@ export class MenuComponent implements OnInit {
     {
       title: `Nomenclatures`,
       icon: 'build',
+      permission: 'USER',
       children: [
         {
           title: `Car brands`,
           icon: 'trademark',
-          routerLink: '/car-brands'
+          routerLink: '/car-brands',
+          permission: 'USER',
         },
         {
           title: `Car models`,
           icon: 'car',
-          routerLink: '/car-models'
+          routerLink: '/car-models',
+          permission: 'USER',
         },
         {
           title: `Fuel`,
           icon: 'shop',
-          routerLink: '/fuel'
+          routerLink: '/fuel',
+          permission: 'USER',
+        },
+        {
+          title: `Users`,
+          icon: 'usergroup-add',
+          routerLink: '/users'
         }
       ]
     },
@@ -70,10 +81,11 @@ export class MenuComponent implements OnInit {
 
   @Input() public mode = 'vertical';
   @Input() public isCollapsed = false;
-
+  @Input() roles!: any[];
   constructor(
     private router: Router
-  ) {}
+  ) {
+  }
 
   public ngOnInit() {
     setTimeout(() => {
@@ -96,7 +108,8 @@ export class MenuComponent implements OnInit {
     } else if (
       url.includes('car-models') ||
       url.includes('car-brands') ||
-      url.includes('fuel')
+      url.includes('fuel')||
+      url.includes('users')
     ) {
       this.openMap[`Nomenclatures`] = true;
     }

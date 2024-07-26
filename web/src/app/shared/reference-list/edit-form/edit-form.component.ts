@@ -3,8 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 
-import {DateTimePipe} from "../../formatters/date-time";
-import {VignetteType} from "../../services/vignettes/vignette";
+import {DateTimePipe} from "../../formatters";
 import {EditFormTypes} from "../../shared";
 import {Subscription} from "rxjs";
 
@@ -17,13 +16,6 @@ export class EditFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   @Input() public currentItem: any;
   protected readonly EditFormTypes = EditFormTypes;
-  vignetteOptions: any[] = [
-    {label: 'Weekend', value: VignetteType.WEEKEND},
-    {label: 'Week', value: VignetteType.WEEK},
-    {label: 'Month', value: VignetteType.MONTH},
-    {label: 'Quarter', value: VignetteType.QUARTER},
-    {label: 'Year', value: VignetteType.YEAR},
-  ];
   public type!: string
   public svc: any
   public subscriptions: Subscription[] = [];

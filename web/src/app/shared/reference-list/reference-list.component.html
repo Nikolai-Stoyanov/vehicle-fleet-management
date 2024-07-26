@@ -1,4 +1,4 @@
-<div style="margin: 0.5em;"     *ngIf="dataType!=='Notes'">
+<div style="margin: 0.5em;">
   <vfm-dummy-table-checkboxes
     [haveEdit]="true"
     [allItems]="items"
@@ -41,16 +41,4 @@
       </button>
     </div>
   </div>
-</div>
-
-<div style="margin: 0.5em;" *ngIf="dataType==='Notes'">
-<vfm-text-area autosize="false" ></vfm-text-area>
-<div nz-row nzGutter="10"  style="margin: 0.5em;">
-  <div nz-col>
-    <button nz-button nzType="default" type="button" id="saveButton" (click)="saveNotes()">
-      <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-      <span>Save</span>
-    </button>
-  </div>
-</div>
 </div>

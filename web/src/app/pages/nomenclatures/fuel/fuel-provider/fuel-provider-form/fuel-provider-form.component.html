@@ -52,16 +52,7 @@
               <div nz-col nzSpan="11">
                 <vfm-form-item label="Name">
                   <vfm-select id="name{{ fuelOptionIndex }}"
-                              formControlName="name"  [options]="fuelOptions" (selectionchange)="onselectionchange($event)"></vfm-select>
-                </vfm-form-item>
-              </div>
-              <div nz-col nzSpan="6">
-                <vfm-form-item label="Price($)">
-                  <vfm-number-input
-                    id="price{{ fuelOptionIndex }}"
-                    formControlName="price"
-                  >
-                  </vfm-number-input>
+                              formControlName="name"  [options]="fuelOptions"></vfm-select>
                 </vfm-form-item>
               </div>
               <div nz-col>

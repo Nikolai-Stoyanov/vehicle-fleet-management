@@ -50,7 +50,6 @@ export class CarRecordService {
       showSortFn: true,
       type: 'text',
     },
-
     {
       id: '5',
       title: 'Owner',

@@ -1,6 +1,6 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClient, withInterceptors, withInterceptorsFromDi} from "@angular/common/http";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 import { routes } from './app.routes';
@@ -9,15 +9,17 @@ import {AppConfigService} from "./app-config.service";
 import {httpInterceptorProviders} from "./http-interceptors";
 import {environment} from "../environments/environment";
 import {ENVIRONMENT} from "./shared/shared";
-import {ZorroConfigModule} from "./zorro-config.module";
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+
     provideAnimations(),
-   AppConfigService, appBootstrap, httpInterceptorProviders,ZorroConfigModule,
-    { provide: ENVIRONMENT, useValue: environment }
+    AppConfigService,
+    appBootstrap,
+    { provide: ENVIRONMENT, useValue: environment },
+    httpInterceptorProviders,
+    provideHttpClient(withInterceptorsFromDi()),
   ]
 };
