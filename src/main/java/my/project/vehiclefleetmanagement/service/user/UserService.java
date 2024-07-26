@@ -17,7 +17,7 @@ public interface UserService {
 
   List<UserListDTO> getAllUsers();
 
-  boolean updateUser(Long id, UserEditDTO userEditDTO);
+  void updateUser(Long id, UserEditDTO userEditDTO);
 
   UserByIdDto getUserById(Long id);
 

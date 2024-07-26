@@ -104,10 +104,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(Long id, UserEditDTO userEditDTO) {
+    public void updateUser(Long id, UserEditDTO userEditDTO) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
         if (userEntityOptional.isEmpty()) {
-            return false;
+            throw new AppException("User is not found!", HttpStatus.NOT_FOUND);
         }
         userEntityOptional.get().setUsername(userEditDTO.getUsername());
         userEntityOptional.get().setEmail(userEditDTO.getEmail());
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
         }
         userEntityOptional.get().setRoles(userRoles);
         this.userRepository.save(userEntityOptional.get());
-        return true;
+        throw new AppException("User successfully updated!", HttpStatus.OK);
     }
 
     @Override
@@ -128,7 +128,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
+        Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
+        if (userEntityOptional.isEmpty()) {
+            throw new AppException("User is not found!", HttpStatus.NOT_FOUND);
+        }
         this.userRepository.deleteById(id);
+        throw new AppException("User successfully deleted!", HttpStatus.OK);
     }
 
     @Override

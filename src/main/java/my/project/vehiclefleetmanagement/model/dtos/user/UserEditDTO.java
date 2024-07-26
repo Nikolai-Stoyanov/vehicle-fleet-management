@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEditDTO {
-  @NotEmpty
   private Long id;
   @NotEmpty
   @Size(min = 5, max = 20)
