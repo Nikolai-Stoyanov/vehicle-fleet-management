@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
     {
       title: `Cars`,
       icon: 'car',
-      permission: 'USER',
+      permission: 'ALL',
       children: [
         {
           title: `Car record`,
@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit {
     {
       title: `Operations`,
       icon: 'audit',
-      permission: 'USER',
+      permission: 'ALL',
       children: [
         {
           title: `Declaration`,
@@ -45,30 +45,31 @@ export class MenuComponent implements OnInit {
     {
       title: `Nomenclatures`,
       icon: 'build',
-      permission: 'USER',
+      permission: 'ALL',
       children: [
         {
           title: `Car brands`,
           icon: 'trademark',
           routerLink: '/car-brands',
-          permission: 'USER',
+          permission: 'ALL',
         },
         {
           title: `Car models`,
           icon: 'car',
           routerLink: '/car-models',
-          permission: 'USER',
+          permission: 'ALL',
         },
         {
           title: `Fuel`,
           icon: 'shop',
           routerLink: '/fuel',
-          permission: 'USER',
+          permission: 'ALL',
         },
         {
           title: `Users`,
           icon: 'usergroup-add',
-          routerLink: '/users'
+          routerLink: '/users',
+          permission: 'ADMIN',
         }
       ]
     },

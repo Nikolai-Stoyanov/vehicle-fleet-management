@@ -11,6 +11,8 @@ import {
   RegistrationNumberService, ResponsibleService,
 } from "../../../shared/services";
 import {Subscription} from "rxjs";
+import {CarModelsService} from "../../nomenclatures/car-models/car-models.service";
+import {CarBrandsService} from "../../nomenclatures/car-brands/car-brands.service";
 
 @Component({
   selector: 'vfm-car-record-form',
@@ -20,13 +22,14 @@ import {Subscription} from "rxjs";
 export class CarRecordFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   @Input() public currentItemId: any;
-  @Output() public submit = new EventEmitter<any>();
   public currentItem: any;
   public fuelOptions: any;
   public categoryOptions: any[] = [];
   public headquartersOptions: any[] = [];
   public ownerNameOptions: any[] = [];
   public vehicleOptions: any[] = [];
+  public carBrandOptions: any[] = [];
+  public carModelOptions: any[] = [];
   public subscriptions: Subscription[] = [];
 
   constructor(
@@ -39,6 +42,8 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
     private responsibleService: ResponsibleService,
     private driversService: DriversService,
     private fuelCardService: FuelCardService,
+    private carModelService:CarModelsService,
+    private carBrandService:CarBrandsService
   ) {
     this.currentItemId = this.modal['config'].nzData.id;
   }
@@ -122,8 +127,7 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
         Validators.required
       ),
       loadCapacity: this.fb.control(
-        this.currentItem?.loadCapacity || null,
-        Validators.required
+        this.currentItem?.loadCapacity || null
       ),
       ownerName: this.fb.control(
         this.currentItem?.ownerName || null,
@@ -184,20 +188,16 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
           : []
       ),
       createdBy: this.fb.control(
-        this.currentItem?.createdBy || null,
-        Validators.required
+        {value:this.currentItem?.createdBy || null,disabled:true}
       ),
       createdDate: this.fb.control(
-        this.currentItem?.createdDate || null,
-        Validators.required
+        {value:this.currentItem?.createdDate || null,disabled:true}
       ),
       modifyBy: this.fb.control(
-        this.currentItem?.modifyBy || null,
-        Validators.required
+        {value:this.currentItem?.modifyBy || null,disabled:true}
       ),
       modifyDate: this.fb.control(
-        this.currentItem?.modifyDate || null,
-        Validators.required
+        {value:this.currentItem?.modifyDate || null,disabled:true}
       ),
     });
   }
@@ -278,6 +278,11 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return
+    }
+    console.log(this.form.getRawValue());
     if (this.currentItemId) {
       const sub1 = this.svc.updateRecords(this.currentItemId.id, this.form.getRawValue()).subscribe({
         next: () => {
@@ -317,45 +322,56 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
 
   private getOptions() {
     this.fuelOptions = [
-      {value: Fuels.DIESEL, label: 'Diesel'},
-      {value: Fuels.GASOLINE, label: 'Gasoline'},
-      {value: Fuels.LPG, label: 'LPG'},
-      {value: Fuels.METHANOL, label: 'Methanol'},
+      {value:{id:1,name:Fuels.DIESEL} , label: Fuels.DIESEL},
+      {value:{id:2,name:Fuels.GASOLINE}, label: Fuels.GASOLINE},
+      {value:{id:3,name: Fuels.LPG}, label: Fuels.LPG},
+      {value:{id:4,name: Fuels.METHANOL}, label: Fuels.METHANOL},
     ];
 
     this.vehicleOptions = [
-      {value: VehicleType.CAR, label: 'Car'},
-      {value: VehicleType.TRUCK, label: 'Truck'},
-
+      {value: {id:1,name:VehicleType.CAR}, label: VehicleType.CAR},
+      {value: {id:2,name:VehicleType.TRUCK}, label: VehicleType.TRUCK},
     ];
 
     this.categoryOptions = [
-      {value: DrivingCategoryType.A, label: 'A'},
-      {value: DrivingCategoryType.B, label: 'B'},
-      {value: DrivingCategoryType.BE, label: 'BE'},
-      {value: DrivingCategoryType.C, label: 'C'},
-      {value: DrivingCategoryType.C1E, label: 'C1E'},
-      {value: DrivingCategoryType.D, label: 'D'},
-      {value: DrivingCategoryType.D1E, label: 'D1E'},
-      {value: DrivingCategoryType.DE, label: 'DE'},
-      {value: DrivingCategoryType.Ttm, label: 'Ttm'},
-      {value: DrivingCategoryType.Tkt, label: 'Tkt'},
+      {value:{id:1,name: DrivingCategoryType.A}, label: DrivingCategoryType.A},
+      {value:{id:2,name: DrivingCategoryType.B}, label: DrivingCategoryType.B},
+      {value:{id:3,name: DrivingCategoryType.BE}, label: DrivingCategoryType.BE},
+      {value:{id:4,name: DrivingCategoryType.C}, label: DrivingCategoryType.C},
+      {value:{id:5,name: DrivingCategoryType.C1E}, label: DrivingCategoryType.C1E},
+      {value:{id:6,name: DrivingCategoryType.D}, label: DrivingCategoryType.D},
+      {value:{id:7,name: DrivingCategoryType.D1E}, label: DrivingCategoryType.D1E},
+      {value:{id:8,name: DrivingCategoryType.DE}, label: DrivingCategoryType.DE},
+      {value:{id:9,name: DrivingCategoryType.Ttm}, label: DrivingCategoryType.Ttm},
+      {value:{id:10,name: DrivingCategoryType.Tkt}, label: DrivingCategoryType.Tkt},
     ];
 
     this.ownerNameOptions = [
-      {value: Owner.FIRSTOWNER, label: 'First Owner'},
-      {value: Owner.SECONDOWNER, label: 'Second Owner'},
-      {value: Owner.THIRDOWNER, label: 'Third Owner'},
-      {value: Owner.FOURTHOWNER, label: 'Fourth Owner'},
+      {value:{id:1,name:  Owner.FIRSTOWNER}, label: Owner.FIRSTOWNER},
+      {value:{id:1,name:  Owner.SECONDOWNER}, label:Owner.SECONDOWNER},
+      {value:{id:1,name:  Owner.THIRDOWNER}, label: Owner.THIRDOWNER},
+      {value:{id:1,name:  Owner.FOURTHOWNER}, label:Owner.FOURTHOWNER}
     ];
 
     this.headquartersOptions = [
-      {value: Headquarter.HEADQUARTER1, label: 'First Headquarter'},
-      {value: Headquarter.HEADQUARTER2, label: 'Second Headquarter'},
-      {value: Headquarter.HEADQUARTER3, label: 'Third Headquarter'},
-      {value: Headquarter.HEADQUARTER4, label: 'Fourth Headquarter'},
-      {value: Headquarter.HEADQUARTER5, label: 'Fifth Headquarter'},
+      {value:{id:1,name:  Headquarter.HEADQUARTER1}, label: Headquarter.HEADQUARTER1},
+      {value:{id:1,name:  Headquarter.HEADQUARTER2}, label: Headquarter.HEADQUARTER2},
+      {value:{id:1,name:  Headquarter.HEADQUARTER3}, label: Headquarter.HEADQUARTER3},
+      {value:{id:1,name:  Headquarter.HEADQUARTER4}, label: Headquarter.HEADQUARTER4},
+      {value:{id:1,name:  Headquarter.HEADQUARTER5}, label: Headquarter.HEADQUARTER5},
     ];
+
+    this.carModelService.fetchLatest().subscribe((res)=>{
+      res.forEach((item:any)=>{
+        this.carModelOptions.push({value:item, label: item.name});
+      })
+
+    })
+    this.carBrandService.fetchLatest().subscribe((res)=>{
+      res.forEach((item:any)=>{
+        this.carBrandOptions.push({value:item, label: item.name});
+      })
+    })
   }
 
   ngOnDestroy() {

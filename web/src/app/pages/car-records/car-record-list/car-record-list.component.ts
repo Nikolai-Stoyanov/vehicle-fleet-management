@@ -33,7 +33,7 @@ export class CarRecordListComponent implements OnInit {
       this.allTableColumns = res;
     });
     this.loading = true;
-    this.svc.fetchLatest().subscribe((res) => {
+    this.svc.fetchLatestRecords().subscribe((res:any) => {
       this.currentItems = res;
       this.loading = false;
     });
@@ -57,9 +57,9 @@ export class CarRecordListComponent implements OnInit {
       nzFooter: null,
     });
     modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+      this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
+        this.currentItems = res;
+      });
     });
   }
 
@@ -73,7 +73,9 @@ export class CarRecordListComponent implements OnInit {
         const sub2 = this.svc.deleteRecord(this.currentItem?.id).subscribe({
           next: () => {
             this.message.create('success', `Car record successfully deleted.`);
-            this.svc.fetchLatest();
+            this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {

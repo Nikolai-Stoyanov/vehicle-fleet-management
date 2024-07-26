@@ -72,18 +72,14 @@ export class CarModelsListComponent implements OnInit {
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteModel(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', `Model successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatest().subscribe((res) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error(`Model not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },

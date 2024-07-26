@@ -78,18 +78,14 @@ export class FuelProviderListComponent implements OnInit {
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteSupplier(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', `Provider successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatestSuppliers().subscribe((res) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error(`Provider not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },

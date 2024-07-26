@@ -10,7 +10,7 @@ import {Status} from "../../shared/shared";
   providedIn: 'root'
 })
 export class CarRecordService {
-  private readonly endpoint = 'cars';
+  private readonly endpoint = '/carRecord';
 
   public carRecordsListColumns: TableColumnInterface[] = [
     {
@@ -115,11 +115,9 @@ export class CarRecordService {
   }
 
   // data
-  // fetchLatest(): Observable<any> {
-  //   return this.http.get<any>(this.endpoint);
-  // }
-  fetchLatest(): Observable<any> {
-    return of(this.carRecords);
+
+  fetchLatestRecords() {
+    return this.http.get<any>(`${this.endpoint}`);
   }
 
   deleteRecord(id: number) {

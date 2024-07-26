@@ -78,18 +78,14 @@ export class FuelListComponent implements OnInit {
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteFuel(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', `Fuel successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatestFuels().subscribe((res) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error(`Fuel not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },

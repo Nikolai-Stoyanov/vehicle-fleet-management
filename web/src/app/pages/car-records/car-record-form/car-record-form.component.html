@@ -3,7 +3,7 @@
     <div nz-row nzGutter="24">
       <div nz-col nzSpan="6">
         <vfm-form-item label="Vehicle type" controlSpan="24">
-          <vfm-select id="vehicleType" formControlName="vehicleType" [options]="vehicleOptions" i18n>
+          <vfm-select id="vehicleType" formControlName="vehicleType" [options]="vehicleOptions">
           </vfm-select>
         </vfm-form-item>
       </div>
@@ -17,18 +17,12 @@
       </div>
       <div nz-col nzSpan="5">
         <vfm-form-item label="Brand" controlSpan="24">
-          <vfm-text-input
-            id="brand"
-            formControlName="brand"
-          ></vfm-text-input>
+          <vfm-select id="brand" formControlName="brand" [options]="carBrandOptions"></vfm-select>
         </vfm-form-item>
       </div>
       <div nz-col nzSpan="5">
         <vfm-form-item label="Model" controlSpan="24">
-          <vfm-text-input
-            id="model"
-            formControlName="model"
-          ></vfm-text-input>
+          <vfm-select id="model" formControlName="model" [options]="carModelOptions"></vfm-select>
         </vfm-form-item>
       </div>
 

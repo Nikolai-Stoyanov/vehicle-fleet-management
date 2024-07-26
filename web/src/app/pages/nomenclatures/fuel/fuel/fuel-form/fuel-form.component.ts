@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {FuelProviderType, FuelType} from "../../fuel";
+import { FuelType} from "../../fuel";
 import {FuelService} from "../../fuel.service";
 
 @Component({
@@ -29,7 +29,6 @@ export class FuelFormComponent implements OnInit {
     if (this.currentItemId) {
       this.svc.fetchFuelById(this.currentItemId).subscribe((res:FuelType) => {
         this.currentItem = res;
-        console.log(res)
         this.getForm();
       })
     }else {
@@ -70,7 +69,8 @@ export class FuelFormComponent implements OnInit {
 
     if (!this.currentItem?.id) {
       this.svc.createFuel(formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
@@ -79,7 +79,8 @@ export class FuelFormComponent implements OnInit {
       })
     }else {
       this.svc.updateFuel(this.currentItem?.id,formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {

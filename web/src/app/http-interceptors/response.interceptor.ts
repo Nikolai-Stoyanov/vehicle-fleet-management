@@ -27,14 +27,6 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   handleDefault(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
     return throwError(error);
   }
 
@@ -43,10 +35,6 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   handle400Error(error: any): Observable<any> {
-    // if (error && error.status === 400 && error.error) {
-    // 	return this.logoutUser();
-    // }
-
     return throwError(error);
   }
 }

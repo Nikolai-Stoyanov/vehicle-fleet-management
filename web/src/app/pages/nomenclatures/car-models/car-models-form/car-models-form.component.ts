@@ -85,7 +85,8 @@ export class CarModelsFormComponent implements OnInit {
     }
     if (!this.currentItem?.id) {
       this.modelService.createModel(formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
@@ -94,7 +95,8 @@ export class CarModelsFormComponent implements OnInit {
       })
     } else {
       this.modelService.updateModel(this.currentItem?.id, formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
