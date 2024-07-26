@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {CarBrandsService} from "../car-brands.service";
 
 @Component({
-  selector: 'vfm-car-models-form',
+  selector: 'vfm-users-form',
   templateUrl: './car-brands-form.component.html',
   styleUrls: ['./car-brands-form.component.scss']
 })
@@ -19,6 +20,7 @@ export class CarBrandsFormComponent implements OnInit {
     private modalService: NzModalService,
     private message: NzMessageService,
     protected modal: NzModalRef,
+    private brandService: CarBrandsService,
   ) {
     this.currentItem = this.modal['config'].nzData.currentItem;
   }
@@ -35,7 +37,6 @@ export class CarBrandsFormComponent implements OnInit {
       ),
       description: this.fb.control(
         this.currentItem?.description || null,
-        Validators.required
       ),
       company: this.fb.control(
         this.currentItem?.company || null,
@@ -52,7 +53,33 @@ export class CarBrandsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-    // this.submit.emit(this.form.getRawValue());
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return
+    }
+    if (!this.currentItem?.id) {
+      this.brandService.createBrand(this.form.getRawValue()).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.modal.destroy();
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.message.error(error.status + ' ' + error.statusText);
+        }
+      })
+    }else {
+      this.brandService.updateBrand(this.currentItem?.id,this.form.getRawValue()).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.modal.destroy();
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.message.error(error.status + ' ' + error.statusText);
+        }
+      })
+    }
+
   }
 }

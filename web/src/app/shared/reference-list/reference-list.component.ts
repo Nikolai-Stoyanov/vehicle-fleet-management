@@ -7,7 +7,6 @@ import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {NzMessageService} from 'ng-zorro-antd/message';
 
 import {TableColumnInterface} from '../dummy-table';
-import {CarModel} from "../../pages/nomenclatures/car-models/car-model";
 import {EditFormComponent} from "./edit-form";
 
 @Component({

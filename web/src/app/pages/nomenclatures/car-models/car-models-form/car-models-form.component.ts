@@ -7,7 +7,7 @@ import {CarBrandsService} from "../../car-brands/car-brands.service";
 import {DateTimePipe} from "../../../../shared/formatters/date-time";
 
 @Component({
-  selector: 'vfm-car-models-form',
+  selector: 'vfm-users-form',
   templateUrl: './car-models-form.component.html',
   styleUrls: ['./car-models-form.component.scss'],
 })
@@ -30,7 +30,7 @@ export class CarModelsFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.brandService.carBrandsListData.forEach(item=>{
+    this.brandService.carBrandsListData.forEach((item:any)=>{
       this.brandOptions.push({label: item.name, value: item.id})
     })
     this.form = this.fb.group({

@@ -1,25 +1,22 @@
 <div style="margin: 0.5em;">
   <vfm-dummy-table-checkboxes
+    [tableHeight]="'72vh'"
+    [loading]="loading"
     [haveEdit]="true"
-    [allItems]="items"
+    [allItems]="currentItems"
     [listOfColumns]="allTableColumns"
-    (onItemDblClick)="editItem($event)"
+    (onItemDblClick)="editUser($event)"
     (onItemClick)="currentItemSelect($event)"
+    [titleTemplate]="titleTemplate"
   >
   </vfm-dummy-table-checkboxes>
   <div nz-row nzGutter="10"  style="margin: 0.5em;">
-    <div nz-col>
-      <button nz-button nzType="default" type="button" id="addButton" (click)="editItem()">
-        <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-        <span >Add</span>
-      </button>
-    </div>
     <div nz-col>
       <button
         type="button"
         id="editButton"
         nz-button nzType="default"
-        (click)="editItem(currentItem)"
+        (click)="editUser(currentItem)"
         [disabled]="!currentItem"
       >
         <i nz-icon nzType="edit" nzTheme="outline"></i>
@@ -33,7 +30,7 @@
         nz-button
         nzType="default"
         nzDanger
-        (click)="removeItem()"
+        (click)="removeUser()"
         [disabled]="!currentItem"
       >
         <i nz-icon nzType="delete" nzTheme="outline"></i>
@@ -42,3 +39,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #titleTemplate>
+  <span style="font-weight: 900;font-style: italic">Users table</span>
+</ng-template>

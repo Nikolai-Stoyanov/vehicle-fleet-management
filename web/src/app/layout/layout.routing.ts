@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { DefaultLayoutComponent } from './default-layout';
 import { MenuComponent } from './menu/menu.component';
+import { PermissionGuard } from '../core/guards/permission.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'waybill',
+        redirectTo: 'home',
       },
       {
         path: 'login',
@@ -29,27 +30,61 @@ const routes: Routes = [
       },
       {
         path: 'car-brands',
-        loadChildren: () => import('../pages/nomenclatures/car-brands').then((m) => m.CarBrandsModule)
+        loadChildren: () => import('../pages/nomenclatures/car-brands').then((m) => m.CarBrandsModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: `Car brands`
+        },
       },
       {
         path: 'car-models',
-        loadChildren: () => import('../pages/nomenclatures/car-models').then((m) => m.CarModelsModule)
+        loadChildren: () => import('../pages/nomenclatures/car-models').then((m) => m.CarModelsModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: `Car models`
+        },
       },
       {
         path: 'fuel',
-        loadChildren: () => import('../pages/nomenclatures/fuel').then((m) => m.FuelModule)
+        loadChildren: () => import('../pages/nomenclatures/fuel').then((m) => m.FuelModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: `Fuel`
+        },
       },
       {
         path: 'car-record',
-        loadChildren: () => import('../pages/car-records').then((m) => m.CarRecordModule)
+        loadChildren: () => import('../pages/car-records').then((m) => m.CarRecordModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: `Car records`
+        },
       },
       {
         path: 'declarations',
-        loadChildren: () => import('../pages/declarations').then((m) => m.DeclarationsModule)
+        loadChildren: () => import('../pages/declarations').then((m) => m.DeclarationsModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: `Declarations`
+        },
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('../pages/nomenclatures/users').then((m) => m.UsersModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['ADMIN'],
+          module: `Users`
+        },
       },
       {
         path: '**',
-        redirectTo: '',
+        redirectTo: 'home',
       },
     ]
   }

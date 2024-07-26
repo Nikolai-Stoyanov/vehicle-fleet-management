@@ -8,7 +8,7 @@ import { CarBrand } from './car-brands';
   providedIn: 'root'
 })
 export class CarBrandsService {
-  private readonly endpoint = '';
+  private readonly endpoint = '/carBrand';
 
   public carBrandsListColumns  = [
     {
@@ -119,13 +119,21 @@ export class CarBrandsService {
   // data
 
   fetchLatest(): Observable<any> {
-    return of(this.carBrandsListData);
+    return this.http.get<any>(`${this.endpoint}`)
   }
 
-  public deleteBranch( brandId: number): Observable<any> {
+  fetchBrandById(brandId: number): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/${brandId}`)
+  }
+
+  public deleteBrand( brandId: number): Observable<any> {
     return this.http.delete<any>(`${this.endpoint}/${brandId}`);
   }
-  // fetchLatest(): Observable<any> {
-  //   return this.http.get<any>(this.endpoint);
-  // }
+
+  public createBrand(brand: CarBrand): Observable<any> {
+    return this.http.post<any>(`${this.endpoint}`,brand)
+  }
+  public updateBrand(brandId:number,brand: CarBrand): Observable<any> {
+    return this.http.put<any>(`${this.endpoint}/${brandId}`,brand)
+  }
 }

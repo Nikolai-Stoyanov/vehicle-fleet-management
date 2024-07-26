@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {NzMessageService} from 'ng-zorro-antd/message';
 
 import {AuthenticationService} from '../auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'vfm-login',
@@ -22,14 +23,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       username: this.fb.control('', [Validators.required]),
       password: this.fb.control('', [Validators.required]),
-      language: this.fb.control('', [Validators.required]),
-      appId: this.fb.control(''),
-      redirectTo: this.fb.control('')
     });
   }
 
@@ -39,13 +38,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     e.stopPropagation();
     this.loading = true;
 
+
     if (this.loginForm.valid) {
-      const sub1 = this.authService.login(this.loginForm.value).subscribe(
+      const sub1 = this.authService.login(this.loginForm.getRawValue()).subscribe(
         () => {
+            this.router.navigate(['/home']).then(() => {
+              window.location.reload();
+            });
         },
         (error: any) => {
           console.log(error);
-          this.message.error(error.statusText);
+          this.message.error(error.status + " "+error.error.message);
         }
       );
       this.subscriptions.push(sub1);

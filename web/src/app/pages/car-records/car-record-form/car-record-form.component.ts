@@ -8,11 +8,7 @@ import {ReferenceListComponent} from "../../../shared/reference-list/reference-l
 import {CarRecord, DrivingCategoryType, Fuels, Headquarter, Owner, VehicleType} from "../car-record";
 import {
   DriversService, FuelCardService,
-  InspectionService,
-  InsuranceService,
-  NotesService,
   RegistrationNumberService, ResponsibleService,
-  VignetteService
 } from "../../../shared/services";
 import {Subscription} from "rxjs";
 
@@ -39,10 +35,6 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
     private modal: NzModalRef,
     private message: NzMessageService,
     private svc: CarRecordService,
-    private notesService: NotesService,
-    private vignetteService: VignetteService,
-    private insuranceService: InsuranceService,
-    private inspectionService: InspectionService,
     private registrationNumberService: RegistrationNumberService,
     private responsibleService: ResponsibleService,
     private driversService: DriversService,
@@ -219,47 +211,6 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
     let data;
     let columns;
     switch (type) {
-      case 'Notes':
-        service = this.notesService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        break;
-      case 'Vignettes':
-        service = this.vignetteService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-      case 'Inspections':
-        service = this.inspectionService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-      case 'Insurances':
-        service = this.insuranceService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
       case 'Registration numbers':
         service = this.registrationNumberService
         if (this.currentItemId) {

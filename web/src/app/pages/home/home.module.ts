@@ -9,10 +9,11 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { HomeRoutingModule } from './home.routing';
+import {HomeComponent} from "./home.component";
 
 @NgModule({
   exports: [],
-  declarations: [],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     NzLayoutModule,

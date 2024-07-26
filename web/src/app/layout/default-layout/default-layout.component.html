@@ -11,18 +11,19 @@
       <li nz-menu-item routerLink="/contacts">Contacts</li>
       <span class="greeting" >
         <span>Hallo </span>
-        <span>Guest</span>
+        <span *ngIf="currentUser?.username">{{ currentUser?.username}}</span>
+        <span *ngIf="!currentUser?.username">Guest</span>
       </span>
-      <li nz-menu-item routerLink="/login" *ngIf="isCollapsed">Login</li>
-      <li nz-menu-item routerLink="/register" *ngIf="isCollapsed">Register</li>
-      <li nz-menu-item *ngIf="!isCollapsed">Logout</li>
+      <li nz-menu-item routerLink="/login" *ngIf="!currentUser?.username">Login</li>
+      <li nz-menu-item routerLink="/register" *ngIf="!currentUser?.username">Register</li>
+      <li nz-menu-item (click)="onLogoutClick($event)" *ngIf="currentUser?.username">Logout</li>
     </ul>
 
   </nz-header>
   <nz-layout>
-    <nz-sider nzWidth="200px" nzTheme="light" *ngIf="isCollapsed">
+    <nz-sider nzWidth="200px" nzTheme="light" *ngIf="currentUser?.username">
       <div class="sider-menu">
-        <vfm-menu></vfm-menu>
+        <vfm-menu [roles]="roles"></vfm-menu>
       </div>
     </nz-sider>
     <nz-layout class="inner-layout">

@@ -7,30 +7,6 @@
         </vfm-form-item>
       </div>
 
-      <div nz-col nzSpan="24" *ngIf="type===EditFormTypes.VIGNETTES">
-        <vfm-form-item label="Vignette type" controlSpan="16" labelSpan="8">
-          <vfm-select id="vignetteType" formControlName="vignetteType" [allowClear]="true"
-                      [options]="vignetteOptions"></vfm-select>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="24"
-           *ngIf="type===EditFormTypes.VIGNETTES || type===EditFormTypes.INSPECTIONS || type===EditFormTypes.INSURANCES">
-        <vfm-form-item label="Description" controlSpan="16" labelSpan="8">
-          <vfm-text-input id="description" formControlName="description"></vfm-text-input>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="24"
-           *ngIf="type===EditFormTypes.VIGNETTES || type===EditFormTypes.INSPECTIONS || type===EditFormTypes.INSURANCES">
-        <vfm-form-item label="Date from" controlSpan="16" labelSpan="8">
-          <vfm-datepicker id="dateFrom" formControlName="dateFrom"></vfm-datepicker>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="24"
-           *ngIf="type===EditFormTypes.VIGNETTES || type===EditFormTypes.INSPECTIONS || type===EditFormTypes.INSURANCES">
-        <vfm-form-item label="Date to" controlSpan="16" labelSpan="8">
-          <vfm-datepicker id="dateTo" formControlName="dateTo"></vfm-datepicker>
-        </vfm-form-item>
-      </div>
 
       <div nz-col nzSpan="24" *ngIf="type===EditFormTypes.RESPONSIBLE || type===EditFormTypes.DRIVERS">
         <vfm-form-item label="Name" controlSpan="16" labelSpan="8">
@@ -65,8 +41,7 @@
         </vfm-form-item>
       </div>
 
-      <div nz-col nzSpan="24"
-           *ngIf="type!==EditFormTypes.VIGNETTES && type!==EditFormTypes.INSPECTIONS && type!==EditFormTypes.INSURANCES">
+      <div nz-col nzSpan="24">
         <vfm-form-item controlSpan="16" labelSpan="8">
           <label nz-checkbox id="status" formControlName="status"
           >Active</label

@@ -3,27 +3,26 @@ import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
-import { CarModelsFormComponent } from '../car-models-form';
-import { CarModelsService } from '../car-models.service';
-import { CarModel} from "../car-model";
+import { UsersFormComponent } from '../users-form';
+import { UsersService } from '../users.service';
+import { Users} from "../users";
 
 import { TableColumnInterface } from '../../../../shared/dummy-table';
 
 @Component({
   selector: 'vfm-users-list',
-  templateUrl: './car-models-list.component.html',
-  styleUrls: ['./car-models-list.component.scss'],
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
-export class CarModelsListComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 
-  public currentItems: CarModel[] | undefined;
+  public currentItems: Users[] | undefined;
   public currentItem:any;
   public allTableColumns: TableColumnInterface[] = [];
-  public currentTableColumns: TableColumnInterface[] = [];
   public loading = false;
 
   constructor(
-    private svc: CarModelsService,
+    private svc: UsersService,
     private message: NzMessageService,
     private modalService: NzModalService
   ) {}
@@ -31,11 +30,6 @@ export class CarModelsListComponent implements OnInit {
   ngOnInit() {
     this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
-      this.allTableColumns.forEach((column: TableColumnInterface) => {
-        if (column.visible === true) {
-          this.currentTableColumns.push(column);
-        }
-      });
     });
 
     this.loading = true;
@@ -45,45 +39,46 @@ export class CarModelsListComponent implements OnInit {
     });
   }
 
-  editModel(item?: CarModel) {
+  editUser(item?: Users) {
     let title;
     if (item) {
-      title = `Model: ${item.name}`;
-    } else {
-      title = `New Model`;
+      title = `User: ${item.username}`;
     }
+
     const modal = this.modalService.create({
       nzTitle: title,
-      nzContent: CarModelsFormComponent,
+      nzContent: UsersFormComponent,
       nzWidth: '40vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item,
+        currentItem: item?.id,
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+    modal.afterClose.subscribe(() => {
+      this.svc.fetchLatest().subscribe((res) => {
+        this.currentItems = res;
+      });
     });
   }
 
-  removeModel() {
+  removeUser() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this model?`,
+      nzTitle: `Are you sure you want to delete this user?`,
       nzOkText: `Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteModel(this.currentItem?.id).subscribe({
+        const sub2 = this.svc.deleteUser(this.currentItem?.id).subscribe({
           next: () => {
-            this.message.create('success', `Model successfully deleted.`);
-            this.svc.fetchLatest();
+            this.message.create('success', `User successfully deleted.`);
+            this.svc.fetchLatest().subscribe((res) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {
-              this.message.error(`Model not found`);
+              this.message.error(`User not found`);
             } else {
               this.message.error(error);
             }
@@ -96,7 +91,7 @@ export class CarModelsListComponent implements OnInit {
     });
   }
 
-  currentItemSelect(item: CarModel) {
+  currentItemSelect(item: Users) {
     if (item.id===this.currentItem?.id){
       this.currentItem=null
     }else {

@@ -1,21 +1,24 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, Inject} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {mergeMap, tap} from 'rxjs/operators';
 
-import { ENVIRONMENT } from '../shared/shared';
+import {ENVIRONMENT} from '../shared/shared';
+import {Router} from "@angular/router";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<any>;
   public currentUser$: Observable<any>;
+  private currentUserSubject: BehaviorSubject<any>;
 
   constructor(
     private httpClient: HttpClient,
-    @Inject(ENVIRONMENT) protected env: any // private appConfigService: AppConfigService
+    @Inject(ENVIRONMENT) protected env: any, // private appConfigService: AppConfigService
+    private router: Router
   ) {
-    this.currentUserSubject = new BehaviorSubject<any>(null);
+    // @ts-ignore
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
@@ -23,31 +26,42 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+
   login(form: any): any {
-    const body = this.getBody(form);
-    return this.httpClient.post<any>('/login', body).pipe(
-      mergeMap((res) => {
-        return this.redirectTo(res);
-      })
-    );
+    return this.httpClient.post<any>('/login', form).pipe(tap((user) => {
+      if (user && user.roles.length > 0) {
+        const roles: any[] = []
+        user.roles.forEach((item: any) => {
+          roles.push(item.role)
+        })
+        const currentUser = {
+          username: user.username,
+          token: user.token,
+          roles: roles,
+        }
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }
+    }))
   }
 
-  getBody(form: any): any {
-    const { username, password, language, appId, redirectTo } = form;
-    return {
-      user: username,
-      password,
-      language: language,
-      applicationId: appId,
-      redirectTo: redirectTo
-    };
+
+  register(form: any): Observable<any> {
+    return this.httpClient.post<any>('/register', form);
   }
 
-  redirectTo(res: any): any {
-    console.log('Redirecting to: ' + res.redirectUrl);
-    if (res.openInNewTab) {
-      return window.open(res.redirectUrl, '_blank');
+
+  logout(error?: any) {
+    try {
+      localStorage.removeItem('currentUser');
+      this.currentUserSubject.next(null);
+
+      this.httpClient.post<any>('/logout', null);
+      this.router.navigate(['/home']).then(() => {
+        window.location.reload();
+      });
+      return true;
+    } catch (err) {
+      return false;
     }
-    return (window.location.href = res.redirectUrl);
   }
 }
