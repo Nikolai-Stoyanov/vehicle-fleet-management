@@ -42,9 +42,9 @@ export class CarRecordListComponent implements OnInit {
   editRecord(item?: CarRecordList) {
     let title;
     if (item) {
-      title = `Record: ${item.registrationNumber}`;
+      title = $localize`Record: ${item.registrationNumber}`;
     } else {
-      title = `New Record`;
+      title = $localize`New Record`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -65,28 +65,28 @@ export class CarRecordListComponent implements OnInit {
 
   removeRecord() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this model?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this model?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteRecord(this.currentItem?.id).subscribe({
           next: () => {
-            this.message.create('success', `Car record successfully deleted.`);
+            this.message.create('success', $localize`Car record successfully deleted.`);
             this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
             if (error.status === 404) {
-              this.message.error(`Record not found`);
+              this.message.error($localize`Record not found`);
             } else {
               this.message.error(error);
             }
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

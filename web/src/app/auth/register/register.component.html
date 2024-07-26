@@ -1,15 +1,15 @@
 <div class="wrapper">
-  <h1 class="greetings">Register</h1>
+  <h1 class="greetings" i18n>Register</h1>
   <div class="inner-content ">
     <form nz-form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
-      <vfm-form-item label="Username" labelSpan="8" controlSpan="16">
+      <vfm-form-item label="Username" labelSpan="8" controlSpan="16" i18n-label>
         <vfm-text-input id="username" formControlName="username" prefixIcon="user"></vfm-text-input>
       </vfm-form-item>
-      <vfm-form-item label="Email" labelSpan="8" controlSpan="16">
+      <vfm-form-item label="Email" labelSpan="8" controlSpan="16" i18n-label>
         <vfm-text-input id="email" formControlName="email" prefixIcon="mail"></vfm-text-input>
       </vfm-form-item>
 
-      <vfm-form-item label="Password" labelSpan="8" controlSpan="16">
+      <vfm-form-item label="Password" labelSpan="8" controlSpan="16" i18n-label>
         <vfm-text-input
           [type]="passwordVisible ? 'text' : 'password'"
           [suffix]="suffixTemplate"
@@ -18,7 +18,7 @@
           id="password"
         ></vfm-text-input>
       </vfm-form-item>
-      <vfm-form-item label="Repeat password" labelSpan="8" controlSpan="16">
+      <vfm-form-item label="Repeat password" labelSpan="8" controlSpan="16" i18n-label>
         <vfm-text-input
           [type]="passwordVisible ? 'text' : 'password'"
           [suffix]="suffixTemplate"
@@ -39,15 +39,15 @@
         <i nz-icon nzType="lock" nzTheme="outline"></i>
       </ng-template>
       <div class="register-form-button">
-        <button nz-button [nzLoading]="loading" style="width: 100%" nzType="primary">
+        <button nz-button [nzLoading]="loading" style="width: 100%" nzType="primary" i18n>
           Register
         </button>
       </div>
     </form>
     <div class="login-text">
-      <span
-      > Already have an account?
-        <span routerLink="/login">Login</span>
+      <span>
+        <span i18n> Already have an account?</span>
+        <span routerLink="/login" i18n>Login</span>
       </span>
     </div>
 

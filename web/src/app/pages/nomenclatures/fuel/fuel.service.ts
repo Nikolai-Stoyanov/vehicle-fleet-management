@@ -11,7 +11,7 @@ export class FuelService {
   public fuelProviderColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -21,7 +21,7 @@ export class FuelService {
     },
     {
       id: '2',
-      title: 'Name',
+      title: $localize`Name`,
       propsName: 'name',
       width: '100px',
       type: 'text',
@@ -31,7 +31,7 @@ export class FuelService {
     },
     {
       id: '3',
-      title: 'Description',
+      title: $localize`Description`,
       propsName: 'description',
       width: '200px',
       type: 'text',
@@ -41,7 +41,7 @@ export class FuelService {
     },
     {
       id: '4',
-      title: 'Fuels',
+      title: $localize`Fuels`,
       propsName: 'fuelList',
       width: '200px',
       type: 'array',
@@ -49,7 +49,7 @@ export class FuelService {
     },
     {
       id: '5',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '150px',
       sortFn: (a: any, b: any) => Number(a.active) - Number(b.active),
@@ -61,7 +61,7 @@ export class FuelService {
   public fuelColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -71,7 +71,7 @@ export class FuelService {
     },
     {
       id: '2',
-      title: 'Name',
+      title: $localize`Name`,
       propsName: 'name',
       width: '150px',
       type: 'text',
@@ -81,7 +81,7 @@ export class FuelService {
     },
     {
       id: '3',
-      title: 'Description',
+      title: $localize`Description`,
       propsName: 'description',
       width: '200px',
       sortFn: (a: any, b: any) => a.description.localeCompare(b.description),
@@ -91,7 +91,7 @@ export class FuelService {
     },
     {
       id: '4',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '100px',
       sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),
@@ -104,106 +104,6 @@ export class FuelService {
   private readonly supplierEndpoint = '/fuelSupplier';
 
   constructor(private http: HttpClient) {}
-
-  public fetchLatestFuel(): Observable<FuelType[]> {
-    return of([
-      {
-        id: 1,
-        name: 'Дизел',
-        description:'',
-        status: true
-      },
-      {
-        id: 2,
-        name: 'Бензин А95 Н',
-        description: '',
-        status: true
-      },
-      {
-        id: 3,
-        name: 'Газ',
-        description: '',
-        status: true
-      },
-      {
-        id: 4,
-        name: 'Бензин А98',
-        description: '',
-        status: true
-      },
-      {
-        id: 5,
-        name: 'Super Diesel',
-        description: '',
-        status: true
-      },
-      {
-        id: 6,
-        name: 'Metan',
-        description: '',
-        status: true
-      }
-    ]);
-  }
-  public fetchLatestProvider(): Observable<FuelProviderType[]> {
-    return of([
-      {
-        id: 0,
-        name: 'Петрол',
-        description: 'petrol',
-        fuelOptions: [
-          { id: 1,price:1.5 },
-          { id: 2, price:1.2  },
-          { id: 3, price:0.9  }
-        ],
-        status: true
-      },
-      {
-        id: 1,
-        name: 'OMV',
-        description: 'omv',
-        fuelOptions: [
-          { id: 1,price:1.6 },
-          { id: 2, price:1.3  },
-          { id: 3, price:0.8  }
-        ],
-        status: true
-      },
-      {
-        id: 2,
-        name: 'Лукойл',
-        description: 'lucoil',
-        fuelOptions: [
-          { id: 1,price:1.2  },
-          { id: 2, price:1.76},
-          { id: 3, price:0.6}
-        ],
-        status: true
-      },
-      {
-        id: 3,
-        name: 'Бентойл',
-        description: 'bentoil',
-        fuelOptions: [
-          { id: 1,price:1.5 },
-          { id: 2, price:1.2 },
-          { id: 3, price:0.9}
-        ],
-        status: true
-      },
-      {
-        id: 4,
-        name: 'Shell',
-        description: 'shell',
-        fuelOptions: [
-          { id: 1,price:1.46 },
-          { id: 2, price:1.66  },
-          { id: 3, price:0.95 }
-        ],
-        status: true
-      }
-    ]);
-  }
 
   public getFuelColumns(): Observable<any> {
     return of(this.fuelColumns);

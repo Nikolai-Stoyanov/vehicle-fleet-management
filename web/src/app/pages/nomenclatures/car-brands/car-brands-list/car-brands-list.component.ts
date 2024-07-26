@@ -42,9 +42,9 @@ export class CarBrandsListComponent implements OnInit {
   editBrand(item?: CarBrand) {
     let title;
     if (item) {
-      title = `Brand: ${item.name}`;
+      title = $localize`Brand: ${item.name}`;
     } else {
-      title = `New brand`;
+      title = $localize`New brand`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -65,8 +65,8 @@ export class CarBrandsListComponent implements OnInit {
 
   removeBrand() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this brand?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this brand?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
@@ -82,7 +82,7 @@ export class CarBrandsListComponent implements OnInit {
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

@@ -47,9 +47,9 @@ export class DeclarationsListComponent implements OnInit {
   editDeclaration(item?: DeclarationList) {
     let title;
     if (item) {
-      title = `Edit declaration for: ${item.registrationNumber}`;
+      title = $localize`Edit declaration for: ${item.registrationNumber}`;
     } else {
-      title = `New declaration (${this.currentRegistrationNumber.registrationNumber}) `;
+      title = $localize`New declaration (${this.currentRegistrationNumber.registrationNumber}) `;
     }
     this.createModalVisible=false
     const modal = this.modalService.create({
@@ -65,33 +65,33 @@ export class DeclarationsListComponent implements OnInit {
     });
     modal.afterClose.subscribe((res) => {
       if (res) {
-        this.message.info('Функцията не е имплементирана!');
+        this.message.info($localize`Функцията не е имплементирана!`);
       }
     });
   }
 
   removeDeclaration() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this declaration?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this declaration?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteDeclaration(this.currentItem?.id).subscribe({
           next: () => {
-            this.message.create('success', `Declaration successfully deleted.`);
+            this.message.create('success', $localize`Declaration successfully deleted.`);
             this.svc.fetchLatest();
           },
           error: (error) => {
             if (error.status === 404) {
-              this.message.error(`Declaration not found`);
+              this.message.error($localize`Declaration not found`);
             } else {
               this.message.error(error);
             }
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

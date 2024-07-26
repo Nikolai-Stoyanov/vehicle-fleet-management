@@ -19,54 +19,54 @@ export interface MenuItem {
 export class MenuComponent implements OnInit {
   public model: MenuItem[] = [
     {
-      title: `Cars`,
+      title: $localize`Cars`,
       icon: 'car',
       permission: 'ALL',
       children: [
         {
-          title: `Car record`,
+          title: $localize`Car record`,
           icon: 'car',
           routerLink: ['/car-record']
         }
       ]
     },
     {
-      title: `Operations`,
+      title: $localize`Operations`,
       icon: 'audit',
       permission: 'ALL',
       children: [
         {
-          title: `Declaration`,
+          title: $localize`Declaration`,
           icon: 'file',
           routerLink: '/declarations'
         }
       ]
     },
     {
-      title: `Nomenclatures`,
+      title: $localize`Nomenclatures`,
       icon: 'build',
       permission: 'ALL',
       children: [
         {
-          title: `Car brands`,
+          title: $localize`Car brands`,
           icon: 'trademark',
           routerLink: '/car-brands',
           permission: 'ALL',
         },
         {
-          title: `Car models`,
+          title: $localize`Car models`,
           icon: 'car',
           routerLink: '/car-models',
           permission: 'ALL',
         },
         {
-          title: `Fuel`,
+          title: $localize`Fuel`,
           icon: 'shop',
           routerLink: '/fuel',
           permission: 'ALL',
         },
         {
-          title: `Users`,
+          title: $localize`Users`,
           icon: 'usergroup-add',
           routerLink: '/users',
           permission: 'ADMIN',
@@ -103,16 +103,16 @@ export class MenuComponent implements OnInit {
   initialOpenMenuHandler() {
     const url = this.router.url;
  if (url.includes('car-record')) {
-      this.openMap[`Cars`] = true;
+      this.openMap[$localize`Cars`] = true;
     } else if ( url.includes('declarations')) {
-      this.openMap[`Operations`] = true;
+      this.openMap[$localize`Operations`] = true;
     } else if (
       url.includes('car-models') ||
       url.includes('car-brands') ||
       url.includes('fuel')||
       url.includes('users')
     ) {
-      this.openMap[`Nomenclatures`] = true;
+      this.openMap[$localize`Nomenclatures`] = true;
     }
   }
 }

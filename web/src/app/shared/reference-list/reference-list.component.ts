@@ -41,9 +41,9 @@ export class ReferenceListComponent implements OnInit {
   editItem(item?: any) {
     let title;
     if (item) {
-      title = `${this.dataType}: ${item.name}`;
+      title = $localize`${this.dataType}`;
     } else {
-      title = `New ${this.dataType}`;
+      title = $localize`New ${this.dataType}`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -66,26 +66,26 @@ export class ReferenceListComponent implements OnInit {
 
   removeItem() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this item?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this item?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
         const sub2 = this.svc.delete(this.carId).subscribe({
           next: () => {
-            this.message.create('success', `Item successfully deleted.`);
+            this.message.create('success', $localize`Item successfully deleted.`);
             this.svc.fetchLatest();
           },
           error: (error:any) => {
             if (error.status === 404) {
-              this.message.error(`Item not found`);
+              this.message.error($localize`Item not found`);
             } else {
               this.message.error(error);
             }
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

@@ -56,7 +56,8 @@ export interface Fuel {
 
 
 export enum Fuels{
-  DIESEL='Disel', LPG='LPG', GASOLINE='Gasoline', METHANOL='Methanol',
+
+  DIESEL= `Disel`, LPG= `LPG`, GASOLINE= `Gasoline`, METHANOL= `Methanol`,
 }
 
 export enum Headquarter{
@@ -68,7 +69,8 @@ FIRSTOWNER='First owner',SECONDOWNER='Second owner',THIRDOWNER='Third owner',FOU
 }
 
 export enum VehicleType{
-  CAR='Car', TRUCK='Truck'
+
+  CAR=`Car`, TRUCK= `Truck`
 }
 
 export enum DrivingCategoryType{

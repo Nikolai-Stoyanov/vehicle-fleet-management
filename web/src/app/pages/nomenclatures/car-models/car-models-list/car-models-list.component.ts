@@ -43,9 +43,9 @@ export class CarModelsListComponent implements OnInit {
   editModel(item?: CarModel) {
     let title;
     if (item) {
-      title = `Model: ${item.name}`;
+      title = $localize`Model: ${item.name}`;
     } else {
-      title = `New Model`;
+      title = $localize`New Model`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -66,8 +66,8 @@ export class CarModelsListComponent implements OnInit {
 
   removeModel() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this model?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this model?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
@@ -83,7 +83,7 @@ export class CarModelsListComponent implements OnInit {
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

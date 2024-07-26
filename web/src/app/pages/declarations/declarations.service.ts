@@ -14,7 +14,7 @@ export class DeclarationsService {
   public declarationListColumns  = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -24,7 +24,7 @@ export class DeclarationsService {
     },
     {
       id: '2',
-      title: 'Period',
+      title: $localize`Period`,
       propsName: 'period',
       width: '100px',
       sortFn: (a: any, b: any) => a.period.localeCompare(b.period),
@@ -34,7 +34,7 @@ export class DeclarationsService {
     },
     {
       id: '3',
-      title: 'Responsible',
+      title: $localize`Responsible`,
       propsName: 'responsible',
       width: '100px',
       sortFn: (a: any, b: any) => a.responsible.localeCompare(b.responsible),
@@ -44,7 +44,7 @@ export class DeclarationsService {
     },
     {
       id: '4',
-      title: 'registrationNumber',
+      title: $localize`Registration number`,
       propsName: 'registrationNumber',
       width: '100px',
       sortFn: (a: any, b: any) =>
@@ -55,7 +55,7 @@ export class DeclarationsService {
     },
     {
       id: '6',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '100px',
       sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),

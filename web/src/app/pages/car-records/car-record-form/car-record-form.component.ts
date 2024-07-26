@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
@@ -322,7 +322,7 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
 
   private getOptions() {
     this.fuelOptions = [
-      {value:{id:1,name:Fuels.DIESEL} , label: Fuels.DIESEL},
+      {value:{id:1,name:Fuels.DIESEL} , label:Fuels.DIESEL},
       {value:{id:2,name:Fuels.GASOLINE}, label: Fuels.GASOLINE},
       {value:{id:3,name: Fuels.LPG}, label: Fuels.LPG},
       {value:{id:4,name: Fuels.METHANOL}, label: Fuels.METHANOL},

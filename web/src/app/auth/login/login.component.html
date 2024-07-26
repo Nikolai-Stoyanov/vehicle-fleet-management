@@ -1,12 +1,12 @@
 <div class="wrapper">
-  <h1 class="greetings">Log in</h1>
+  <h1 class="greetings" i18n>Log in</h1>
   <div class="inner-content ">
     <form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
-      <vfm-form-item label="Username" [labelSpan]="6" [controlSpan]="18">
+      <vfm-form-item label="Username" [labelSpan]="6" [controlSpan]="18" i18n-label>
         <vfm-text-input id="username" formControlName="username" prefixIcon="user"></vfm-text-input>
       </vfm-form-item>
 
-      <vfm-form-item label="Password" [labelSpan]="6" [controlSpan]="18">
+      <vfm-form-item label="Password" [labelSpan]="6" [controlSpan]="18" i18n-label>
         <vfm-text-input
           [type]="passwordVisible ? 'text' : 'password'"
           [suffix]="suffixTemplate"
@@ -27,15 +27,15 @@
         <i nz-icon nzType="lock" nzTheme="outline"></i>
       </ng-template>
       <div class="login-form-button">
-        <button nz-button [nzLoading]="loading" style="width: 100%" nzType="primary">
+        <button nz-button [nzLoading]="loading" style="width: 100%" nzType="primary" i18n>
           Login
         </button>
       </div>
     </form>
     <div class="register-text">
-      <span
-      > Don't have an account?
-        <span routerLink="/register">Register</span>
+      <span>
+        <span i18n>Don't have an account?</span>
+        <span class="link" routerLink="/register" i18n>Register</span>
       </span>
     </div>
   </div>

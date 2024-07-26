@@ -14,21 +14,21 @@ export class DriversService {
   public carDriversColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'Id',
+      title: $localize`Id`,
       propsName: 'driverId',
       width: '80px',
       type: 'text',
     },
     {
       id: '2',
-      title: 'Phone number',
+      title: $localize`Phone number`,
       propsName: 'phoneNumber',
       width: '120px',
       type: 'text',
     },
     {
       id: '3',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'Status',
       width: '60px',
       type: 'status',

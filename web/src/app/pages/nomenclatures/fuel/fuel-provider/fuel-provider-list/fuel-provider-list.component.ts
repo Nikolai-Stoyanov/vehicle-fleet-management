@@ -41,9 +41,9 @@ export class FuelProviderListComponent implements OnInit {
   editFuelProvider(item?: FuelProviderType) {
     let title;
     if (item) {
-      title = `Provider: ${item.name}`;
+      title = $localize`Provider: ${item.name}`;
     } else {
-      title = `New provider`;
+      title = $localize`New provider`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -72,8 +72,8 @@ export class FuelProviderListComponent implements OnInit {
 
   removeFuelProvider() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this provider?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this provider?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
@@ -89,7 +89,7 @@ export class FuelProviderListComponent implements OnInit {
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

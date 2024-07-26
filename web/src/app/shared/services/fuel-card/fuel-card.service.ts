@@ -12,21 +12,21 @@ export class FuelCardService {
   public carCardColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'Card number',
+      title: $localize`Card number`,
       propsName: 'cardNumber',
       width: '150px',
       type: 'text',
     },
     {
       id: '2',
-      title: 'Limit',
+      title: $localize`Limit`,
       propsName: 'cardLimit',
       width: '90px',
       type: 'text',
     },
     {
       id: '3',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'Status',
       width: '60px',
       type: 'status',

@@ -40,9 +40,9 @@ export class FuelListComponent implements OnInit {
   editFuel(item?: any) {
     let title;
     if (item) {
-      title = `Fuel: ${item.name}`;
+      title = $localize`Fuel: ${item.name}`;
     } else {
-      title = `New fuel`;
+      title = $localize`New fuel`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -72,8 +72,8 @@ export class FuelListComponent implements OnInit {
 
   removeFuel() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this fuel?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this fuel?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
@@ -89,7 +89,7 @@ export class FuelListComponent implements OnInit {
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

@@ -4,9 +4,9 @@ import { ValidationErrors } from '@angular/forms';
 @Pipe({ name: 'vfmValidationErrorI18N' })
 export class ValidationErrorI18nPipe implements PipeTransform {
   private errors: any = {
-    required: () => 'Required field!',
-    email:()=>'Wrong email format!',
-    incorrectRepeatPassword:()=>'The passwords do not match!'
+    required: () => $localize`Required field!`,
+    email:()=> $localize`Wrong email format!`,
+    incorrectRepeatPassword:()=> $localize`The passwords do not match!`
   };
 
   constructor() {}

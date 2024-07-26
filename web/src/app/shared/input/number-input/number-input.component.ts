@@ -77,16 +77,4 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor {
     this.changeDetector.markForCheck();
     this.input.setDisabledState(isDisabled);
   }
-
-  formatter = (value: number) => {
-    switch (this.formatterType) {
-      case 'formatterMinutes':
-        return `${value / 60}`;
-        break;
-
-      default:
-        return value;
-        break;
-    }
-  };
 }

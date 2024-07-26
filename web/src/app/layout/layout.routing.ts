@@ -34,7 +34,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['USER','ADMIN'],
-          module: `Car brands`
+          module: $localize`Car brands`
         },
       },
       {
@@ -43,7 +43,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['USER','ADMIN'],
-          module: `Car models`
+          module: $localize`Car models`
         },
       },
       {
@@ -52,7 +52,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['USER','ADMIN'],
-          module: `Fuel`
+          module: $localize`Fuel`
         },
       },
       {
@@ -61,7 +61,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['USER','ADMIN'],
-          module: `Car records`
+          module: $localize`Car records`
         },
       },
       {
@@ -70,7 +70,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['USER','ADMIN'],
-          module: `Declarations`
+          module: $localize`Declarations`
         },
       },
       {
@@ -79,7 +79,7 @@ const routes: Routes = [
         canActivate: [PermissionGuard],
         data: {
           expectedPermission: ['ADMIN'],
-          module: `Users`
+          module: $localize`Users`
         },
       },
       {
