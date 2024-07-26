@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +17,5 @@ public class CarModelListDTO {
   private String description;
   private LocalDate year;
   private String brand;
+  private boolean status;
 }

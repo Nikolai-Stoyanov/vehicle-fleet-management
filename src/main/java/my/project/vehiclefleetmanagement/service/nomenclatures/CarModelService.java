@@ -10,9 +10,9 @@ import java.util.List;
 public interface CarModelService {
     List<CarModelListDTO> getAllModels();
 
-    boolean createModel(CarModelCreateDTO carModelCreateDTO);
+    void createModel(CarModelCreateDTO carModelCreateDTO);
 
-    boolean updateModel(Long id, CarModelEditDTO carModelEditDTO);
+    void updateModel(Long id, CarModelEditDTO carModelEditDTO);
 
     CarModelDTO getModelById(Long id);
 

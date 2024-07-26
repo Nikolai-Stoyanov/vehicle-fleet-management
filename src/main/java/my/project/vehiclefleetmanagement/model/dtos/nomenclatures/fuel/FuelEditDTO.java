@@ -14,7 +14,7 @@ import my.project.vehiclefleetmanagement.model.enums.FuelType;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FuelEditDTO {
-  @NotEmpty
+
   private long id;
   @NotEmpty
   private String name;

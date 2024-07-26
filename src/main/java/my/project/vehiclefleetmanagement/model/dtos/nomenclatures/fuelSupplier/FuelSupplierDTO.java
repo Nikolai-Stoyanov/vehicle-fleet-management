@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public class FuelSupplierDTO {
   private int id;
   private String name;
   private String description;
-  private List<String> fuelList;
+  private List<FuelDTO> fuelList;
   private boolean status;
 }

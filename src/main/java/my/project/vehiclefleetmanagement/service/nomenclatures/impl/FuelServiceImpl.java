@@ -1,5 +1,6 @@
 package my.project.vehiclefleetmanagement.service.nomenclatures.impl;
 
+import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelEditDTO;
@@ -8,6 +9,7 @@ import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
 import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelRepository;
 import my.project.vehiclefleetmanagement.service.nomenclatures.FuelService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,15 +27,15 @@ public class FuelServiceImpl implements FuelService {
     }
 
     @Override
-    public boolean createFuel(FuelCreateDTO fuelCreateDTO) {
+    public void createFuel(FuelCreateDTO fuelCreateDTO) {
         Optional<FuelEntity> optionalFuel = this.fuelRepository.findByName(fuelCreateDTO.getName());
 
         if (optionalFuel.isPresent()) {
-            return false;
+            throw new AppException("Fuel already exists", HttpStatus.BAD_REQUEST);
         }
         FuelEntity mappedEntity = modelMapper.map(fuelCreateDTO, FuelEntity.class);
         this.fuelRepository.save(mappedEntity);
-        return true;
+        throw new AppException("Fuel successfully created", HttpStatus.OK);
     }
 
     @Override
@@ -51,22 +53,31 @@ public class FuelServiceImpl implements FuelService {
     @Override
     public FuelDTO getFuelById(Long id) {
         Optional<FuelEntity> optionalFuel = this.fuelRepository.findById(id);
-        return optionalFuel.map(fuel -> modelMapper.map(fuel, FuelDTO.class)).orElse(null);
+        if (optionalFuel.isEmpty()) {
+            throw new AppException("Fuel is not found!", HttpStatus.NOT_FOUND);
+        }
+        return optionalFuel.map(fuel -> modelMapper.map(fuel, FuelDTO.class))
+                .orElseThrow(() -> new AppException("Unknown error", HttpStatus.UNPROCESSABLE_ENTITY));
     }
 
     @Override
     public void deleteFuel(Long id) {
+        Optional<FuelEntity> optionalFuel = this.fuelRepository.findById(id);
+        if (optionalFuel.isEmpty()) {
+            throw new AppException("Fuel is not found!", HttpStatus.NOT_FOUND);
+        }
         this.fuelRepository.deleteById(id);
+        throw new AppException("Fuel successfully deleted!", HttpStatus.OK);
     }
 
     @Override
-    public boolean updateFuel(Long id, FuelEditDTO fuelEditDTO) {
+    public void updateFuel(Long id, FuelEditDTO fuelEditDTO) {
         Optional<FuelEntity> optionalFuel = this.fuelRepository.findById(id);
         if (optionalFuel.isEmpty()) {
-            return false;
+            throw new AppException("Fuel is not found!", HttpStatus.NOT_FOUND);
         }
         FuelEntity mappedEntity = modelMapper.map(fuelEditDTO, FuelEntity.class);
         this.fuelRepository.save(mappedEntity);
-        return true;
+        throw new AppException("Fuel successfully updated!", HttpStatus.OK);
     }
 }

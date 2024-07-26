@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CarBrandService {
 
-    boolean createBrand(CarBrandCreateDTO carBrandCreateDTO);
+    void createBrand(CarBrandCreateDTO carBrandCreateDTO);
 
     List<CarBrandListDTO> getAllBrands();
 
@@ -17,5 +17,5 @@ public interface CarBrandService {
 
     void deleteBrand(Long id);
 
-    boolean updateBrand(Long id, CarBrandEditDTO carBrandEditDTO);
+    void updateBrand(Long id, CarBrandEditDTO carBrandEditDTO);
 }

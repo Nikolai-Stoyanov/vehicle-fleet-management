@@ -7,7 +7,7 @@ import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import java.util.List;
 
 @Entity
-@Table(name = "fuel-suppliers")
+@Table(name = "fuel_suppliers")
 @Getter
 @Setter
 @NoArgsConstructor

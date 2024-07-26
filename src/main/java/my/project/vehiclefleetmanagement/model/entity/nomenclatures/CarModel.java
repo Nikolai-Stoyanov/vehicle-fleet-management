@@ -22,4 +22,6 @@ public class CarModel extends BaseEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "brand_id")
     private CarBrand brand;
+    @Column()
+    private boolean status;
 }
