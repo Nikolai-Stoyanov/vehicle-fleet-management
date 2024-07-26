@@ -1,8 +1,5 @@
 package my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand;
 
-
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarBrandCreateDTO {
-  @NotEmpty
-  @Size(min = 3, max = 20)
+public class BrandDTO {
+  private int id;
   private String name;
-  private String description;
-  @NotEmpty
-  private String company;
-  private List<String> models;
-  private boolean status;
 }

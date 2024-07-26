@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 
 import java.util.List;
 
@@ -12,7 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserRoleDto {
-    private long id;
-    private UserRoleEnum role;
+public class UserByIdDto {
+
+    private Long id;
+    private String username;
+    private String email;
+    private List<UserRoleDto> roles;
 }

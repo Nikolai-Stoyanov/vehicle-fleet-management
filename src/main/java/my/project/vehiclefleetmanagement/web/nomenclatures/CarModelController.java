@@ -24,44 +24,29 @@ public class CarModelController {
 
     @GetMapping
     public ResponseEntity<List<CarModelListDTO>> getAllModel() {
-        return ResponseEntity.ok(
-                carModelService.getAllModels()
-        );
+        return ResponseEntity.ok(carModelService.getAllModels());
     }
 
     @PostMapping
     public ResponseEntity<String> createCarModel(@RequestBody CarModelCreateDTO carModelCreateDTO) {
-
-        boolean success = carModelService.createModel(carModelCreateDTO);
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Model already exist!");
-        }
+        carModelService.createModel(carModelCreateDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCarModel(@PathVariable("id") Long id,@RequestBody CarModelEditDTO carModelEditDTO) {
-
-        boolean success = carModelService.updateModel(id,carModelEditDTO);
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Model not found!");
-        }
+    public ResponseEntity<String> updateCarModel(@PathVariable("id") Long id, @RequestBody CarModelEditDTO carModelEditDTO) {
+        carModelService.updateModel(id, carModelEditDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CarModelDTO> getById(@PathVariable("id") Long id) {
-        return ResponseEntity
-                .ok(carModelService.getModelById(id));
+        return ResponseEntity.ok(carModelService.getModelById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
         carModelService.deleteModel(id);
-        return ResponseEntity
-                .noContent()
-                .build();
+        return ResponseEntity.noContent().build();
     }
 }

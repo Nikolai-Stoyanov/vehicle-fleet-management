@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FuelSupplierService {
 
-    boolean createFuelSupplier(FuelSupplierCreateDTO fuelCreateDTO);
+    void createFuelSupplier(FuelSupplierCreateDTO fuelCreateDTO);
 
     List<FuelSupplierListDTO> getAllFuelSuppliers();
 
@@ -17,5 +17,5 @@ public interface FuelSupplierService {
 
     void deleteFuelSupplier(Long id);
 
-    boolean updateFuelSupplier(Long id, FuelSupplierEditDTO fuelEditDTO);
+    void updateFuelSupplier(Long id, FuelSupplierEditDTO fuelEditDTO);
 }

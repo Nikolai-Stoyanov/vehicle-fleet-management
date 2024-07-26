@@ -1,5 +1,7 @@
 package my.project.vehiclefleetmanagement.service.nomenclatures.impl;
 
+import my.project.vehiclefleetmanagement.exceptions.AppException;
+import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierEditDTO;
@@ -10,6 +12,7 @@ import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelRepository
 import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelSupplierRepository;
 import my.project.vehiclefleetmanagement.service.nomenclatures.FuelSupplierService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,16 +33,22 @@ public class FuelSupplierServiceImpl implements FuelSupplierService {
     }
 
     @Override
-    public boolean createFuelSupplier(FuelSupplierCreateDTO fuelSupplierCreateDTO) {
+    public void createFuelSupplier(FuelSupplierCreateDTO fuelSupplierCreateDTO) {
         Optional<FuelSupplier> optionalFuelSupplier = this.fuelSupplierRepository.findByName( fuelSupplierCreateDTO.getName());
 
         if (optionalFuelSupplier.isPresent()) {
-            return false;
+            throw new AppException("Fuel supplier already exists", HttpStatus.BAD_REQUEST);
         }
         FuelSupplier mappedEntity = modelMapper.map(fuelSupplierCreateDTO, FuelSupplier.class);
-        mappedEntity.setFuelList(this.getFuelsList(fuelSupplierCreateDTO.getFuelList()));
+
+       List<FuelEntity> fuelEntities = new ArrayList<>();
+       for (Long id : fuelSupplierCreateDTO.getFuelList()) {
+           Optional<FuelEntity> optionalFuelEntity = this.fuelRepository.findById(id);
+           optionalFuelEntity.ifPresent(fuelEntities::add);
+       }
+        mappedEntity.setFuelList(fuelEntities);
         this.fuelSupplierRepository.save(mappedEntity);
-        return true;
+        throw new AppException("Fuel supplier successfully created", HttpStatus.OK);
     }
 
     @Override
@@ -63,26 +72,40 @@ public class FuelSupplierServiceImpl implements FuelSupplierService {
     @Override
     public FuelSupplierDTO getFuelSupplierById(Long id) {
         Optional<FuelSupplier> fuelSupplierOptional = this.fuelSupplierRepository.findById(id);
-        return fuelSupplierOptional.map(fuelSupplier -> modelMapper.map(fuelSupplier, FuelSupplierDTO.class)).orElse(null);
+        if (fuelSupplierOptional.isEmpty()) {
+            throw new AppException("Fuel supplier is not found!", HttpStatus.NOT_FOUND);
+        }
+        FuelSupplierDTO fuelSupplierDTO= modelMapper.map(fuelSupplierOptional, FuelSupplierDTO.class);
+
+        List<FuelDTO> fuelDTOS = new ArrayList<>();
+        for (FuelEntity fuel : fuelSupplierOptional.get().getFuelList()) {
+            fuelDTOS.add(modelMapper.map(fuel, FuelDTO.class));
+        }
+        fuelSupplierDTO.setFuelList(fuelDTOS);
+        return fuelSupplierDTO;
     }
 
     @Override
     public void deleteFuelSupplier(Long id) {
+        Optional<FuelSupplier> fuelSupplierOptional = this.fuelSupplierRepository.findById(id);
+        if (fuelSupplierOptional.isEmpty()) {
+            throw new AppException("Fuel supplier is not found!", HttpStatus.NOT_FOUND);
+        }
         this.fuelSupplierRepository.deleteById(id);
+        throw new AppException("Fuel supplier successfully deleted!", HttpStatus.OK);
     }
 
     @Override
-    public boolean updateFuelSupplier(Long id, FuelSupplierEditDTO fuelSupplierEditDTO) {
+    public void updateFuelSupplier(Long id, FuelSupplierEditDTO fuelSupplierEditDTO) {
         Optional<FuelSupplier> fuelSupplierOptional = this.fuelSupplierRepository.findById(id);
         if (fuelSupplierOptional.isEmpty()) {
-            return false;
+            throw new AppException("Fuel supplier is not found!", HttpStatus.NOT_FOUND);
         }
         FuelSupplier mappedEntity = modelMapper.map(fuelSupplierEditDTO, FuelSupplier.class);
 
-
         mappedEntity.setFuelList(this.getFuelsList(fuelSupplierEditDTO.getFuelList()));
         this.fuelSupplierRepository.save(mappedEntity);
-        return true;
+        throw new AppException("Fuel supplier successfully updated!", HttpStatus.OK);
     }
 
    private List<FuelEntity> getFuelsList(List<Long> list){

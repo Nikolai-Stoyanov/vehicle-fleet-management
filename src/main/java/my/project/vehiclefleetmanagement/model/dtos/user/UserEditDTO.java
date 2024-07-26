@@ -1,6 +1,7 @@
-package my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand;
+package my.project.vehiclefleetmanagement.model.dtos.user;
 
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -14,13 +15,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarBrandCreateDTO {
+public class UserEditDTO {
   @NotEmpty
-  @Size(min = 3, max = 20)
-  private String name;
-  private String description;
+  private Long id;
   @NotEmpty
-  private String company;
-  private List<String> models;
-  private boolean status;
+  @Size(min = 5, max = 20)
+  private String username;
+  @Email
+  private String email;
+  private List<UserRoleDto> roles;
 }

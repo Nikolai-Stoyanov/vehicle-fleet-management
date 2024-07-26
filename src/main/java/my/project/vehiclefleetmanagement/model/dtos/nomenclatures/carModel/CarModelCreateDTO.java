@@ -23,4 +23,6 @@ public class CarModelCreateDTO {
   private LocalDate year;
   @NotEmpty
   private long brand;
+  @NotEmpty
+  private boolean status;
 }

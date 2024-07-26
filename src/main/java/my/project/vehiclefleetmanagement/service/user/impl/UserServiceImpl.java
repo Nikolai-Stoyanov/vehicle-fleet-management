@@ -2,18 +2,18 @@ package my.project.vehiclefleetmanagement.service.user.impl;
 
 import my.project.vehiclefleetmanagement.config.UserMapper;
 import my.project.vehiclefleetmanagement.exceptions.AppException;
-import my.project.vehiclefleetmanagement.model.dtos.user.CredentialsDto;
-import my.project.vehiclefleetmanagement.model.dtos.user.SignUpDto;
-import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
+import my.project.vehiclefleetmanagement.model.dtos.user.*;
 import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
 import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
 import my.project.vehiclefleetmanagement.service.user.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,29 +23,22 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserRolesRepository userRolesRepository;
     private final UserMapper userMapper;
+    private final ModelMapper modelMapper;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRolesRepository userRolesRepository, UserMapper userMapper) {
+    public UserServiceImpl(
+            PasswordEncoder passwordEncoder,
+            UserRepository userRepository,
+            UserRolesRepository userRolesRepository,
+            UserMapper userMapper,
+            ModelMapper modelMapper
+    ) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRolesRepository = userRolesRepository;
         this.userMapper = userMapper;
+        this.modelMapper = modelMapper;
     }
-//
-//    @Override
-//    public boolean registerUser(UserRegistrationDTO userRegistration) {
-//        boolean isUserNameOrEmailExist = this.userRepository1.existsByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
-//        boolean isPasswordsSame=userRegistration.getPassword().equals(userRegistration.getConfirmPassword());
-//        if (isUserNameOrEmailExist || !isPasswordsSame) {
-//            return false;
-//        }
-//        UserEntity mappedEntity = modelMapper.map(userRegistration, UserEntity.class);
-//
-//        mappedEntity.setPassword(passwordEncoder.encode(userRegistration.getPassword()));
-//        Optional<UserRole> userRole=this.userRolesRepository.findById(2L);
-//        mappedEntity.setRoles(List.of(userRole.get()));
-//        this.userRepository1.save(mappedEntity);
-//        return true;
-//    }
+
 
     @Override
     public UserDto login(CredentialsDto credentialsDto) {
@@ -85,4 +78,61 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
     }
+
+    @Override
+    public List<UserListDTO> getAllUsers() {
+        List<UserEntity> userEntityList=  userRepository.findAll();
+        List<UserListDTO> userListDTOS = new ArrayList<>();
+        for (UserEntity user : userEntityList) {
+            UserListDTO userListDTO = modelMapper.map(user, UserListDTO.class);
+
+            List<String> userRolesDTO = new ArrayList<>();
+            for (UserRole roleDto : user.getRoles()) {
+                userRolesDTO.add(roleDto.getRole().toString());
+            }
+            userListDTO.setRoles(userRolesDTO);
+
+            userListDTOS.add(userListDTO);
+        }
+        return userListDTOS;
+    }
+
+    @Override
+    public boolean updateUser(Long id, UserEditDTO userEditDTO) {
+        Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
+        if (userEntityOptional.isEmpty()) {
+            return false;
+        }
+        userEntityOptional.get().setUsername(userEditDTO.getUsername());
+        userEntityOptional.get().setEmail(userEditDTO.getEmail());
+        List<UserRole> userRoles = new ArrayList<>();
+        for (UserRoleDto roleDto : userEditDTO.getRoles()) {
+            userRoles.add(modelMapper.map(roleDto, UserRole.class));
+        }
+        userEntityOptional.get().setRoles(userRoles);
+        this.userRepository.save(userEntityOptional.get());
+        return true;
+    }
+
+    @Override
+    public UserByIdDto getUserById(Long id) {
+        Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
+        return userEntityOptional.map(user -> modelMapper.map(user, UserByIdDto.class)).orElse(null);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserRoleDto> getAllRoles() {
+        List<UserRole> userRoles=  userRolesRepository.findAll();
+        List<UserRoleDto> userRoleDtos = new ArrayList<>();
+        for (UserRole role : userRoles) {
+            userRoleDtos.add(modelMapper.map(role, UserRoleDto.class));
+        }
+        return userRoleDtos;
+    }
+
 }

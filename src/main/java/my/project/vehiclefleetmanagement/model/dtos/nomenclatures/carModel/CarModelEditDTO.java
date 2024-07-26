@@ -25,4 +25,6 @@ public class CarModelEditDTO {
   private LocalDate year;
   @NotEmpty
   private long brand;
+  @NotEmpty
+  private boolean status;
 }

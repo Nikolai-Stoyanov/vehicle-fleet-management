@@ -15,10 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarBrandEditDTO {
-  @NotEmpty
   private long id;
   @NotEmpty
-  @Size(min = 5, max = 20)
+  @Size(min = 3, max = 20)
   private String name;
   private String description;
   @NotEmpty

@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FuelSupplierEditDTO {
-  @NotEmpty
   private long id;
   @NotEmpty
   @Size(min = 5, max = 20)
