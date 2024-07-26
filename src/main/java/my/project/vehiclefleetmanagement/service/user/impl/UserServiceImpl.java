@@ -64,7 +64,13 @@ public class UserServiceImpl implements UserService {
 
         UserEntity user = userMapper.signUpToUser(signUpDto);
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-        Optional<UserRole> userRole=this.userRolesRepository.findById(2L);
+        Optional<UserRole> userRole;
+        if (!userRepository.findAll().isEmpty()){
+             userRole=this.userRolesRepository.findById(2L);
+        }else {
+             userRole=this.userRolesRepository.findById(1L);
+        }
+
         user.setRoles(List.of(userRole.get()));
 
         UserEntity savedUser = userRepository.save(user);
