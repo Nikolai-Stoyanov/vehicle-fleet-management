@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { CarModel } from './car-model';
   providedIn: 'root'
 })
 export class CarModelsService {
-  private readonly endpoint = '';
+  private readonly endpoint = '/carModel';
 
   public carBrandsListColumns  = [
     {
@@ -152,13 +152,21 @@ export class CarModelsService {
   // data
 
   fetchLatest(): Observable<any> {
-    return of(this.carModelsListData);
+    return this.http.get<any>(`${this.endpoint}`)
   }
 
-  public deleteModel( brandId: number): Observable<any> {
-    return this.http.delete<any>(`${this.endpoint}/${brandId}`);
+  fetchModelById(modelId: number): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/${modelId}`)
   }
-  // fetchLatest(): Observable<any> {
-  //   return this.http.get<any>(this.endpoint);
-  // }
+
+  public deleteModel( modelId: number): Observable<any> {
+    return this.http.delete<any>(`${this.endpoint}/${modelId}`);
+  }
+
+  public createModel(model: CarModel): Observable<any> {
+    return this.http.post<any>(`${this.endpoint}`,model)
+  }
+  public updateModel(modelId:number,model: CarModel): Observable<any> {
+    return this.http.put<any>(`${this.endpoint}/${modelId}`,model)
+  }
 }

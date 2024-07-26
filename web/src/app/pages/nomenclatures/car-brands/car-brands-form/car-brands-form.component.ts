@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {NzModalRef} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {CarBrandsService} from "../car-brands.service";
 
@@ -13,11 +13,9 @@ import {CarBrandsService} from "../car-brands.service";
 export class CarBrandsFormComponent implements OnInit {
   public form!: FormGroup;
   @Input() public currentItem: any;
-  @Output() public submit = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
-    private modalService: NzModalService,
     private message: NzMessageService,
     protected modal: NzModalRef,
     private brandService: CarBrandsService,
@@ -59,23 +57,19 @@ export class CarBrandsFormComponent implements OnInit {
     }
     if (!this.currentItem?.id) {
       this.brandService.createBrand(this.form.getRawValue()).subscribe({
-        next: (res) => {
-          console.log(res)
+        next: () => {
           this.modal.destroy();
         },
         error: (error: any) => {
-          console.log(error);
           this.message.error(error.status + ' ' + error.statusText);
         }
       })
     }else {
       this.brandService.updateBrand(this.currentItem?.id,this.form.getRawValue()).subscribe({
-        next: (res) => {
-          console.log(res)
+        next: () => {
           this.modal.destroy();
         },
         error: (error: any) => {
-          console.log(error);
           this.message.error(error.status + ' ' + error.statusText);
         }
       })

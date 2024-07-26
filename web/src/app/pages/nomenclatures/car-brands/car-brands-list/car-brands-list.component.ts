@@ -57,11 +57,9 @@ export class CarBrandsListComponent implements OnInit {
       nzFooter: null,
     });
     modal.afterClose.subscribe(() => {
-
         this.svc.fetchLatest().subscribe((res) => {
           this.currentItems = res;
         });
-
     });
   }
 

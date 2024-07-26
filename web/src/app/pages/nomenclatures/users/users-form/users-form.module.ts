@@ -21,8 +21,6 @@ import {TextInputModule} from "../../../../shared/input";
 import {DatepickerModule} from "../../../../shared/input";
 import {SelectModule} from "../../../../shared/input";
 import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
-import {DateTimeModule} from "../../../../shared/formatters/date-time";
-import {DateTimePipe} from "../../../../shared/formatters/date-time";
 
 @NgModule({
   declarations: [UsersFormComponent],
@@ -44,10 +42,9 @@ import {DateTimePipe} from "../../../../shared/formatters/date-time";
     TextInputModule,
     DatepickerModule,
     SelectModule,
-    NzDatePickerComponent,
-    DateTimeModule
+    NzDatePickerComponent
   ],
   exports: [UsersFormComponent],
-  providers: [NzModalService,DateTimePipe]
+  providers: [NzModalService]
 })
 export class UsersFormModule {}

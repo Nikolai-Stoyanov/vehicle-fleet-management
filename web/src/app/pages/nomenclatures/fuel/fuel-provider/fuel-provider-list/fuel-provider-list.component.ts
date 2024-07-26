@@ -32,7 +32,7 @@ export class FuelProviderListComponent implements OnInit {
     });
 
     this.loading = true;
-    this.svc.fetchLatestProvider().subscribe((res) => {
+    this.svc.fetchLatestSuppliers().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
     });
@@ -51,14 +51,14 @@ export class FuelProviderListComponent implements OnInit {
       nzWidth: '60vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item,
+        id: item?.id,
       },
       nzFooter: null,
     });
     modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+      this.svc.fetchLatestSuppliers().subscribe((res) => {
+        this.currentItems = res;
+      });
     });
   }
 
@@ -77,10 +77,12 @@ export class FuelProviderListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteFuelProvider(this.currentItem?.id).subscribe({
+        const sub2 = this.svc.deleteSupplier(this.currentItem?.id).subscribe({
           next: () => {
             this.message.create('success', `Provider successfully deleted.`);
-            this.svc.fetchLatestProvider();
+            this.svc.fetchLatestSuppliers().subscribe((res) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {

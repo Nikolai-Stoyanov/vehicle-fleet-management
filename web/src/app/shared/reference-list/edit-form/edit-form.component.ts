@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 
-import {DateTimePipe} from "../../formatters/date-time";
+import {DateTimePipe} from "../../formatters";
 import {EditFormTypes} from "../../shared";
 import {Subscription} from "rxjs";
 

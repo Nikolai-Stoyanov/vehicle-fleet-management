@@ -19,7 +19,6 @@ export class CarModelsListComponent implements OnInit {
   public currentItems: CarModel[] | undefined;
   public currentItem:any;
   public allTableColumns: TableColumnInterface[] = [];
-  public currentTableColumns: TableColumnInterface[] = [];
   public loading = false;
 
   constructor(
@@ -31,11 +30,7 @@ export class CarModelsListComponent implements OnInit {
   ngOnInit() {
     this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
-      this.allTableColumns.forEach((column: TableColumnInterface) => {
-        if (column.visible === true) {
-          this.currentTableColumns.push(column);
-        }
-      });
+
     });
 
     this.loading = true;
@@ -58,14 +53,14 @@ export class CarModelsListComponent implements OnInit {
       nzWidth: '40vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item,
+        id: item?.id,
       },
       nzFooter: null,
     });
     modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
+      this.svc.fetchLatest().subscribe((res) => {
+        this.currentItems = res;
+      });
     });
   }
 
@@ -79,7 +74,9 @@ export class CarModelsListComponent implements OnInit {
         const sub2 = this.svc.deleteModel(this.currentItem?.id).subscribe({
           next: () => {
             this.message.create('success', `Model successfully deleted.`);
-            this.svc.fetchLatest();
+            this.svc.fetchLatest().subscribe((res) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
             if (error.status === 404) {

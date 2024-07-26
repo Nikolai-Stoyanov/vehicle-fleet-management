@@ -9,7 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { FormsModule as LIBSFormsModule } from '../forms';
-import {DateTimeModule, DateTimePipe} from '../formatters/date-time';
+import {DateTimeModule, DateTimePipe} from '../formatters';
 
 import { ReferenceListComponent } from './reference-list.component';
 import {DummyTableCheckboxesModule} from "../dummy-table";

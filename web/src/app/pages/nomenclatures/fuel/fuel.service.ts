@@ -42,10 +42,8 @@ export class FuelService {
     {
       id: '4',
       title: 'Fuels',
-      propsName: 'fuelOptions',
+      propsName: 'fuelList',
       width: '200px',
-      sortFn: (a: any, b: any) => a.fuelOptions.localeCompare(b.fuelOptions),
-      showSortFn: true,
       type: 'array',
       align: 'center'
     },
@@ -75,7 +73,7 @@ export class FuelService {
       id: '2',
       title: 'Name',
       propsName: 'name',
-      width: '100px',
+      width: '150px',
       type: 'text',
       align: 'left',
       sortFn: (a: any, b: any) => a.name.localeCompare(b.name),
@@ -95,51 +93,52 @@ export class FuelService {
       id: '4',
       title: 'Status',
       propsName: 'status',
-      width: '150px',
+      width: '100px',
       sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),
       showSortFn: true,
       type: 'status',
       align: 'center',
     }
   ];
-  private readonly endpoint = '';
+  private readonly fuelEndpoint = '/fuel';
+  private readonly supplierEndpoint = '/fuelSupplier';
 
   constructor(private http: HttpClient) {}
 
   public fetchLatestFuel(): Observable<FuelType[]> {
     return of([
       {
-        id: 0,
+        id: 1,
         name: 'Дизел',
         description:'',
         status: true
       },
       {
-        id: 1,
+        id: 2,
         name: 'Бензин А95 Н',
         description: '',
         status: true
       },
       {
-        id: 2,
+        id: 3,
         name: 'Газ',
         description: '',
         status: true
       },
       {
-        id: 3,
+        id: 4,
         name: 'Бензин А98',
         description: '',
         status: true
       },
       {
-        id: 4,
+        id: 5,
         name: 'Super Diesel',
         description: '',
         status: true
       },
       {
-        id: 5,
+        id: 6,
         name: 'Metan',
         description: '',
         status: true
@@ -214,10 +213,42 @@ export class FuelService {
     return of(this.fuelProviderColumns);
   }
 
-  public deleteFuel( brandId: number): Observable<any> {
-    return this.http.delete<any>(`${this.endpoint}/${brandId}`);
+  fetchLatestFuels(): Observable<any> {
+    return this.http.get<any>(`${this.fuelEndpoint}`)
   }
-  public deleteFuelProvider( brandId: number): Observable<any> {
-    return this.http.delete<any>(`${this.endpoint}/${brandId}`);
+  fetchLatestSuppliers(): Observable<any> {
+    return this.http.get<any>(`${this.supplierEndpoint}`)
+  }
+
+  fetchFuelById(fuelId: number): Observable<any> {
+    return this.http.get<any>(`${this.fuelEndpoint}/${fuelId}`)
+  }
+
+  fetchSupplierById(supplierId: number): Observable<any> {
+    return this.http.get<any>(`${this.supplierEndpoint}/${supplierId}`)
+  }
+
+  public deleteFuel( fuelId: number): Observable<any> {
+    return this.http.delete<any>(`${this.fuelEndpoint}/${fuelId}`);
+  }
+
+  public deleteSupplier( supplierId: number): Observable<any> {
+    return this.http.delete<any>(`${this.supplierEndpoint}/${supplierId}`);
+  }
+
+  public createFuel(fuel: FuelType): Observable<any> {
+    return this.http.post<any>(`${this.fuelEndpoint}`,fuel)
+  }
+
+  public createSupplier(supplier: FuelProviderType): Observable<any> {
+    return this.http.post<any>(`${this.supplierEndpoint}`,supplier)
+  }
+
+  public updateFuel(fuelId:number,fuel: FuelProviderType): Observable<any> {
+    return this.http.put<any>(`${this.fuelEndpoint}/${fuelId}`,fuel)
+  }
+
+  public updateSupplier(supplierId:number,supplier: FuelProviderType): Observable<any> {
+    return this.http.put<any>(`${this.supplierEndpoint}/${supplierId}`,supplier)
   }
 }

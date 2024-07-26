@@ -9,11 +9,11 @@ export class DateTimePipe implements PipeTransform {
 
     if (value.toString().indexOf('[') !== -1) {
       const date = value.split('[')[0];
-      return format(new Date(date),'dd.MM.yyyy HH:mm:ss');
+      return format(new Date(date),'dd.MM.yyyy');
     }
     if (value.toString().indexOf('-') > 0) {
-      return format(new Date(value),'dd.MM.yyyy HH:mm:ss');
+      return format(new Date(value),'dd.MM.yyyy');
     }
-    return format(new Date(value),'dd.MM.yyyy HH:mm:ss');
+    return format(new Date(value),'dd.MM.yyyy');
   }
 }
