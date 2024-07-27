@@ -15,10 +15,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -42,6 +42,18 @@ public class CarBrandControllerIT {
     public void tearDown() {
         carModelRepository.deleteAll();
         carBrandRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetAllBrands() throws Exception {
+        createTestCarBrandList();
+
+        mockMvc.perform(get("/carBrand")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$.[0].name", is("Kia")))
+                .andExpect(jsonPath("$.[1].name", is("Opel")));
     }
 
     @Test
@@ -145,5 +157,13 @@ public class CarBrandControllerIT {
         return carBrandRepository.save(
                 new CarBrand("Kia", "description", "Kia OOD", List.of(),true)
         );
+    }
+
+    private void createTestCarBrandList() {
+        carBrandRepository.save(
+                new CarBrand("Kia", "description", "Kia OOD", List.of(),true));
+        carBrandRepository.save(
+                new CarBrand("Opel", "description", "Opel OOD", List.of(),true));
+
     }
 }

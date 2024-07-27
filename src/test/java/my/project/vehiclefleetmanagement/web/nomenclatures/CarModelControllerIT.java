@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -44,6 +45,18 @@ public class CarModelControllerIT {
     public void tearDown() {
         carModelRepository.deleteAll();
         carBrandRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetAllCarModels() throws Exception {
+        createTestCarModelList();
+
+        mockMvc.perform(get("/carModel")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$.[0].name", is("Sorento")))
+                .andExpect(jsonPath("$.[1].name", is("Ceed")));
     }
 
     @Test
@@ -154,5 +167,16 @@ public class CarModelControllerIT {
     private CarBrand createTestBrand() {
         CarBrand carBrand = new CarBrand("Kia", "description", "Kia OOD", List.of(), true);
         return carBrandRepository.save(carBrand);
+    }
+
+    private void createTestCarModelList() {
+        CarBrand carBrand = createTestBrand();
+        carModelRepository.save(
+                new CarModel("Sorento", "description2", LocalDate.now(), carBrand, true)
+        );
+        carModelRepository.save(
+                new CarModel("Ceed", "description21", LocalDate.now(), carBrand, true)
+        );
+
     }
 }

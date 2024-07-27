@@ -1,6 +1,5 @@
 package my.project.vehiclefleetmanagement.web;
 
-import com.jayway.jsonpath.JsonPath;
 import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
 import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
@@ -9,20 +8,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 import java.util.List;
-import java.util.Optional;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -44,6 +38,20 @@ public class UserControllerIT {
     @AfterEach
     public void tearDown() {
         userRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetAllUser() throws Exception {
+        createTestUserList();
+
+        mockMvc.perform(get("/users")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$.[0].username", is("Gosho")))
+                .andExpect(jsonPath("$.[0].email", is("gosho@abv.bg")))
+                .andExpect(jsonPath("$.[1].username", is("Pesho")))
+                .andExpect(jsonPath("$.[1].email", is("pesho@abv.bg")));
     }
 
     @Test
@@ -115,5 +123,15 @@ public class UserControllerIT {
                 new UserEntity("gosho@abv.bg", "1234", "Gosho",
                         List.of(new UserRole(1L, UserRoleEnum.ADMIN)))
         );
+    }
+
+    private void createTestUserList() {
+        userRepository.save(
+                new UserEntity("gosho@abv.bg", "1234", "Gosho",
+                        List.of(new UserRole(1L, UserRoleEnum.ADMIN))));
+        userRepository.save(
+                new UserEntity("pesho@abv.bg", "1234", "Pesho",
+                        List.of(new UserRole(2L, UserRoleEnum.USER))));
+
     }
 }
