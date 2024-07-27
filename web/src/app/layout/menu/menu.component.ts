@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
         {
           title: $localize`Car record`,
           icon: 'car',
-          routerLink: ['/car-record']
+          routerLink: ['/car-record'],permission: 'ALL',
         }
       ]
     },
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
         {
           title: $localize`Declaration`,
           icon: 'file',
-          routerLink: '/declarations'
+          routerLink: '/declarations',permission: 'ALL',
         }
       ]
     },

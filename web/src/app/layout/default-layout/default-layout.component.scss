@@ -7,7 +7,8 @@
   height: 64px;
   overflow: hidden;
   line-height: 64px;
-  background: #fff;
+  //background: #fff;
+  background: #a0d6bf;
   transition: all 0.3s;
   text-align: center;
   padding: 0 10px;
@@ -22,6 +23,7 @@
   line-height: 64px;
   transition: all 0.3s;
   text-align: center;
+  background: #a0d6bf;
 }
 
 .logo img {
@@ -42,13 +44,26 @@
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  background: #a0d6bf;
+
+  & li{
+    font-weight: bold;
+    color: #000000;
+    & .ant-menu-item-selected{
+      color: #ffffff;
+    }
+    &:hover {
+      color: #ffffff;
+    }
+  }
 }
 
 .sider-menu {
   position: relative;
   z-index: 10;
   min-height: 94vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  //box-shadow: 2px 0 6px rgba(24, 144, 255, 0.44);
+  background: #a0d6bf;
 }
 
 .inner-layout {
@@ -58,16 +73,30 @@
 .greeting {
   width: 70%;
   text-align: end;
-  text-decoration-line: underline;
-  color: #1890ff;
+  //text-decoration-line: underline;
+  font-weight: bold;
+  color: #000000;
   padding-right: 10px
 }
 
 nz-content {
   padding: 0.5em;
-  background-image: url("../../../assets/images/1.jpg");
   max-height: 95vh;
   margin: 0;
   overflow: auto;
 }
+
+.login-user{
+  background-image: url("../../../assets/images/full1.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.guest{
+  background-image: url("../../../assets/images/empty.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+
 

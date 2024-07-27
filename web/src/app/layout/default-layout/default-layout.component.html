@@ -7,12 +7,12 @@
     </div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu" (selectionchange)="changeSelection($event)">
       <li nz-menu-item [nzSelected]="isSelected('/home')" routerLink="/home" i18n>Home</li>
-      <li nz-menu-item [nzSelected]="isSelected('/aboutUs')" routerLink="/aboutUs" i18n>About us</li>
-      <li nz-menu-item [nzSelected]="isSelected('/contacts')" routerLink="/contacts" i18n>Contacts</li>
+<!--      <li nz-menu-item [nzSelected]="isSelected('/aboutUs')" routerLink="/aboutUs" i18n>About us</li>-->
+<!--      <li nz-menu-item [nzSelected]="isSelected('/contacts')" routerLink="/contacts" i18n>Contacts</li>-->
       <span class="greeting" >
         <span i18n>Hello </span>
-        <span *ngIf="currentUser?.username">{{ currentUser?.username}}</span>
-        <span *ngIf="!currentUser?.username" i18n>Guest</span>
+        <span *ngIf="currentUser?.username"> << {{ currentUser?.username}} >></span>
+        <span *ngIf="!currentUser?.username" i18n><< Guest >></span>
       </span>
       <li nz-menu-item [nzSelected]="isSelected('/login')" routerLink="/login" *ngIf="!currentUser?.username" i18n>Login</li>
       <li nz-menu-item [nzSelected]="isSelected('/register')" routerLink="/register" *ngIf="!currentUser?.username" i18n>Register</li>
@@ -27,7 +27,7 @@
       </div>
     </nz-sider>
     <nz-layout class="inner-layout">
-      <nz-content>
+      <nz-content [ngClass]="currentUser?.username? 'login-user' : 'guest'">
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
