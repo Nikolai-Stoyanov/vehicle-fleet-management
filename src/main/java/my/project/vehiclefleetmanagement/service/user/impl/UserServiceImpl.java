@@ -70,11 +70,8 @@ public class UserServiceImpl implements UserService {
         }else {
              userRole=this.userRolesRepository.findById(1L);
         }
-
         user.setRoles(List.of(userRole.get()));
-
         UserEntity savedUser = userRepository.save(user);
-
         return userMapper.toUserDto(savedUser);
     }
 
@@ -123,7 +120,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserByIdDto getUserById(Long id) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
-        return userEntityOptional.map(user -> modelMapper.map(user, UserByIdDto.class)).orElse(null);
+        return userEntityOptional.map(user -> modelMapper.map(user, UserByIdDto.class))
+                .orElseThrow( () -> new AppException("User is not found!", HttpStatus.NOT_FOUND));
     }
 
     @Override

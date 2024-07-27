@@ -102,18 +102,15 @@ public class FuelSupplierServiceImpl implements FuelSupplierService {
             throw new AppException("Fuel supplier is not found!", HttpStatus.NOT_FOUND);
         }
         FuelSupplier mappedEntity = modelMapper.map(fuelSupplierEditDTO, FuelSupplier.class);
+        List<FuelEntity> fuelEntities = new ArrayList<>();
+        for (long fuelId : fuelSupplierEditDTO.getFuelList()) {
+            Optional<FuelEntity> optionalFuel = this.fuelRepository.findById( fuelId);
+            optionalFuel.ifPresent(fuelEntities::add);
+        }
 
-        mappedEntity.setFuelList(this.getFuelsList(fuelSupplierEditDTO.getFuelList()));
+        mappedEntity.setFuelList(fuelEntities);
         this.fuelSupplierRepository.save(mappedEntity);
         throw new AppException("Fuel supplier successfully updated!", HttpStatus.OK);
     }
 
-   private List<FuelEntity> getFuelsList(List<Long> list){
-       List<FuelEntity> fuelEntities = new ArrayList<>();
-       for (long fuelId : list) {
-           Optional<FuelEntity> optionalFuel = this.fuelRepository.findById( fuelId);
-           optionalFuel.ifPresent(fuelEntities::add);
-       }
-        return fuelEntities;
-    }
 }

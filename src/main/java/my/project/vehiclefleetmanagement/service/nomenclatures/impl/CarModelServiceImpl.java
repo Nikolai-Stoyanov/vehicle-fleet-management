@@ -71,7 +71,7 @@ public class CarModelServiceImpl implements CarModelService {
             throw new AppException("Car model is not found!", HttpStatus.NOT_FOUND);
         }
         if (carBrandOptional.isEmpty()) {
-            throw new AppException("Car brand not found", HttpStatus.BAD_REQUEST);
+            throw new AppException("Car brand not found!", HttpStatus.BAD_REQUEST);
         }
         CarModel mappedEntity = modelMapper.map(carModelEditDTO, CarModel.class);
         mappedEntity.setBrand(carBrandOptional.get());
