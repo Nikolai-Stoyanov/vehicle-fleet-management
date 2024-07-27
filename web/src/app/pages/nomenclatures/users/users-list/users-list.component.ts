@@ -42,7 +42,7 @@ export class UsersListComponent implements OnInit {
   editUser(item?: Users) {
     let title;
     if (item) {
-      title = `User: ${item.username}`;
+      title = $localize`User: ${item.username}`;
     }
 
     const modal = this.modalService.create({
@@ -64,28 +64,24 @@ export class UsersListComponent implements OnInit {
 
   removeUser() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this user?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this user?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteUser(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', `User successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatest().subscribe((res) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error(`User not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

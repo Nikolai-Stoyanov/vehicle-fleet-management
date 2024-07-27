@@ -10,12 +10,12 @@ import {Status} from "../../shared/shared";
   providedIn: 'root'
 })
 export class CarRecordService {
-  private readonly endpoint = 'cars';
+  private readonly endpoint = '/carRecord';
 
   public carRecordsListColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -24,7 +24,7 @@ export class CarRecordService {
     },
     {
       id: '2',
-      title: 'Registration number',
+      title: $localize`Registration number`,
       propsName: 'registrationNumber',
       key: 'name',
       width: '110px',
@@ -34,7 +34,7 @@ export class CarRecordService {
     },
     {
       id: '3',
-      title: 'Brand',
+      title: $localize`Brand`,
       propsName: 'brand',
       width: '100px',
       sortFn: (a: any, b: any) => a.brand.localeCompare(b.brand),
@@ -43,7 +43,7 @@ export class CarRecordService {
     },
     {
       id: '4',
-      title: 'Model',
+      title: $localize`Model`,
       propsName: 'model',
       width: '100px',
       sortFn: (a: any, b: any) => a.model.localeCompare(b.model),
@@ -52,7 +52,7 @@ export class CarRecordService {
     },
     {
       id: '5',
-      title: 'Owner',
+      title: $localize`Owner`,
       propsName: 'owner',
       width: '100px',
       sortFn: (a: any, b: any) => a.owner.localeCompare(b.owner),
@@ -61,7 +61,7 @@ export class CarRecordService {
     },
     {
       id: '5',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '100px',
       sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),
@@ -115,11 +115,9 @@ export class CarRecordService {
   }
 
   // data
-  // fetchLatest(): Observable<any> {
-  //   return this.http.get<any>(this.endpoint);
-  // }
-  fetchLatest(): Observable<any> {
-    return of(this.carRecords);
+
+  fetchLatestRecords() {
+    return this.http.get<any>(`${this.endpoint}`);
   }
 
   deleteRecord(id: number) {

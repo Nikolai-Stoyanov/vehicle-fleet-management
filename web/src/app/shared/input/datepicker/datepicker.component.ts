@@ -16,7 +16,6 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
-import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import { en_US, NzI18nService } from 'ng-zorro-antd/i18n';
 
 @Component({

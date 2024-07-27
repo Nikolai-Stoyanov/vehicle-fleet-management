@@ -1,5 +1,5 @@
 <vfm-dummy-table-checkboxes
-  [tableHeight]="'72vh'"
+  [tableHeight]="'81vh'"
   [loading]="loading"
   [haveEdit]="true"
   [allItems]="currentItems"
@@ -13,7 +13,7 @@
   <div nz-col>
     <button nz-button nzType="default" type="button" id="addButton" (click)="editRecord()">
       <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-      <span >Add record</span>
+      <span i18n>Add record</span>
     </button>
   </div>
   <div nz-col>
@@ -25,7 +25,7 @@
       [disabled]="!currentItem"
     >
       <i nz-icon nzType="edit" nzTheme="outline"></i>
-      <span >Edit</span>
+      <span i18n>Edit</span>
     </button>
   </div>
   <div nz-col>
@@ -39,7 +39,7 @@
       [disabled]="!currentItem"
     >
       <i nz-icon nzType="delete" nzTheme="outline"></i>
-      <span >Delete</span>
+      <span i18n>Delete</span>
     </button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
@@ -48,11 +48,10 @@ export class UsersFormComponent implements OnInit {
     }
     this.userService.updateUser(this.currentItemId,this.form.getRawValue()).subscribe({
       next: (res) => {
-        console.log(res)
+        this.message.success(res.message);
         this.modal.destroy();
       },
       error: (error: any) => {
-        console.log(error);
         this.message.error(error.status + ' ' + error.error.message);
       }
     })

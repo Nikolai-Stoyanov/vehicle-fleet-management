@@ -10,10 +10,10 @@ import { Users } from './users';
 export class UsersService {
   private readonly endpoint = '/users';
 
-  public carBrandsListColumns  = [
+  public userListColumns  = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -23,7 +23,7 @@ export class UsersService {
     },
     {
       id: '2',
-      title: 'Name',
+      title: $localize`Name`,
       propsName: 'username',
       width: '130px',
       sortFn: (a: any, b: any) => a.username.localeCompare(b.username),
@@ -33,7 +33,7 @@ export class UsersService {
     },
     {
       id: '3',
-      title: 'Email',
+      title: $localize`Email`,
       propsName: 'email',
       width: '130px',
       sortFn: (a: any, b: any) => a.email.localeCompare(b.email),
@@ -43,7 +43,7 @@ export class UsersService {
     },
     {
       id: '4',
-      title: 'Roles',
+      title: $localize`Roles`,
       propsName: 'roles',
       width: '300px',
       type: 'array',
@@ -55,7 +55,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
   // columns
   public getColumns(): Observable<any> {
-    return of(this.carBrandsListColumns);
+    return of(this.userListColumns);
   }
 
   // data

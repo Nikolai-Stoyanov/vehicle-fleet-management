@@ -57,20 +57,22 @@ export class CarBrandsFormComponent implements OnInit {
     }
     if (!this.currentItem?.id) {
       this.brandService.createBrand(this.form.getRawValue()).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
-          this.message.error(error.status + ' ' + error.statusText);
+          this.message.error(error.status + ' ' + error.error.message);
         }
       })
     }else {
       this.brandService.updateBrand(this.currentItem?.id,this.form.getRawValue()).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
-          this.message.error(error.status + ' ' + error.statusText);
+          this.message.error(error.status + ' ' + error.error.message);
         }
       })
     }

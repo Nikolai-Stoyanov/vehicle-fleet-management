@@ -8,7 +8,7 @@
     padding: 2em;
     box-shadow: 0 1px 2px #c6c3c3;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.93);
     overflow-y: hidden;
   }
 
@@ -19,7 +19,10 @@
   }
 
   .greetings {
-    color: #0078cb;
+    color: #ffffff;
+    background: rgba(0, 120, 203, 0.73);
+    padding: 1px 15px;
+    border-radius: 8px;
   }
 }
 
@@ -35,7 +38,7 @@
 .register-text{
   margin-top: 10px;
   text-align: end;
-  & span > span{
+  & .link{
     color: #0078cb;
     cursor: pointer;
 

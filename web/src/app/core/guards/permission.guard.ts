@@ -26,7 +26,7 @@ export class PermissionGuard {
         }
       });
       if (!isAvailable) {
-        this.message.create('error', `You do not have rights for module ${module}!`);
+        this.message.create('error', $localize `You do not have rights for module ${module}!`);
         this.router.navigate(['/']);
         return false;
       }

@@ -1,0 +1,1597 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="2336550011721758066" datatype="html">
+        <source>Log in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5248717555542428023" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1908285951500318953" datatype="html">
+        <source> Login </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2950600607347308247" datatype="html">
+        <source>Don&apos;t have an account? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2907733796351584017" datatype="html">
+        <source> Register </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3301086086650990787" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users.service.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5373727393387841282" datatype="html">
+        <source>Repeat password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6207438724033771807" datatype="html">
+        <source>Already have an account? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6221269179333060603" datatype="html">
+        <source>You do not have rights for module <x id="PH" equiv-text="module"/>!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/guards/permission.guard.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2821179408673282599" datatype="html">
+        <source>Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2501489806101473286" datatype="html">
+        <source>About us</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5945986349492910662" datatype="html">
+        <source>Contacts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5485072068199666072" datatype="html">
+        <source>Hello </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="268369328039605234" datatype="html">
+        <source>Guest</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3797778920049399855" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1919233464463863623" datatype="html">
+        <source>Car brands</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7372209105092772192" datatype="html">
+        <source>Car models</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2109651353551967284" datatype="html">
+        <source>Fuel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8607878270241410409" datatype="html">
+        <source>Car records</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2046003391679469154" datatype="html">
+        <source>Declarations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4555457172864212828" datatype="html">
+        <source>Users</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/layout.routing.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="954702980611036148" datatype="html">
+        <source>Cars</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2537532662423369583" datatype="html">
+        <source>Car record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7457179823984196306" datatype="html">
+        <source>Operations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4312716739160141243" datatype="html">
+        <source>Declaration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4012676901987515256" datatype="html">
+        <source>Nomenclatures</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/menu/menu.component.ts</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7856974223389485354" datatype="html">
+        <source>Vehicle type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2559885490456050359" datatype="html">
+        <source>Brand</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1141886420788473147" datatype="html">
+        <source>Model</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6100747796157797826" datatype="html">
+        <source>Frame number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1749213171197822405" datatype="html">
+        <source>Engine number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6607195904604930762" datatype="html">
+        <source>Power (hp / kW)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8721258120216284134" datatype="html">
+        <source>Engine volume</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="780918556937444561" datatype="html">
+        <source>Seating capacity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">75,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="250800299134200245" datatype="html">
+        <source>Color (primary)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1109188323292748766" datatype="html">
+        <source>Color (additional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="290824698421831767" datatype="html">
+        <source>Load capacity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5145456373288670435" datatype="html">
+        <source>Total mileage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7802443366630305581" datatype="html">
+        <source>Development (km) from / to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3715596725146409911" datatype="html">
+        <source>Owner</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6744001209908616785" datatype="html">
+        <source>Headquarters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3955967824702499842" datatype="html">
+        <source>Department</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2758958688720316014" datatype="html">
+        <source>Stay place</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5170041270881448813" datatype="html">
+        <source>Inspection Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">176</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7263358834293561842" datatype="html">
+        <source>Vignette Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4663152043311495518" datatype="html">
+        <source>Insurance Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">192</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7448808151142843482" datatype="html">
+        <source>Created by</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5224451373257709572" datatype="html">
+        <source>Created date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">208</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="981843417673542253" datatype="html">
+        <source>Modify by</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">216</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2576107135173400242" datatype="html">
+        <source>Modify date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">224</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">178</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4390643733177958863" datatype="html">
+        <source>Fuels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">245</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8650499415827640724" datatype="html">
+        <source>Type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">265</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4402157137301141301" datatype="html">
+        <source>Tank volume</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">271</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5585282637884712237" datatype="html">
+        <source>Distance limit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">280</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6477432941319585603" datatype="html">
+        <source>Money limit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">289</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3900896641789545132" datatype="html">
+        <source> Empty </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">315</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">78,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2281656643938237827" datatype="html">
+        <source> Registration numbers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">331</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6720919378059917655" datatype="html">
+        <source> Responsible </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">343</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2527508239476863005" datatype="html">
+        <source> Drivers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">355</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3948035241039745288" datatype="html">
+        <source> Fuel cards </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">367</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7286430803380181008" datatype="html">
+        <source>Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">379</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/drivers/drivers.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/responsible/responsible.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6645333413867569064" datatype="html">
+        <source>Registration number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">384</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations.service.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3615438364868928452" datatype="html">
+        <source>Driving category</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">392</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3832219812812910946" datatype="html">
+        <source>First registration date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">398</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">410,411</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4229797901578461384" datatype="html">
+        <source>Add Fuel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-form/car-record-form.component.html</context>
+          <context context-type="linenumber">426,427</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1411054340145318743" datatype="html">
+        <source>Add record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6534074762894473283" datatype="html">
+        <source>Record: <x id="PH" equiv-text="item.registrationNumber"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3798672260803600943" datatype="html">
+        <source>New Record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6942864054534920082" datatype="html">
+        <source>Are you sure you want to delete this model?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2807800733729323332" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3882613231349180813" datatype="html">
+        <source>Car record successfully deleted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7312016500964928140" datatype="html">
+        <source>Record not found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record-list/car-record-list.component.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8040881171107393560" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users.service.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/car-records/car-record.service.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations.service.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/drivers/drivers.service.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/fuel-card/fuel-card.service.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/registration-number/registration-number.service.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/responsible/responsible.service.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6731309416658946614" datatype="html">
+        <source>Date from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1507949699959470925" datatype="html">
+        <source>Period</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations.service.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5748881542105193683" datatype="html">
+        <source>Old report(km)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5299020055630528257" datatype="html">
+        <source>Responsible</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations.service.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5811667338042944813" datatype="html">
+        <source>New report(km)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5518705910886398528" datatype="html">
+        <source>Mileage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="351918317648365338" datatype="html">
+        <source>Distribution by fuel types</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4173876003985777931" datatype="html">
+        <source>Fuel remaining</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4779868071241910454" datatype="html">
+        <source>Fuel consumption</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7683267927039994801" datatype="html">
+        <source>Distance remaining</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5377078063439833222" datatype="html">
+        <source> Edit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">189,190</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">101,102</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3620188369327429839" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-form/declarations-form.component.html</context>
+          <context context-type="linenumber">192,193</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">104,105</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1244276996601761323" datatype="html">
+        <source>Add declaration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1375389395427535722" datatype="html">
+        <source>Select registration number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7322373231564004139" datatype="html">
+        <source>Find</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3856633367783441864" datatype="html">
+        <source>Edit declaration for: <x id="PH" equiv-text="item.registrationNumber"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4051535001649498844" datatype="html">
+        <source>New declaration (<x id="PH" equiv-text="this.currentRegistrationNumber.registrationNumber"/>) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8086773754138382158" datatype="html">
+        <source>Функцията не е имплементирана!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7548637641788136284" datatype="html">
+        <source>Are you sure you want to delete this declaration?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4437997286638367283" datatype="html">
+        <source>Declaration successfully deleted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="528629153287573992" datatype="html">
+        <source>Declaration not found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/declarations/declarations-list/declarations-list.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5210624362477088103" datatype="html">
+        <source>Hallo my friend </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel.service.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users.service.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1826215573205981970" datatype="html">
+        <source>Company</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6388512731122559427" datatype="html">
+        <source>Models</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands.service.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8204176479746810612" datatype="html">
+        <source>Active</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-form/car-brands-form.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3091193135122273879" datatype="html">
+        <source>Add brand</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="629248637335081975" datatype="html">
+        <source>Brands table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4601789385616939436" datatype="html">
+        <source>Brand: <x id="PH" equiv-text="item.name"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7607337025118216724" datatype="html">
+        <source>New brand</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6423636533946976385" datatype="html">
+        <source>Are you sure you want to delete this brand?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-brands/car-brands-list/car-brands-list.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1464072562214937907" datatype="html">
+        <source>Year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6100518552999600869" datatype="html">
+        <source>Add model</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5255668452320045368" datatype="html">
+        <source>Models table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5356536809657690064" datatype="html">
+        <source>Model: <x id="PH" equiv-text="item.name"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8433430355372963565" datatype="html">
+        <source>New Model</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2667784109810028859" datatype="html">
+        <source>Is active</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-form/fuel-form.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-form/fuel-provider-form.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8300300320949185460" datatype="html">
+        <source>Add provider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1880100550398114641" datatype="html">
+        <source>Providers table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5845109652928606695" datatype="html">
+        <source>Provider: <x id="PH" equiv-text="item.name"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3865744924578848383" datatype="html">
+        <source>New provider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4493592429026400931" datatype="html">
+        <source>Are you sure you want to delete this provider?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel-provider/fuel-provider-list/fuel-provider-list.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3623535959757254920" datatype="html">
+        <source>Add fuel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2930313471841081031" datatype="html">
+        <source>Fuels table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8096639287553679015" datatype="html">
+        <source>Fuel: <x id="PH" equiv-text="item.name"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5536993311902715374" datatype="html">
+        <source>New fuel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2709653780910127741" datatype="html">
+        <source>Are you sure you want to delete this fuel?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/fuel/fuel/fuel-list/fuel-list.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="795890916060309463" datatype="html">
+        <source>Roles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-form/users-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users.service.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5741647037177343247" datatype="html">
+        <source>Users table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8777643423278895767" datatype="html">
+        <source>User: <x id="PH" equiv-text="item.username"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4794731989135207662" datatype="html">
+        <source>Are you sure you want to delete this user?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/nomenclatures/users/users-list/users-list.component.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5341859637346833117" datatype="html">
+        <source>Required field!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/validation-error-i18n/validation-error-i18n.pipe.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5832885852895012455" datatype="html">
+        <source>Wrong email format!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/validation-error-i18n/validation-error-i18n.pipe.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3068896303489252695" datatype="html">
+        <source>The passwords do not match!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/validation-error-i18n/validation-error-i18n.pipe.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8121141462865337916" datatype="html">
+        <source>Phone number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/drivers/drivers.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/responsible/responsible.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1749464566472606680" datatype="html">
+        <source>Registration date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/registration-number/registration-number.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7792003816300086620" datatype="html">
+        <source>Card number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/fuel-card/fuel-card.service.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2485969382829178841" datatype="html">
+        <source>Limit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/edit-form/edit-form.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/fuel-card/fuel-card.service.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3249513483374643425" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source><x id="PH" equiv-text="this.dataType"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7627688244367953308" datatype="html">
+        <source>New <x id="PH" equiv-text="this.dataType"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8927837337329146438" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4994726770828795919" datatype="html">
+        <source>Item successfully deleted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6363205220515636309" datatype="html">
+        <source>Item not found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/reference-list/reference-list.component.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8298333184054476827" datatype="html">
+        <source>Registration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/services/registration-number/registration-number.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8470311110519302542" datatype="html">
+        <source>No data</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/zorro-config.module.ts</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

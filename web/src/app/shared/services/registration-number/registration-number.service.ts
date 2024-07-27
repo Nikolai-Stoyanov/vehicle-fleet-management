@@ -14,21 +14,21 @@ export class RegistrationNumberService {
   public carRegistrationNumbersColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'Registration',
+      title: $localize`Registration`,
       propsName: 'registration',
       width: '150px',
       type: 'text',
     },
     {
       id: '2',
-      title: 'Registration date',
+      title: $localize`Registration date`,
       propsName: 'registrationDate',
       width: '150px',
       type: 'date',
     },
     {
       id: '3',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '150px',
       type: 'status',

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../auth/auth.service";
-
-// import { AppConfigService } from '@core/services/app-config.service';
-// import { AuthenticationService } from '@auth/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'vfm-default-layout',
@@ -10,23 +8,29 @@ import {AuthenticationService} from "../../auth/auth.service";
   styleUrls: ['./default-layout.component.scss']
 })
 export class DefaultLayoutComponent implements OnInit {
-  public isCollapsed = true;
   public currentUser:any;
   public roles:any[]=[];
 
   constructor(
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.currentUser=this.authService.currentUserValue
-    // @ts-ignore
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.roles = this.currentUser?.roles || [];
   }
 
   ngOnInit(): void {}
 
+  isSelected(route: string): boolean {
+    return route === this.router.url;
+  }
+
   public onLogoutClick(e: Event) {
     e.stopPropagation();
     this.authService.logout();
+  }
+
+  changeSelection($event: Event) {
+    console.log($event)
   }
 }

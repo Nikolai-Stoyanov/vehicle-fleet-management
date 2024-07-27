@@ -56,21 +56,23 @@ export interface Fuel {
 
 
 export enum Fuels{
-  DIESEL, LPG, GASOLINE, METHANOL,
+
+  DIESEL= `Disel`, LPG= `LPG`, GASOLINE= `Gasoline`, METHANOL= `Methanol`,
 }
 
 export enum Headquarter{
-HEADQUARTER1,HEADQUARTER2,HEADQUARTER3,HEADQUARTER4,HEADQUARTER5
+HEADQUARTER1='Headquarter 1',HEADQUARTER2='Headquarter 2',HEADQUARTER3='Headquarter 3',HEADQUARTER4='Headquarter 4',HEADQUARTER5='Headquarter 5'
 }
 
 export enum Owner{
-FIRSTOWNER,SECONDOWNER,THIRDOWNER,FOURTHOWNER
+FIRSTOWNER='First owner',SECONDOWNER='Second owner',THIRDOWNER='Third owner',FOURTHOWNER='Fourth owner'
 }
 
 export enum VehicleType{
-  CAR, TRUCK
+
+  CAR=`Car`, TRUCK= `Truck`
 }
 
 export enum DrivingCategoryType{
-  AM, A1, A2, A, B1, B, C1, C, D1, D, BE, C1E, D1E, DE, Ttm, Tkt
+  AM='AM', A1='A1', A2='A2', A='A', B1='B1', B='B', C1='C1', C='C', D1='D1', D='D', BE='BE', C1E='C1E', D1E='D1E', DE='DE', Ttm='Ttm', Tkt='Tkt'
 }

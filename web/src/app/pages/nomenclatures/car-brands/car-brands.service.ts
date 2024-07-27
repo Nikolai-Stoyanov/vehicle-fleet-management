@@ -13,7 +13,7 @@ export class CarBrandsService {
   public carBrandsListColumns  = [
     {
       id: '1',
-      title: 'ID',
+      title: $localize`ID`,
       propsName: 'id',
       width: '70px',
       type: 'text',
@@ -23,7 +23,7 @@ export class CarBrandsService {
     },
     {
       id: '2',
-      title: 'Name',
+      title: $localize`Name`,
       propsName: 'name',
       width: '100px',
       sortFn: (a: any, b: any) => a.name.localeCompare(b.name),
@@ -33,7 +33,7 @@ export class CarBrandsService {
     },
     {
       id: '3',
-      title: 'Description',
+      title: $localize`Description`,
       propsName: 'description',
       width: '200px',
       sortFn: (a: any, b: any) => a.description.localeCompare(b.description),
@@ -43,7 +43,7 @@ export class CarBrandsService {
     },
     {
       id: '4',
-      title: 'Company',
+      title: $localize`Company`,
       propsName: 'company',
       width: '130px',
       sortFn: (a: any, b: any) =>
@@ -54,7 +54,7 @@ export class CarBrandsService {
     },
     {
       id: '5',
-      title: 'Models',
+      title: $localize`Models`,
       propsName: 'models',
       width: '200px',
       showSortFn: false,
@@ -63,7 +63,7 @@ export class CarBrandsService {
     },
     {
       id: '6',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'status',
       width: '100px',
       sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),

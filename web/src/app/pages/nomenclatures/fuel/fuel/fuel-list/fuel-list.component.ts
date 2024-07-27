@@ -40,9 +40,9 @@ export class FuelListComponent implements OnInit {
   editFuel(item?: any) {
     let title;
     if (item) {
-      title = `Fuel: ${item.name}`;
+      title = $localize`Fuel: ${item.name}`;
     } else {
-      title = `New fuel`;
+      title = $localize`New fuel`;
     }
     const modal = this.modalService.create({
       nzTitle: title,
@@ -72,28 +72,24 @@ export class FuelListComponent implements OnInit {
 
   removeFuel() {
     this.modalService.confirm({
-      nzTitle: `Are you sure you want to delete this fuel?`,
-      nzOkText: `Yes`,
+      nzTitle: $localize`Are you sure you want to delete this fuel?`,
+      nzOkText: $localize`Yes`,
       nzOkDanger: true,
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteFuel(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', `Fuel successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatestFuels().subscribe((res) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error(`Fuel not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },
-      nzCancelText: `No`,
+      nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });

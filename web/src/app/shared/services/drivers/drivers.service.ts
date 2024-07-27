@@ -9,26 +9,26 @@ import {Observable, of} from "rxjs";
   providedIn: 'root'
 })
 export class DriversService {
-  private readonly endpoint = 'cars';
+  private readonly endpoint = '/drivers';
 
   public carDriversColumns: TableColumnInterface[] = [
     {
       id: '1',
-      title: 'Id',
+      title: $localize`Id`,
       propsName: 'driverId',
       width: '80px',
       type: 'text',
     },
     {
       id: '2',
-      title: 'Phone number',
+      title: $localize`Phone number`,
       propsName: 'phoneNumber',
       width: '120px',
       type: 'text',
     },
     {
       id: '3',
-      title: 'Status',
+      title: $localize`Status`,
       propsName: 'Status',
       width: '60px',
       type: 'status',
@@ -44,6 +44,10 @@ export class DriversService {
 
   fetchLatest(carId: number) {
     return this.http.get<any>(`${this.endpoint}/${carId}`);
+  }
+
+  fetchById(id: number) {
+    return this.http.get<any>(`${this.endpoint}/${id}`);
   }
 
   delete(carId: number) {

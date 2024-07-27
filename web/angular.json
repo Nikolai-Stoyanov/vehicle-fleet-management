@@ -5,8 +5,11 @@
   "projects": {
     "vehicleFleetManagement": {
       "i18n": {
-        "sourceLocale": "en"
-        },
+        "sourceLocale": "en",
+        "locales": {
+          "bg": "/src/i18n/messages.bg.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,6 +26,8 @@
             "outputPath": "dist/vehicle-fleet-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "localize": true,
+            "aot": true,
             "polyfills": [
               "zone.js",
               "@angular/localize/init"
@@ -44,7 +49,21 @@
             "scripts": []
           },
           "configurations": {
+            "bg": {
+              "localize": [
+                "bg"
+              ]
+            },
+            "en-US": {
+              "localize": [
+                "en"
+              ]
+            },
             "production": {
+              "localize": [
+                "bg",
+                "en"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -70,6 +89,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "bg": {
+              "buildTarget": "vehicleFleetManagement:build:bg"
+            },
             "production": {
               "buildTarget": "vehicleFleetManagement:build:production"
             },

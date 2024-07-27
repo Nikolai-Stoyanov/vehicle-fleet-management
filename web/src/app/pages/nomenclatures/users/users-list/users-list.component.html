@@ -1,6 +1,6 @@
 <div style="margin: 0.5em;">
   <vfm-dummy-table-checkboxes
-    [tableHeight]="'72vh'"
+    [tableHeight]="'77vh'"
     [loading]="loading"
     [haveEdit]="true"
     [allItems]="currentItems"
@@ -20,7 +20,7 @@
         [disabled]="!currentItem"
       >
         <i nz-icon nzType="edit" nzTheme="outline"></i>
-        <span >Edit</span>
+        <span i18n>Edit</span>
       </button>
     </div>
     <div nz-col>
@@ -34,12 +34,12 @@
         [disabled]="!currentItem"
       >
         <i nz-icon nzType="delete" nzTheme="outline"></i>
-        <span >Delete</span>
+        <span i18n>Delete</span>
       </button>
     </div>
   </div>
 </div>
 
 <ng-template #titleTemplate>
-  <span style="font-weight: 900;font-style: italic">Users table</span>
+  <span style="font-weight: 900;font-style: italic" i18n>Users table</span>
 </ng-template>

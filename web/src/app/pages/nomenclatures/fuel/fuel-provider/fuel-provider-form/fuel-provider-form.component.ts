@@ -102,7 +102,8 @@ export class FuelProviderFormComponent implements OnInit {
 
     if (!this.currentItem?.id) {
       this.svc.createSupplier(formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {
@@ -111,7 +112,8 @@ export class FuelProviderFormComponent implements OnInit {
       })
     }else {
       this.svc.updateSupplier(this.currentItem?.id,formObject).subscribe({
-        next: () => {
+        next: (res) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
         error: (error: any) => {

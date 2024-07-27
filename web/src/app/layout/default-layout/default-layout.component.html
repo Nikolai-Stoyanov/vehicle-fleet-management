@@ -5,18 +5,18 @@
         <img src="assets/images/car.png" alt="logo" />
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-      <li nz-menu-item nzSelected routerLink="/home">Home</li>
-      <li nz-menu-item routerLink="/aboutUs">About us</li>
-      <li nz-menu-item routerLink="/contacts">Contacts</li>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu" (selectionchange)="changeSelection($event)">
+      <li nz-menu-item [nzSelected]="isSelected('/home')" routerLink="/home" i18n>Home</li>
+<!--      <li nz-menu-item [nzSelected]="isSelected('/aboutUs')" routerLink="/aboutUs" i18n>About us</li>-->
+<!--      <li nz-menu-item [nzSelected]="isSelected('/contacts')" routerLink="/contacts" i18n>Contacts</li>-->
       <span class="greeting" >
-        <span>Hallo </span>
-        <span *ngIf="currentUser?.username">{{ currentUser?.username}}</span>
-        <span *ngIf="!currentUser?.username">Guest</span>
+        <span i18n>Hello </span>
+        <span *ngIf="currentUser?.username"> << {{ currentUser?.username}} >></span>
+        <span *ngIf="!currentUser?.username" i18n><< Guest >></span>
       </span>
-      <li nz-menu-item routerLink="/login" *ngIf="!currentUser?.username">Login</li>
-      <li nz-menu-item routerLink="/register" *ngIf="!currentUser?.username">Register</li>
-      <li nz-menu-item (click)="onLogoutClick($event)" *ngIf="currentUser?.username">Logout</li>
+      <li nz-menu-item [nzSelected]="isSelected('/login')" routerLink="/login" *ngIf="!currentUser?.username" i18n>Login</li>
+      <li nz-menu-item [nzSelected]="isSelected('/register')" routerLink="/register" *ngIf="!currentUser?.username" i18n>Register</li>
+      <li nz-menu-item (click)="onLogoutClick($event)" *ngIf="currentUser?.username" i18n>Logout</li>
     </ul>
 
   </nz-header>
@@ -27,7 +27,7 @@
       </div>
     </nz-sider>
     <nz-layout class="inner-layout">
-      <nz-content>
+      <nz-content [ngClass]="currentUser?.username? 'login-user' : 'guest'">
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
