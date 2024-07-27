@@ -36,20 +36,28 @@
       </trans-unit>
       <trans-unit id="1908285951500318953" datatype="html">
         <source> Login </source>
-        <target>Вход</target>
+        <target> Вход </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
           <context context-type="linenumber">31,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8164791295086777340" datatype="html">
-        <source>Don&apos;t have an account?</source>
+        <source>Don&apos;t have an account? </source>
         <target>Нямате акаунт?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
           <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2950600607347308247" datatype="html">
+              <source>Don&apos;t have an account? </source>
+              <target>Нямате акаунт? </target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
+                <context context-type="linenumber">37,38</context>
+              </context-group>
+            </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
         <source>Register</source>
         <target>Регистрация</target>
@@ -99,13 +107,21 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8681189941561211044" datatype="html">
-        <source> Already have an account?</source>
+        <source> Already have an account? </source>
         <target>Вече имате акаунт?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6207438724033771807" datatype="html">
+              <source>Already have an account? </source>
+              <target>Вече имате акаунт?</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+                <context context-type="linenumber">49,50</context>
+              </context-group>
+            </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
         <target>Вход</target>

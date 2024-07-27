@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="2336550011721758066" datatype="html">
         <source>Log in</source>
@@ -37,20 +37,31 @@
           <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
           <context context-type="linenumber">31,32</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="8164791295086777340" datatype="html">
-        <source>Don&apos;t have an account?</source>
+      <trans-unit id="2950600607347308247" datatype="html">
+        <source>Don&apos;t have an account? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
           <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3301086086650990787" datatype="html">
-        <source>Register</source>
+      <trans-unit id="2907733796351584017" datatype="html">
+        <source> Register </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/login/login.component.html</context>
           <context context-type="linenumber">38,39</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3301086086650990787" datatype="html">
+        <source>Register</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">2,3</context>
@@ -82,29 +93,11 @@
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2907733796351584017" datatype="html">
-        <source> Register </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
-          <context context-type="linenumber">43,44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8681189941561211044" datatype="html">
-        <source> Already have an account?</source>
+      <trans-unit id="6207438724033771807" datatype="html">
+        <source>Already have an account? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
           <context context-type="linenumber">49,50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2454050363478003966" datatype="html">
-        <source>Login</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/register/register.component.html</context>
-          <context context-type="linenumber">50,51</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
-          <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6221269179333060603" datatype="html">
@@ -151,6 +144,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
           <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layout/default-layout/default-layout.component.html</context>
+          <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3797778920049399855" datatype="html">
