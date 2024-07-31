@@ -5,7 +5,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import my.project.vehiclefleetmanagement.exceptions.AppException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -38,7 +40,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     }
                 } catch (RuntimeException e) {
                     SecurityContextHolder.clearContext();
-                    throw e;
+//                    throw e;
+                    throw new AppException("The Token has expired!", HttpStatus.UNAUTHORIZED);
                 }
             }
         }

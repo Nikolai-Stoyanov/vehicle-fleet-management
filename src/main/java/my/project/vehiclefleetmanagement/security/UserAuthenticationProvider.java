@@ -3,7 +3,7 @@ package my.project.vehiclefleetmanagement.security;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
-import my.project.vehiclefleetmanagement.service.user.UserService;
+import my.project.vehiclefleetmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -34,7 +34,7 @@ public class UserAuthenticationProvider {
 
     public String createToken(UserDto user) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3600000); // 1 hour
+        Date validity = new Date(now.getTime() + 10800000); // 3 hour
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()

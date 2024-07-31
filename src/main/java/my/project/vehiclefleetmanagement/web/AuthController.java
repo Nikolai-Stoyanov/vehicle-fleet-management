@@ -6,14 +6,12 @@ import my.project.vehiclefleetmanagement.security.UserAuthenticationProvider;
 import my.project.vehiclefleetmanagement.model.dtos.user.CredentialsDto;
 import my.project.vehiclefleetmanagement.model.dtos.user.SignUpDto;
 import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
-import my.project.vehiclefleetmanagement.service.user.UserService;
+import my.project.vehiclefleetmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController

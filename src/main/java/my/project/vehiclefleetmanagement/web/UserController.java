@@ -3,7 +3,7 @@ package my.project.vehiclefleetmanagement.web;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import my.project.vehiclefleetmanagement.model.dtos.user.*;
-import my.project.vehiclefleetmanagement.service.user.UserService;
+import my.project.vehiclefleetmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
