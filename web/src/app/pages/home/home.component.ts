@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('HomeComponent ngOnInit');
+    console.log('ContactsComponent ngOnInit');
 
   }
 }

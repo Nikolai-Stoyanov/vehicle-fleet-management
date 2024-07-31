@@ -52,7 +52,7 @@ export class CarRecordListComponent implements OnInit {
       nzWidth: '75vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item?.id,
+        id: item?.id,
       },
       nzFooter: null,
     });

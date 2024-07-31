@@ -1,18 +1,23 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalRef} from 'ng-zorro-antd/modal';
 import {CarRecordService} from '../car-record.service';
-import {ReferenceListComponent} from "../../../shared/reference-list/reference-list.component";
-import {CarRecord, DrivingCategoryType, Fuels, Headquarter, Owner, VehicleType} from "../car-record";
 import {
-  DriversService, FuelCardService,
-  RegistrationNumberService, ResponsibleService,
-} from "../../../shared/services";
+  CarRecord,
+  CATEGORYOPTIONS,
+  FUELOPTIONS,
+  VEHICLEOPTIONS,
+} from "../car-record";
+
 import {Subscription} from "rxjs";
 import {CarModelsService} from "../../nomenclatures/car-models/car-models.service";
-import {CarBrandsService} from "../../nomenclatures/car-brands/car-brands.service";
+import {DateTimeForBackendPipe, DateTimePipe} from "../../../shared/formatters";
+import {CarPersonsService} from "../../nomenclatures/car-persons/car-persons.service";
+import {CarPerson} from "../../nomenclatures/car-persons/car-person";
+import {FuelsPipe} from "../../../shared/formatters/fuels";
+import {VehicleTypePipe} from "../../../shared/formatters/vehicle-type";
+import {CategoryTypePipe} from "../../../shared/formatters/category-type";
 
 @Component({
   selector: 'vfm-car-record-form',
@@ -23,27 +28,24 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   @Input() public currentItemId: any;
   public currentItem: any;
-  public fuelOptions: any;
-  public categoryOptions: any[] = [];
-  public headquartersOptions: any[] = [];
-  public ownerNameOptions: any[] = [];
-  public vehicleOptions: any[] = [];
-  public carBrandOptions: any[] = [];
+  public fuelOptions=FUELOPTIONS
+  public categoryOptions = CATEGORYOPTIONS;
+  public vehicleOptions = VEHICLEOPTIONS;
   public carModelOptions: any[] = [];
+  public carPersonOptions: any[] = [];
   public subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private modalService: NzModalService,
     private modal: NzModalRef,
-    private message: NzMessageService,
     private svc: CarRecordService,
-    private registrationNumberService: RegistrationNumberService,
-    private responsibleService: ResponsibleService,
-    private driversService: DriversService,
-    private fuelCardService: FuelCardService,
-    private carModelService:CarModelsService,
-    private carBrandService:CarBrandsService
+    private carModelService: CarModelsService,
+    private carPersonService: CarPersonsService,
+    private dateForBackendPipe: DateTimeForBackendPipe,
+    private dateTimePipe: DateTimePipe,
+    private fuelPipe:FuelsPipe,
+    private vehicleTypePipe:VehicleTypePipe,
+    private categoryTypePipe:CategoryTypePipe,
   ) {
     this.currentItemId = this.modal['config'].nzData.id;
   }
@@ -66,85 +68,92 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
         value: this.currentItem?.id || null,
         disabled: true,
       }),
-      registrationNumber: this.fb.control(
-        this.currentItem?.registrationNumber || null,
-        Validators.required
-      ),
-      category: this.fb.control(
-        this.currentItem?.category || null,
-        Validators.required
-      ),
-      firstRegistration: this.fb.control(
-        this.currentItem?.firstRegistration || null,
-        Validators.required
-      ),
-      vehicleType: this.fb.control(
-        this.currentItem?.vehicleType || null,
+      drivingCategory: this.fb.control(
+        this.categoryTypePipe.transform(this.currentItem?.drivingCategory) || null,
         Validators.required
       ),
       description: this.fb.control(
-        this.currentItem?.description || null,
-        Validators.required
+        this.currentItem?.description || null
       ),
-      brand: this.fb.control(
-        this.currentItem?.brand || null,
-        Validators.required
-      ),
-      model: this.fb.control(
-        this.currentItem?.model || null,
-        Validators.required
-      ),
-      seatingCapacity: this.fb.control(
-        this.currentItem?.seatingCapacity || null,
-        Validators.required
-      ),
-      frameNumber: this.fb.control(
-        this.currentItem?.frameNumber || null,
-        Validators.required
-      ),
-      engineNumber: this.fb.control(
-        this.currentItem?.engineNumber || null,
-        Validators.required
-      ),
-      horsePower: this.fb.control(
-        this.currentItem?.horsePower || null,
-        Validators.required
-      ),
-      enginePower: this.fb.control(
-        this.currentItem?.enginePower || null,
-        Validators.required
-      ),
-      engineVolume: this.fb.control(
-        this.currentItem?.engineVolume || null,
-        Validators.required
-      ),
-      primaryColor: this.fb.control(
-        this.currentItem?.primaryColor || null,
-        Validators.required
-      ),
-      additionalColor: this.fb.control(
-        this.currentItem?.additionalColor || null,
-        Validators.required
-      ),
-      loadCapacity: this.fb.control(
-        this.currentItem?.loadCapacity || null
-      ),
-      ownerName: this.fb.control(
-        this.currentItem?.ownerName || null,
+      registrationCertificateData: this.fb.group({
+        registrationNumber: this.fb.control(
+          {
+            value: this.currentItem?.registrationCertificateData?.registrationNumber || null, disabled: this.currentItemId},
+          Validators.required
+        ),
+        firstRegistration: this.fb.control(
+          this.dateTimePipe.transform(this.currentItem?.registrationCertificateData?.firstRegistration) || null,
+          Validators.required
+        ),
+        vehicleType: this.fb.control(
+          this.vehicleTypePipe.transform(this.currentItem?.registrationCertificateData?.vehicleType) || null,
+          Validators.required
+        ),
+        brand: this.fb.control(
+          {value: this.currentItem?.registrationCertificateData?.model?.brandName || null, disabled: true},
+          Validators.required
+        ),
+        model: this.fb.control(
+          {value:this.currentItem?.registrationCertificateData?.model || null,disabled:this.currentItemId},
+          Validators.required
+        ),
+        seatingCapacity: this.fb.control(
+          this.currentItem?.registrationCertificateData?.seatingCapacity-1 || null,
+          Validators.required
+        ),
+        frameNumber: this.fb.control(
+          this.currentItem?.registrationCertificateData?.frameNumber || null,
+          Validators.required
+        ),
+        engineNumber: this.fb.control(
+          this.currentItem?.registrationCertificateData?.engineNumber || null,
+          Validators.required
+        ),
+        horsePower: this.fb.control(
+          this.currentItem?.registrationCertificateData?.horsePower || null,
+          Validators.required
+        ),
+        enginePower: this.fb.control(
+          this.currentItem?.registrationCertificateData?.enginePower || null,
+          Validators.required
+        ),
+        engineVolume: this.fb.control(
+          this.currentItem?.registrationCertificateData?.engineVolume || null,
+          Validators.required
+        ),
+        primaryColor: this.fb.control(
+          this.currentItem?.registrationCertificateData?.primaryColor || null,
+          Validators.required
+        ),
+        additionalColor: this.fb.control(
+          this.currentItem?.registrationCertificateData?.additionalColor || null,
+          Validators.required
+        ),
+        loadCapacity: this.fb.control(
+          this.currentItem?.registrationCertificateData?.loadCapacity || null
+        )
+      }),
+      owner: this.fb.control(
+        this.currentItem?.owner || null,
         Validators.required
       ),
       department: this.fb.control(
         this.currentItem?.department || null,
         Validators.required
       ),
-      headquarters: this.fb.control(
-        this.currentItem?.headquarters || null,
-        Validators.required
-      ),
       stay: this.fb.control(
         this.currentItem?.stay || null,
         Validators.required
       ),
+      responsible: this.fb.control(
+        {value:this.currentItem?.responsible || null,disabled:this.currentItemId},
+        Validators.required
+      ),
+      driver: this.fb.control(
+        {value:this.currentItem?.driver || null,disabled:this.currentItemId},
+        Validators.required
+      ),
+
       totalMileage: this.fb.control(
         this.currentItem?.totalMileage || null,
         Validators.required
@@ -157,124 +166,34 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
         this.currentItem?.developmentToMileage || null,
         Validators.required
       ),
-      inspectionDateTo: this.fb.control(
-        this.currentItem?.inspectionDateTo || null,
-        Validators.required
-      ),
-      vignetteDateTo: this.fb.control(
-        this.currentItem?.vignetteDateTo || null,
-        Validators.required
-      ),
-      insuranceDateTo: this.fb.control(
-        this.currentItem?.insuranceDateTo || null,
-        Validators.required
-      ),
       status: this.fb.control(
         this.currentItem?.status || null,
         Validators.required
       ),
-      fuels: this.fb.array(
-        this.currentItem?.fuelOptions
-          ? this.currentItem.fuels.map((options: any) =>
-            this.fb.group({
-              type: this.fb.control(options.type || null,
-                Validators.required),
-              tankVolume: this.fb.control(options.tankVolume || null,
-                Validators.required),
-              distanceLimit: this.fb.control(options.distanceLimit || null),
-              moneyLimit: this.fb.control(options.moneyLimit || null)
-            })
-          )
-          : []
+      fuelCard: this.fb.control(
+        this.currentItem?.fuelCard || null,
+        Validators.required
       ),
+      fuelType: this.fb.control(this.fuelPipe.transform(this.currentItem?.fuelType) || null,
+        Validators.required),
+
       createdBy: this.fb.control(
-        {value:this.currentItem?.createdBy || null,disabled:true}
+        {value: this.currentItem?.createdBy || null, disabled: true}
       ),
-      createdDate: this.fb.control(
-        {value:this.currentItem?.createdDate || null,disabled:true}
+      createdAt: this.fb.control(
+        {value: this.dateTimePipe.transform(this.currentItem?.createdAt) || null, disabled: true}
       ),
-      modifyBy: this.fb.control(
-        {value:this.currentItem?.modifyBy || null,disabled:true}
+      updatedBy: this.fb.control(
+        {value: this.currentItem?.updatedBy || null, disabled: true}
       ),
-      modifyDate: this.fb.control(
-        {value:this.currentItem?.modifyDate || null,disabled:true}
+      updatedAt: this.fb.control(
+        {value: this.dateTimePipe.transform(this.currentItem?.updatedAt) || null, disabled: true}
       ),
     });
-  }
 
-  get getFuelOptionsControls(): any {
-    return (this.form.get('fuels') as FormArray).controls;
-  }
-
-  showModal(type: string) {
-    let service
-    let data;
-    let columns;
-    switch (type) {
-      case 'Registration numbers':
-        service = this.registrationNumberService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-      case 'Responsible':
-        service = this.responsibleService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-      case 'Drivers':
-        service = this.driversService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-      case 'Fuel cards':
-        service = this.fuelCardService
-        if (this.currentItemId) {
-          service.fetchLatest(this.currentItemId).subscribe((res: any) => {
-            data = res;
-          });
-        }
-        service.getColumns().subscribe((res: any) => {
-          columns = res;
-        });
-        break;
-    }
-    const modal = this.modalService.create({
-      nzTitle: type,
-      nzContent: ReferenceListComponent,
-      nzWidth: '45vw',
-      nzStyle: {top: '0'},
-      nzData: {
-        carId: this.currentItemId,
-        data: data,
-        service: service,
-        columns: columns,
-        type:type
-      },
-      nzFooter: null,
-    });
-    modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info('Функцията не е имплементирана!');
-      }
-    });
+    this.form.controls['registrationCertificateData'].get('model')?.valueChanges.subscribe(res => {
+      this.form.controls['registrationCertificateData'].get('brand')?.setValue(res.brandName)
+    })
   }
 
   public onSubmit() {
@@ -282,17 +201,32 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
       this.form.markAllAsTouched();
       return
     }
-    console.log(this.form.getRawValue());
+
+    const form = this.form.getRawValue()
+    form.registrationCertificateData.seatingCapacity=
+      this.form.value['registrationCertificateData']['seatingCapacity']+1
+    form.registrationCertificateData.firstRegistration =
+      this.dateForBackendPipe.transform(this.form.value['registrationCertificateData']['firstRegistration']);
+    form.drivingCategory=this.categoryTypePipe.transform( this.form.value.drivingCategory);
+    form.fuelType=this.fuelPipe.transform( this.form.value.fuelType);
+    form.registrationCertificateData.vehicleType=
+      this.vehicleTypePipe.transform( this.form.value['registrationCertificateData']['vehicleType']);
+
     if (this.currentItemId) {
-      const sub1 = this.svc.updateRecords(this.currentItemId.id, this.form.getRawValue()).subscribe({
+      form.createdAt = this.dateForBackendPipe.transform(this.form.value['createdAt']);
+      if (this.form.get('updatedAt')) {
+        form.updatedAt = this.dateForBackendPipe.transform(this.form.value['updatedAt']);
+      }
+      const sub1 = this.svc.updateRecords(this.currentItemId, form).subscribe({
         next: () => {
           this.modal.destroy();
         },
-        error: () => {}
+        error: () => {
+        }
       });
       this.subscriptions.push(sub1);
     } else {
-      const sub2 = this.svc.createRecords( this.form.getRawValue()).subscribe({
+      const sub2 = this.svc.createRecords(form).subscribe({
         next: () => {
           this.modal.destroy();
         },
@@ -303,74 +237,20 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public addFuelOption() {
-    (this.form.get('fuels') as FormArray).push(
-      this.fb.group({
-        type: this.fb.control(null,
-          Validators.required),
-        tankVolume: this.fb.control(null,
-          Validators.required),
-        distanceLimit: this.fb.control(null),
-        moneyLimit: this.fb.control(null)
-      })
-    );
-  }
-
-  public removeFuelOption(index: any) {
-    (this.form.get('fuels') as FormArray).removeAt(index);
-  }
-
   private getOptions() {
-    this.fuelOptions = [
-      {value:{id:1,name:Fuels.DIESEL} , label:Fuels.DIESEL},
-      {value:{id:2,name:Fuels.GASOLINE}, label: Fuels.GASOLINE},
-      {value:{id:3,name: Fuels.LPG}, label: Fuels.LPG},
-      {value:{id:4,name: Fuels.METHANOL}, label: Fuels.METHANOL},
-    ];
 
-    this.vehicleOptions = [
-      {value: {id:1,name:VehicleType.CAR}, label: VehicleType.CAR},
-      {value: {id:2,name:VehicleType.TRUCK}, label: VehicleType.TRUCK},
-    ];
 
-    this.categoryOptions = [
-      {value:{id:1,name: DrivingCategoryType.A}, label: DrivingCategoryType.A},
-      {value:{id:2,name: DrivingCategoryType.B}, label: DrivingCategoryType.B},
-      {value:{id:3,name: DrivingCategoryType.BE}, label: DrivingCategoryType.BE},
-      {value:{id:4,name: DrivingCategoryType.C}, label: DrivingCategoryType.C},
-      {value:{id:5,name: DrivingCategoryType.C1E}, label: DrivingCategoryType.C1E},
-      {value:{id:6,name: DrivingCategoryType.D}, label: DrivingCategoryType.D},
-      {value:{id:7,name: DrivingCategoryType.D1E}, label: DrivingCategoryType.D1E},
-      {value:{id:8,name: DrivingCategoryType.DE}, label: DrivingCategoryType.DE},
-      {value:{id:9,name: DrivingCategoryType.Ttm}, label: DrivingCategoryType.Ttm},
-      {value:{id:10,name: DrivingCategoryType.Tkt}, label: DrivingCategoryType.Tkt},
-    ];
-
-    this.ownerNameOptions = [
-      {value:{id:1,name:  Owner.FIRSTOWNER}, label: Owner.FIRSTOWNER},
-      {value:{id:1,name:  Owner.SECONDOWNER}, label:Owner.SECONDOWNER},
-      {value:{id:1,name:  Owner.THIRDOWNER}, label: Owner.THIRDOWNER},
-      {value:{id:1,name:  Owner.FOURTHOWNER}, label:Owner.FOURTHOWNER}
-    ];
-
-    this.headquartersOptions = [
-      {value:{id:1,name:  Headquarter.HEADQUARTER1}, label: Headquarter.HEADQUARTER1},
-      {value:{id:1,name:  Headquarter.HEADQUARTER2}, label: Headquarter.HEADQUARTER2},
-      {value:{id:1,name:  Headquarter.HEADQUARTER3}, label: Headquarter.HEADQUARTER3},
-      {value:{id:1,name:  Headquarter.HEADQUARTER4}, label: Headquarter.HEADQUARTER4},
-      {value:{id:1,name:  Headquarter.HEADQUARTER5}, label: Headquarter.HEADQUARTER5},
-    ];
-
-    this.carModelService.fetchLatest().subscribe((res)=>{
-      res.forEach((item:any)=>{
-        this.carModelOptions.push({value:item, label: item.name});
+    this.carModelService.fetchLatest().subscribe((res) => {
+      res.forEach((item: any) => {
+        this.carModelOptions.push({value: item, label: item.name});
       })
 
     })
-    this.carBrandService.fetchLatest().subscribe((res)=>{
-      res.forEach((item:any)=>{
-        this.carBrandOptions.push({value:item, label: item.name});
+    this.carPersonService.fetchLatest().subscribe((res) => {
+      res.forEach((item: CarPerson) => {
+        this.carPersonOptions.push({value: item, label: item.fullName});
       })
+
     })
   }
 

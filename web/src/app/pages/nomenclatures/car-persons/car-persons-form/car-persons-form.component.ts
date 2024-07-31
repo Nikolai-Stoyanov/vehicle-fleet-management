@@ -4,15 +4,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CarBrandsService} from "../../car-brands/car-brands.service";
-import {DateTimeForBackendPipe, DateTimePipe} from "../../../../shared/formatters";
-import {CarModelsService} from "../car-models.service";
+import {CarPersonsService} from "../car-persons.service";
+import {CarPerson} from "../car-person";
 
 @Component({
   selector: 'vfm-car-persons-form',
-  templateUrl: './car-models-form.component.html',
-  styleUrls: ['./car-models-form.component.scss'],
+  templateUrl: './car-persons-form.component.html',
+  styleUrls: ['./car-persons-form.component.scss'],
 })
-export class CarModelsFormComponent implements OnInit {
+export class CarPersonsFormComponent implements OnInit {
   public form!: FormGroup;
   @Input() public currentItem: any;
   public currentItemId: any;
@@ -23,9 +23,7 @@ export class CarModelsFormComponent implements OnInit {
     private message: NzMessageService,
     protected modal: NzModalRef,
     private brandService: CarBrandsService,
-    private modelService: CarModelsService,
-    private dateTimePipe: DateTimePipe,
-    private dateForBackendPipe:DateTimeForBackendPipe
+    private modelService: CarPersonsService,
   ) {
     this.currentItemId = this.modal['config'].nzData.id;
   }
@@ -35,8 +33,8 @@ export class CarModelsFormComponent implements OnInit {
       this.brandOptions.push({label: item.name, value: item})
     }))
     if (this.currentItemId) {
-      this.modelService.fetchModelById(this.currentItemId).subscribe((model: any) => {
-        this.currentItem = model;
+      this.modelService.fetchPersonById(this.currentItemId).subscribe((person: CarPerson) => {
+        this.currentItem = person;
         this.getForm()
       })
     } else {
@@ -51,19 +49,16 @@ export class CarModelsFormComponent implements OnInit {
         value: this.currentItem?.id || null,
         disabled: true
       }),
-      name: this.fb.control(
-        this.currentItem?.name || null,
+      firstName: this.fb.control(
+        this.currentItem?.firstName || null,
         Validators.required
       ),
-      description: this.fb.control(
-        this.currentItem?.description || null
-      ),
-      brand: this.fb.control(
-        this.currentItem?.brand || null,
+      lastName: this.fb.control(
+        this.currentItem?.lastName || null,
         Validators.required
       ),
-      year: this.fb.control(
-        this.dateTimePipe.transform(this.currentItem?.year) || null,
+      phoneNumber: this.fb.control(
+        this.currentItem?.phoneNumber || null,
         Validators.required
       ),
       status: this.fb.control(this.currentItem?.status || null)
@@ -75,16 +70,9 @@ export class CarModelsFormComponent implements OnInit {
       this.form.markAllAsTouched();
       return
     }
-    const formObject = {
-      id: this.currentItemId,
-      name: this.form.getRawValue().name,
-      description: this.form.getRawValue().description,
-      year: this.dateForBackendPipe.transform(this.form.getRawValue().year),
-      brand: this.form.getRawValue().brand.id,
-      status: this.form.getRawValue().status,
-    }
-    if (!this.currentItem?.id) {
-      this.modelService.createModel(formObject).subscribe({
+
+    if (!this.currentItemId) {
+      this.modelService.createPerson(this.form.getRawValue()).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -94,7 +82,7 @@ export class CarModelsFormComponent implements OnInit {
         }
       })
     } else {
-      this.modelService.updateModel(this.currentItem?.id, formObject).subscribe({
+      this.modelService.updatePerson(this.currentItemId, this.form.getRawValue()).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();

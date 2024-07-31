@@ -182,7 +182,7 @@
           <context context-type="linenumber">15,16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="sourcefile">src/app/pages/home/contacts.component.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
@@ -334,11 +334,11 @@
           <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
         <context-group purpose="location">
@@ -370,11 +370,11 @@
           <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
@@ -790,7 +790,7 @@
           <context context-type="linenumber">29,30</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.html</context>
           <context context-type="linenumber">29,30</context>
         </context-group>
         <context-group purpose="location">
@@ -826,7 +826,7 @@
           <context context-type="linenumber">43,44</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.html</context>
           <context context-type="linenumber">43,44</context>
         </context-group>
         <context-group purpose="location">
@@ -870,7 +870,7 @@
           <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.ts</context>
           <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
@@ -890,7 +890,7 @@
           <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
         <context-group purpose="location">
@@ -942,7 +942,7 @@
           <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.ts</context>
           <context context-type="linenumber">86</context>
         </context-group>
         <context-group purpose="location">
@@ -982,11 +982,11 @@
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
@@ -1034,7 +1034,7 @@
           <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
@@ -1166,7 +1166,7 @@
           <context context-type="linenumber">50,51</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">46,47</context>
         </context-group>
         <context-group purpose="location">
@@ -1198,7 +1198,7 @@
           <context context-type="linenumber">53,54</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">49,50</context>
         </context-group>
         <context-group purpose="location">
@@ -1302,7 +1302,7 @@
         <source>Hallo my friend </source>
         <target>Здравей приятелю!</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="sourcefile">src/app/pages/home/contacts.component.html</context>
           <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
@@ -1318,11 +1318,11 @@
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
@@ -1390,7 +1390,7 @@
           <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">36,37</context>
         </context-group>
         <context-group purpose="location">
@@ -1442,11 +1442,11 @@
         <source>Year</source>
         <target>Година</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-models-form.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-form/car-persons-form.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models.service.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-persons.service.ts</context>
           <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
@@ -1454,7 +1454,7 @@
         <source>Add model</source>
         <target>Добави модел</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.html</context>
           <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
@@ -1462,7 +1462,7 @@
         <source>Models table</source>
         <target>Таблица модели</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.html</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.html</context>
           <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
@@ -1470,7 +1470,7 @@
         <source>Model: <x id="PH" equiv-text="item.name"/></source>
         <target>Модел: </target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
@@ -1478,7 +1478,7 @@
         <source>New Model</source>
         <target>Нов модел</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-models-list.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/nomenclatures/car-models/car-models-list/car-persons-list.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>

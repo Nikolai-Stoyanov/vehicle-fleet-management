@@ -6,7 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import {CarBrandsService} from "../car-brands.service";
 
 @Component({
-  selector: 'vfm-users-form',
+  selector: 'vfm-car-persons-form',
   templateUrl: './car-brands-form.component.html',
   styleUrls: ['./car-brands-form.component.scss']
 })

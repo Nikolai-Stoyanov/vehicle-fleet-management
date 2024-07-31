@@ -8,7 +8,6 @@ import { DeclarationsService } from '../declarations.service';
 import {DeclarationList} from "../declarations";
 
 import { TableColumnInterface } from '../../../shared/dummy-table';
-import {RegistrationNumberService} from "../../../shared/services";
 
 @Component({
   selector: 'vfm-declarations-list',
@@ -22,14 +21,11 @@ export class DeclarationsListComponent implements OnInit {
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
   createModalVisible: boolean=false;
-  currentRegistrationNumber: any;
-  registrationNumberOptions: any[]=[];
 
   constructor(
     private svc: DeclarationsService,
     private message: NzMessageService,
     private modalService: NzModalService,
-    private registrationNumberService: RegistrationNumberService,
   ) {}
 
   ngOnInit() {
@@ -49,7 +45,7 @@ export class DeclarationsListComponent implements OnInit {
     if (item) {
       title = $localize`Edit declaration for: ${item.registrationNumber}`;
     } else {
-      title = $localize`New declaration (${this.currentRegistrationNumber.registrationNumber}) `;
+      title = $localize`New declaration`;
     }
     this.createModalVisible=false
     const modal = this.modalService.create({
@@ -59,7 +55,6 @@ export class DeclarationsListComponent implements OnInit {
       nzStyle: { top: '0' },
       nzData: {
         currentId: item?.id,
-        registrationNumber: this.currentRegistrationNumber,
       },
       nzFooter: null,
     });
@@ -103,22 +98,5 @@ export class DeclarationsListComponent implements OnInit {
     }else {
       this.currentItem = item;
     }
-  }
-
-  createModal() {
-      this.registrationNumberService.fetchAllNumber().subscribe((res:any)=>{
-        res.forEach((item:any )=> {
-          this.registrationNumberOptions.push({
-            label:item.registrationNumber,value:item
-          })
-          this.createModalVisible=true
-        })
-
-      })
-  }
-
-  closeModal() {
-    this.createModalVisible=false
-    this.currentRegistrationNumber=null;
   }
 }

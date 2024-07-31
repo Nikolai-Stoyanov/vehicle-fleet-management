@@ -66,6 +66,12 @@ export class MenuComponent implements OnInit {
           permission: 'ALL',
         },
         {
+          title: $localize`Car persons`,
+          icon: 'user-add',
+          routerLink: '/car-persons',
+          permission: 'ALL',
+        },
+        {
           title: $localize`Users`,
           icon: 'usergroup-add',
           routerLink: '/users',
@@ -110,6 +116,7 @@ export class MenuComponent implements OnInit {
       url.includes('car-models') ||
       url.includes('car-brands') ||
       url.includes('fuel')||
+   url.includes('car-persons')||
       url.includes('users')
     ) {
       this.openMap[$localize`Nomenclatures`] = true;
