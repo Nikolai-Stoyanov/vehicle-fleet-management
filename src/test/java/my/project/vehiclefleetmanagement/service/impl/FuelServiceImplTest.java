@@ -6,7 +6,7 @@ import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelEditDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelListDTO;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelRepository;
+import my.project.vehiclefleetmanagement.repository.FuelRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

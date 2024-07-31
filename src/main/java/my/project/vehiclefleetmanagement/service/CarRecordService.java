@@ -1,9 +1,6 @@
 package my.project.vehiclefleetmanagement.service;
 
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordCreateDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordEditDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordListDTO;
+import my.project.vehiclefleetmanagement.model.dtos.car.*;
 
 import java.util.List;
 
@@ -18,4 +15,8 @@ public interface CarRecordService {
     void deleteCarRecord(Long id);
 
     boolean updateCarRecord(Long id, CarRecordEditDTO carRecordEditDTO);
+
+    List<RegistrationNumberDTO> getAllRegistrationNumber();
+
+    CarRecordInfoDTO getCarRecordInfoByRegistrationCertificateDataId(Long id);
 }

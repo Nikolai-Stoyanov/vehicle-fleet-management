@@ -4,10 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.entity.car.DeclarationFuel;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,8 +12,8 @@ import java.util.List;
 public class DeclarationListDTO {
   private long id;
   private String period;
-  private long lastMileage;
-  private long newMileage;
+  private String date;
   private String responsible;
+  private String driver;
   private String registrationNumber;
 }

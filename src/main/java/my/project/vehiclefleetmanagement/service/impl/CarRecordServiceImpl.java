@@ -2,33 +2,37 @@ package my.project.vehiclefleetmanagement.service.impl;
 
 import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.car.*;
-import my.project.vehiclefleetmanagement.model.entity.car.CarPerson;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
 import my.project.vehiclefleetmanagement.model.entity.car.RegistrationCertificateData;
+import my.project.vehiclefleetmanagement.model.entity.declaration.Declaration;
 import my.project.vehiclefleetmanagement.model.enums.VehicleTypeEnum;
 import my.project.vehiclefleetmanagement.repository.CarRecordRepository;
+import my.project.vehiclefleetmanagement.repository.DeclarationRepository;
 import my.project.vehiclefleetmanagement.repository.RegistrationCertificateDataRepository;
 import my.project.vehiclefleetmanagement.service.CarRecordService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.sql.Driver;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarRecordServiceImpl implements CarRecordService {
     private final RegistrationCertificateDataRepository registrationCertificateDataRepository;
     private final CarRecordRepository carRecordRepository;
+    private final DeclarationRepository declarationRepository;
     private final ModelMapper modelMapper;
 
     public CarRecordServiceImpl(RegistrationCertificateDataRepository registrationCertificateDataRepository,
-                                CarRecordRepository carRecordRepository, ModelMapper modelMapper) {
+                                CarRecordRepository carRecordRepository, DeclarationRepository declarationRepository, ModelMapper modelMapper) {
         this.registrationCertificateDataRepository = registrationCertificateDataRepository;
         this.carRecordRepository = carRecordRepository;
+        this.declarationRepository = declarationRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -59,7 +63,7 @@ public class CarRecordServiceImpl implements CarRecordService {
         mappedEntity.setCreatedAt(LocalDate.now());
 
         this.carRecordRepository.save(mappedEntity);
-        return true;
+        throw new AppException("Car record successfully created!", HttpStatus.OK);
     }
 
     @Override
@@ -90,14 +94,19 @@ public class CarRecordServiceImpl implements CarRecordService {
         if (carRecordOptional.isEmpty()) {
             throw new AppException("Car record is not found!", HttpStatus.NOT_FOUND);
         }
-        CarRecordDTO carRecordDTO = modelMapper.map(carRecordOptional, CarRecordDTO.class);
 
-        return carRecordDTO;
+        return modelMapper.map(carRecordOptional, CarRecordDTO.class);
     }
 
     @Override
     public void deleteCarRecord(Long id) {
+        Optional<CarRecord> carRecordOptional = this.carRecordRepository.findById(id);
+
+        if (carRecordOptional.isEmpty()) {
+            throw new AppException("Car record is not found!", HttpStatus.NOT_FOUND);
+        }
         this.carRecordRepository.deleteById(id);
+        throw new AppException("Car record successfully deleted!", HttpStatus.OK);
     }
 
     @Override
@@ -108,15 +117,44 @@ public class CarRecordServiceImpl implements CarRecordService {
         }
         CarRecord editedCarRecord = carRecordOptional.get();
         modelMapper.map(carPersonEditDTO, editedCarRecord);
-//        editedCarRecord.setDriver(modelMapper.map(carPersonEditDTO.getDriver(), CarPerson.class));
-//        editedCarRecord.setResponsible(modelMapper.map(carPersonEditDTO.getResponsible(), CarPerson.class));
-        editedCarRecord.setDriver(null);
-        editedCarRecord.setResponsible(null);
         editedCarRecord.setUpdatedBy("currentPrincipalName");
         editedCarRecord.setUpdatedAt(LocalDate.now());
 
         this.carRecordRepository.save(editedCarRecord);
 
-        return true;
+        throw new AppException("Car record successfully updated!", HttpStatus.OK);
     }
+
+    @Override
+    public List<RegistrationNumberDTO> getAllRegistrationNumber() {
+        List<RegistrationNumberDTO> registrationList = new ArrayList<>();
+
+        List<RegistrationCertificateData> dataList = this.registrationCertificateDataRepository.findAll();
+
+        for (RegistrationCertificateData data : dataList) {
+            registrationList.add(new RegistrationNumberDTO(Math.toIntExact(data.getId()), data.getRegistrationNumber()));
+        }
+        return registrationList;
+    }
+
+    @Override
+    public CarRecordInfoDTO getCarRecordInfoByRegistrationCertificateDataId(Long id) {
+        Optional<RegistrationCertificateData> data = this.registrationCertificateDataRepository.findById(id);
+        if (data.isEmpty()) {
+            throw new AppException("Data is not found!", HttpStatus.NOT_FOUND);
+        }
+        CarRecord carRecord = this.carRecordRepository.findByRegistrationCertificateData(data.get());
+
+        CarRecordInfoDTO carRecordInfoDTO = new CarRecordInfoDTO();
+        carRecordInfoDTO.setRegistrationNumber(data.get().getRegistrationNumber());
+        carRecordInfoDTO.setResponsible(carRecord.getResponsible().getFullName());
+        carRecordInfoDTO.setFuelType(String.valueOf(carRecord.getFuelType()));
+
+        List<Declaration> declarationList = this.declarationRepository.findAll();
+        Declaration lastDeclaration = declarationList.stream().sorted(Comparator.comparing(Declaration::getDate))
+                .toList().get(declarationList.size()-1);
+        carRecordInfoDTO.setLastMileage(lastDeclaration.getNewMileage());
+        return carRecordInfoDTO;
+    }
+
 }

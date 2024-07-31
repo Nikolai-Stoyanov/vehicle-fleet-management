@@ -8,8 +8,8 @@ import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarMo
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarModelListDTO;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarBrand;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.CarBrandRepository;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.CarModelRepository;
+import my.project.vehiclefleetmanagement.repository.CarBrandRepository;
+import my.project.vehiclefleetmanagement.repository.CarModelRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

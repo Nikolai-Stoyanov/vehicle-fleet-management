@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
-import my.project.vehiclefleetmanagement.model.entity.car.DeclarationFuel;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelSupplier;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "declarations")
@@ -18,20 +18,28 @@ import java.util.List;
 public class Declaration extends BaseEntity {
     @ManyToOne()
     private CarRecord carRecord;
-
     @Column(nullable = false)
     private LocalDate date;
-
     @Column(nullable = false)
     private String period;
-
     @Column( name = "last_mileage")
-    private long lastMileage;
-
+    private int lastMileage;
     @Column( name = "new_mileage")
-    private long newMileage;
-
-    @OneToMany(mappedBy = "declaration")
-    private List<DeclarationFuel> fuels;
-
+    private int newMileage;
+    @Column( name = "fuel_kind_id")
+    private long fuelKind;
+    @Column( name = "fuel_supplier_id")
+    private long fuelSupplier;
+    @Column( name = "fuel_amount")
+    private double fuelAmount;
+    @Column( name = "fuel_price")
+    private double fuelPrice;
+    @Column(name = "created_by")
+    private String createdBy;
+    @Column( name = "created_at")
+    private LocalDate createdAt;
+    @Column(name = "updated_by")
+    private String updatedBy;
+    @Column( name = "updated_at")
+    private LocalDate updatedAt;
 }

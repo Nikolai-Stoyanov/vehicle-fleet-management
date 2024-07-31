@@ -34,7 +34,6 @@ public class RegistrationCertificateDataDTO {
     private int seatingCapacity;
     @NotEmpty
     private String primaryColor;
-    @NotEmpty
     private String additionalColor;
     private int loadCapacity;
     @NotEmpty

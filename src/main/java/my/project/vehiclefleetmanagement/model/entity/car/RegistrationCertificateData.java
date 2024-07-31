@@ -42,7 +42,7 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(nullable = false,name = "engine_power")
     private int enginePower;
 
-    @Column(name = "seating_capacity")
+    @Column(nullable = false,name = "seating_capacity")
     private int seatingCapacity;
 
     @Column(nullable = false,name = "primary_color")
@@ -51,7 +51,7 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(name = "additional_color")
     private String additionalColor;
 
-    @Column(nullable = false,name = "load_capacity")
+    @Column(name = "load_capacity")
     private int loadCapacity;
 
     @Enumerated(EnumType.STRING)

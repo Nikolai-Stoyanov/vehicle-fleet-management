@@ -8,8 +8,8 @@ import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.F
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierListDTO;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelSupplier;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelRepository;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelSupplierRepository;
+import my.project.vehiclefleetmanagement.repository.FuelRepository;
+import my.project.vehiclefleetmanagement.repository.FuelSupplierRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

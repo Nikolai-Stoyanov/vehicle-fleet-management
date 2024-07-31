@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.entity.car.CarPerson;
-
-import java.time.LocalDate;
-import java.util.List;
+import my.project.vehiclefleetmanagement.model.dtos.car.carPerson.CarPersonDTO;
+import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
+import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierDTO;
 
 @Getter
 @Setter
@@ -15,12 +14,19 @@ import java.util.List;
 @AllArgsConstructor
 public class DeclarationDTO {
   private long id;
-  private long carRecordId;
   private String period;
-  private LocalDate date;
-  private long lastMileage;
-  private long newMileage;
-  private CarPerson responsible;
+  private String date;
+  private int lastMileage;
+  private int newMileage;
+  private String responsible;
   private String registrationNumber;
-  private List<DeclarationFuelDTO> fuelsList;
+  private String fuelType;
+  private FuelDTO fuelKind;
+  private FuelSupplierDTO fuelSupplier;
+  private double fuelAmount;
+  private double fuelPrice;
+  private String createdBy;
+  private String createdAt;
+  private String updatedBy;
+  private String updatedAt;
 }
