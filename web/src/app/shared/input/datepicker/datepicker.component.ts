@@ -40,6 +40,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() public showTime: any; // { nzFormat: 'HH:mm' }
   @Input() currentPickerValue!: any;
   @Input() disabled!: boolean;
+  @Input() mode: 'date' | 'week' | 'month' | 'quarter' | 'year'='date';
   today = new Date();
 
   public control!: AbstractControl | null;

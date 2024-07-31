@@ -100,5 +100,13 @@ export class CarRecordService {
   createRecords(body:any) {
     return this.http.post(`${this.endpoint}`, body);
   }
+
+  fetchAllRegistrationNumbers() {
+    return this.http.get<any>(`${this.endpoint}/registrationNumber`);
+  }
+
+  getCarRecordInfo(id:any) {
+    return this.http.get<any>(`${this.endpoint}/registrationCertificateData/${id}`);
+  }
 }
 

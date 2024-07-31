@@ -9,7 +9,7 @@ import {CarRecord} from "../car-records/car-record";
   providedIn: 'root'
 })
 export class DeclarationsService {
-  private readonly endpoint = '';
+  private readonly endpoint = '/declaration';
 
   public declarationListColumns  = [
     {
@@ -34,6 +34,16 @@ export class DeclarationsService {
     },
     {
       id: '3',
+      title: $localize`Date from`,
+      propsName: 'date',
+      width: '100px',
+      sortFn: (a: any, b: any) => a.date.localeCompare(b.date),
+      showSortFn: true,
+      type: 'date',
+      align: 'center'
+    },
+    {
+      id: '4',
       title: $localize`Responsible`,
       propsName: 'responsible',
       width: '100px',
@@ -43,7 +53,7 @@ export class DeclarationsService {
       align: 'center'
     },
     {
-      id: '4',
+      id: '5',
       title: $localize`Registration number`,
       propsName: 'registrationNumber',
       width: '100px',
@@ -55,86 +65,43 @@ export class DeclarationsService {
     },
     {
       id: '6',
-      title: $localize`Status`,
-      propsName: 'status',
+      title: $localize`Driver`,
+      propsName: 'driver',
       width: '100px',
-      sortFn: (a: any, b: any) => Number(a.status) - Number(b.status),
+      sortFn: (a: any, b: any) =>
+        a.driver.localeCompare(b.driver),
       showSortFn: true,
-      type: 'status',
-      align: 'center',
-      right: true
-    }
+      type: 'text',
+      align: 'center'
+    },
 
   ];
 
-  public declarationListData: DeclarationList[] = [
-    {
-      id: 1,
-      period: '2020-01',
-      responsible: 'Petar',
-      registrationNumber: 'C0505TT',
-      status: true,
-      carId:5
-    },
-    {
-      id: 2,
-      period: '2023-06',
-      responsible: 'Ivan',
-      registrationNumber: 'CC0654BB',
-      status: true,
-      carId:2
-    },
-    {
-      id: 3,
-      period: '2024-04',
-      responsible: 'Maria',
-      registrationNumber: 'CT2265AA',
-      status: true,
-      carId:3
-    },
-    {
-      id: 4,
-      period: '2024-02',
-      responsible: 'Petar',
-      registrationNumber: 'C0505TT',
-      status: true,
-      carId:5
-    },
-    {
-      id: 5,
-      period: '2020-03',
-      responsible: 'Petar',
-      registrationNumber: 'C0505TT',
-      status: true,
-      carId:5
-    },
-    {
-      id: 6,
-      period: '2020-01',
-      responsible: 'Gosho',
-      registrationNumber: 'B8874BB',
-      status: true,
-      carId:6
-    },
-  ];
 
   constructor(private http: HttpClient) {}
+
   public getColumns(): Observable<any> {
     return of(this.declarationListColumns);
   }
 
-  fetchLatest(): Observable<any> {
-    return of(this.declarationListData);
+
+  fetchLatestDeclarations() {
+    return this.http.get<any>(`${this.endpoint}`);
   }
 
-  public deleteDeclaration( brandId: number): Observable<any> {
-    return this.http.delete<any>(`${this.endpoint}/${brandId}`);
+  deleteDeclaration(id: number) {
+    return this.http.delete<any>(`${this.endpoint}/${id}`);
   }
-  // fetchLatest(): Observable<any> {
-  //   return this.http.get<any>(this.endpoint);
-  // }
 
   fetchDeclarationById(id: any) {
     return this.http.get<CarRecord>(`${this.endpoint}/${id}`);
+  }
+
+  updateDeclaration(id:any, body: any) {
+    return this.http.put(`${this.endpoint}/${id}`, body);
+  }
+
+  createDeclaration(body:any) {
+    return this.http.post(`${this.endpoint}`, body);
   }
 }

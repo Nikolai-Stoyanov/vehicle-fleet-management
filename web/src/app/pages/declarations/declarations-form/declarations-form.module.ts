@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import {NzModalComponent, NzModalContentDirective, NzModalService} from 'ng-zorro-antd/modal';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -24,6 +24,8 @@ import { FormsModule as LibFormModule } from '../../../shared/forms';
 
 
 import { DeclarationsFormComponent } from './declarations-form.component';
+import {DateTimeForBackendPipe, DateTimePipe} from "../../../shared/formatters";
+import {FuelService} from "../../nomenclatures/fuel/fuel.service";
 
 @NgModule({
   declarations: [DeclarationsFormComponent],
@@ -46,9 +48,11 @@ import { DeclarationsFormComponent } from './declarations-form.component';
     DatepickerModule,
     NumberInputModule,
     TextAreaModule,
-    SelectModule
+    SelectModule,
+    NzModalComponent,
+    NzModalContentDirective
   ],
   exports: [DeclarationsFormComponent],
-  providers: [NzModalService]
+  providers: [NzModalService,DateTimeForBackendPipe,FuelService,DateTimePipe]
 })
 export class DeclarationsFormModule {}

@@ -11,7 +11,7 @@
   </vfm-dummy-table-checkboxes>
   <div nz-row nzGutter="10"  style="margin: 0.5em;">
     <div nz-col>
-      <button nz-button nzType="default" type="button" id="addButton" (click)="editDeclaration()">
+      <button nz-button nzType="default" type="button" id="addButton" (click)="createModal()">
         <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
         <span i18n>Add declaration</span>
       </button>
@@ -42,5 +42,29 @@
         <span i18n>Delete</span>
       </button>
     </div>
+  </div>
+</div>
+
+<div nz-row>
+  <div nz-col nzSpan="24">
+    <nz-modal
+      [(nzVisible)]="createModalVisible"
+      nzTitle="Select registration number"
+      (nzOnCancel)="closeModal()"
+      [nzFooter]="footerTemplate"
+      i18n-nzTitle
+    >
+      <ng-template #footerTemplate>
+        <div style="text-align: center">
+          <button nz-button nzType="default" (click)="closeModal()" i18n>Cancel</button>
+          <button nz-button nzType="primary" (click)="editDeclaration()" [disabled]="!currentRegistrationNumber" i18n>Find</button>
+        </div>
+      </ng-template>
+      <vfm-form-item *nzModalContent>
+        <vfm-select id="currentRegistrationNumber" [(ngModel)]="currentRegistrationNumber"
+                    [options]="registrationNumberOptions" i18n>
+        </vfm-select>
+      </vfm-form-item>
+    </nz-modal>
   </div>
 </div>

@@ -18,6 +18,7 @@ import {CarPerson} from "../../nomenclatures/car-persons/car-person";
 import {FuelsPipe} from "../../../shared/formatters/fuels";
 import {VehicleTypePipe} from "../../../shared/formatters/vehicle-type";
 import {CategoryTypePipe} from "../../../shared/formatters/category-type";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'vfm-car-record-form',
@@ -38,6 +39,7 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private modal: NzModalRef,
+    private message: NzMessageService,
     private svc: CarRecordService,
     private carModelService: CarModelsService,
     private carPersonService: CarPersonsService,
@@ -64,131 +66,63 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
 
   private getForm() {
     this.form = this.fb.group({
-      id: this.fb.control({
-        value: this.currentItem?.id || null,
-        disabled: true,
-      }),
+      id: this.fb.control({value: this.currentItem?.id || null, disabled: true,}),
       drivingCategory: this.fb.control(
-        this.categoryTypePipe.transform(this.currentItem?.drivingCategory) || null,
-        Validators.required
-      ),
-      description: this.fb.control(
-        this.currentItem?.description || null
-      ),
+        this.categoryTypePipe.transform(this.currentItem?.drivingCategory) || null, Validators.required),
+      description: this.fb.control(this.currentItem?.description || null),
       registrationCertificateData: this.fb.group({
         registrationNumber: this.fb.control(
-          {
-            value: this.currentItem?.registrationCertificateData?.registrationNumber || null, disabled: this.currentItemId},
-          Validators.required
-        ),
+          {value: this.currentItem?.registrationCertificateData?.registrationNumber || null,
+            disabled: this.currentItemId}, Validators.required),
         firstRegistration: this.fb.control(
           this.dateTimePipe.transform(this.currentItem?.registrationCertificateData?.firstRegistration) || null,
-          Validators.required
-        ),
+          Validators.required),
         vehicleType: this.fb.control(
           this.vehicleTypePipe.transform(this.currentItem?.registrationCertificateData?.vehicleType) || null,
-          Validators.required
-        ),
+          Validators.required),
         brand: this.fb.control(
           {value: this.currentItem?.registrationCertificateData?.model?.brandName || null, disabled: true},
-          Validators.required
-        ),
+          Validators.required),
         model: this.fb.control(
           {value:this.currentItem?.registrationCertificateData?.model || null,disabled:this.currentItemId},
-          Validators.required
-        ),
+          Validators.required),
         seatingCapacity: this.fb.control(
-          this.currentItem?.registrationCertificateData?.seatingCapacity-1 || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.seatingCapacity-1 || null, Validators.required),
         frameNumber: this.fb.control(
-          this.currentItem?.registrationCertificateData?.frameNumber || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.frameNumber || null, Validators.required),
         engineNumber: this.fb.control(
-          this.currentItem?.registrationCertificateData?.engineNumber || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.engineNumber || null, Validators.required),
         horsePower: this.fb.control(
-          this.currentItem?.registrationCertificateData?.horsePower || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.horsePower || null, Validators.required),
         enginePower: this.fb.control(
-          this.currentItem?.registrationCertificateData?.enginePower || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.enginePower || null, Validators.required),
         engineVolume: this.fb.control(
-          this.currentItem?.registrationCertificateData?.engineVolume || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.engineVolume || null, Validators.required),
         primaryColor: this.fb.control(
-          this.currentItem?.registrationCertificateData?.primaryColor || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.primaryColor || null, Validators.required),
         additionalColor: this.fb.control(
-          this.currentItem?.registrationCertificateData?.additionalColor || null,
-          Validators.required
-        ),
+          this.currentItem?.registrationCertificateData?.additionalColor || null),
         loadCapacity: this.fb.control(
-          this.currentItem?.registrationCertificateData?.loadCapacity || null
-        )
+          this.currentItem?.registrationCertificateData?.loadCapacity || null)
       }),
-      owner: this.fb.control(
-        this.currentItem?.owner || null,
-        Validators.required
-      ),
-      department: this.fb.control(
-        this.currentItem?.department || null,
-        Validators.required
-      ),
-      stay: this.fb.control(
-        this.currentItem?.stay || null,
-        Validators.required
-      ),
+      owner: this.fb.control(this.currentItem?.owner || null, Validators.required),
+      department: this.fb.control(this.currentItem?.department || null, Validators.required),
+      stay: this.fb.control(this.currentItem?.stay || null, Validators.required),
       responsible: this.fb.control(
-        {value:this.currentItem?.responsible || null,disabled:this.currentItemId},
-        Validators.required
-      ),
+        {value:this.currentItem?.responsible || null,disabled:this.currentItemId}, Validators.required),
       driver: this.fb.control(
-        {value:this.currentItem?.driver || null,disabled:this.currentItemId},
-        Validators.required
-      ),
-
-      totalMileage: this.fb.control(
-        this.currentItem?.totalMileage || null,
-        Validators.required
-      ),
+        {value:this.currentItem?.driver || null,disabled:this.currentItemId}, Validators.required),
+      totalMileage: this.fb.control(this.currentItem?.totalMileage || null, Validators.required),
       developmentFromMileage: this.fb.control(
-        this.currentItem?.developmentFromMileage || null,
-        Validators.required
-      ),
-      developmentToMileage: this.fb.control(
-        this.currentItem?.developmentToMileage || null,
-        Validators.required
-      ),
-      status: this.fb.control(
-        this.currentItem?.status || null,
-        Validators.required
-      ),
-      fuelCard: this.fb.control(
-        this.currentItem?.fuelCard || null,
-        Validators.required
-      ),
-      fuelType: this.fb.control(this.fuelPipe.transform(this.currentItem?.fuelType) || null,
-        Validators.required),
-
-      createdBy: this.fb.control(
-        {value: this.currentItem?.createdBy || null, disabled: true}
-      ),
-      createdAt: this.fb.control(
-        {value: this.dateTimePipe.transform(this.currentItem?.createdAt) || null, disabled: true}
-      ),
-      updatedBy: this.fb.control(
-        {value: this.currentItem?.updatedBy || null, disabled: true}
-      ),
-      updatedAt: this.fb.control(
-        {value: this.dateTimePipe.transform(this.currentItem?.updatedAt) || null, disabled: true}
-      ),
+        this.currentItem?.developmentFromMileage || null, Validators.required),
+      developmentToMileage: this.fb.control(this.currentItem?.developmentToMileage || null, Validators.required),
+      status: this.fb.control(this.currentItem?.status || null, Validators.required),
+      fuelCard: this.fb.control(this.currentItem?.fuelCard || null, Validators.required),
+      fuelType: this.fb.control(this.fuelPipe.transform(this.currentItem?.fuelType) || null, Validators.required),
+      createdBy: this.fb.control({value: this.currentItem?.createdBy || null, disabled: true}),
+      createdAt: this.fb.control({value: this.dateTimePipe.transform(this.currentItem?.createdAt) || null, disabled: true}),
+      updatedBy: this.fb.control({value: this.currentItem?.updatedBy || null, disabled: true}),
+      updatedAt: this.fb.control({value: this.dateTimePipe.transform(this.currentItem?.updatedAt) || null, disabled: true}),
     });
 
     this.form.controls['registrationCertificateData'].get('model')?.valueChanges.subscribe(res => {
@@ -218,19 +152,23 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
         form.updatedAt = this.dateForBackendPipe.transform(this.form.value['updatedAt']);
       }
       const sub1 = this.svc.updateRecords(this.currentItemId, form).subscribe({
-        next: () => {
+        next: (res:any) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
-        error: () => {
+        error: (error) => {
+          this.message.error(error.status + ' ' + error.error.message);
         }
       });
       this.subscriptions.push(sub1);
     } else {
       const sub2 = this.svc.createRecords(form).subscribe({
-        next: () => {
+        next: (res:any) => {
+          this.message.success(res.message);
           this.modal.destroy();
         },
-        error: () => {
+        error: (error) => {
+          this.message.error(error.status + ' ' + error.error.message);
         }
       });
       this.subscriptions.push(sub2);
@@ -238,19 +176,15 @@ export class CarRecordFormComponent implements OnInit, OnDestroy {
   }
 
   private getOptions() {
-
-
     this.carModelService.fetchLatest().subscribe((res) => {
       res.forEach((item: any) => {
         this.carModelOptions.push({value: item, label: item.name});
       })
-
     })
     this.carPersonService.fetchLatest().subscribe((res) => {
       res.forEach((item: CarPerson) => {
         this.carPersonOptions.push({value: item, label: item.fullName});
       })
-
     })
   }
 
