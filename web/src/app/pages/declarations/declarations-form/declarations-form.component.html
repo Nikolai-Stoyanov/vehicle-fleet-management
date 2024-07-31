@@ -2,7 +2,7 @@
   <nz-card style="margin: 0.5em 0">
     <div nz-row nzGutter="24">
       <div nz-col nzSpan="6">
-        <vfm-form-item label="Id" labelSpan="6" controlSpan="18" i18n-label>
+        <vfm-form-item label="Id"  i18n-label>
           <vfm-text-input
             id="id"
             formControlName="id"
@@ -10,143 +10,97 @@
         </vfm-form-item>
       </div>
       <div nz-col nzSpan="6">
-        <vfm-form-item label="Date from" labelSpan="8" controlSpan="16" i18n-label>
-          <vfm-datepicker
-            id="dateFrom"
-            formControlName="dateFrom"
-          ></vfm-datepicker>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="6">
-        <vfm-form-item label="Period" labelSpan="8" controlSpan="16" i18n-label>
-          <vfm-text-input id="period" formControlName="period"></vfm-text-input>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="6">
-        <vfm-form-item label="Old report(km)" labelSpan="12" controlSpan="12" i18n-label>
-          <vfm-text-input id="oldReport" formControlName="oldReport"></vfm-text-input>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="6">
-        <vfm-form-item label="Responsible" labelSpan="12" controlSpan="12" i18n-label>
-          <vfm-text-input id="responsible" formControlName="responsible"></vfm-text-input>
-        </vfm-form-item>
-      </div>
-      <div nz-col nzSpan="8">
-        <vfm-form-item label="Registration number" labelSpan="12" controlSpan="12" i18n-label>
+        <vfm-form-item label="Registration number"  i18n-label>
           <vfm-text-input id="registrationNumber" formControlName="registrationNumber"></vfm-text-input>
         </vfm-form-item>
       </div>
       <div nz-col nzSpan="6">
-        <vfm-form-item label="New report(km)" labelSpan="12" controlSpan="12" i18n-label>
-          <vfm-text-input id="newReport" formControlName="newReport"></vfm-text-input>
+        <vfm-form-item label="Responsible"  i18n-label>
+          <vfm-text-input id="responsible" formControlName="responsible"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Old report(km)"  i18n-label>
+          <vfm-text-input id="lastMileage" formControlName="lastMileage"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Date from"  i18n-label>
+          <vfm-datepicker
+            id="date"
+            formControlName="date"
+          ></vfm-datepicker>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Period"  i18n-label>
+          <vfm-datepicker
+            id="period"
+            formControlName="period"
+            mode="month"
+            format="MMM.yyyy"
+          ></vfm-datepicker>
         </vfm-form-item>
       </div>
 
-      <div nz-col nzSpan="4">
-        <vfm-form-item label="Mileage" labelSpan="12" controlSpan="12" i18n-label>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="New report(km)"  i18n-label>
+          <vfm-text-input id="newMileage" formControlName="newMileage"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Mileage"  i18n-label>
           <vfm-text-input id="mileage" formControlName="mileage"></vfm-text-input>
         </vfm-form-item>
       </div>
     </div>
   </nz-card>
   <nz-card
-    nzTitle="Distribution by fuel types"
+    nzTitle="Fuel loaded"
     [nzSize]="'small'"
     [nzBodyStyle]="{ padding: '10px 15px' }"
     i18n-nzTitle
   >
-    <div
-      formArrayName="fuels"
-      *ngIf="form.value['fuels'].length > 0"
-    >
-      <div
-        nz-col
-        nzSpan="24"
-        class="container"
-        *ngFor="
-              let item of getFuelOptionsControls;
-              index as fuelOptionIndex
-            "
-      >
-        <div nz-row [formGroupName]="fuelOptionIndex" nzGutter="10">
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Type" i18n-label>
-              <vfm-text-input
-                id="type{{ fuelOptionIndex }}"
-                formControlName="type"
-              >
-              </vfm-text-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Tank volume" i18n-label>
-              <vfm-number-input
-                id="tankCapacity{{ fuelOptionIndex }}"
-                formControlName="tankCapacity"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Fuel remaining" i18n-label>
-              <vfm-number-input
-                id="fuelRemaining{{ fuelOptionIndex }}"
-                formControlName="fuelRemaining"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Fuel consumption" i18n-label>
-              <vfm-number-input
-                id="fuelConsumption{{ fuelOptionIndex }}"
-                formControlName="fuelConsumption"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Mileage" i18n-label>
-              <vfm-number-input
-                id="mileage{{ fuelOptionIndex }}"
-                formControlName="mileage"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Distance limit" i18n-label>
-              <vfm-number-input
-                id="distanceLimit{{ fuelOptionIndex }}"
-                formControlName="distanceLimit"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Distance remaining" i18n-label>
-              <vfm-number-input
-                id="distanceRemaining{{ fuelOptionIndex }}"
-                formControlName="distanceRemaining"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-          <div nz-col nzSpan="3">
-            <vfm-form-item label="Money limit" i18n-label>
-              <vfm-number-input
-                id="moneyLimit{{ fuelOptionIndex }}"
-                formControlName="moneyLimit"
-              >
-              </vfm-number-input>
-            </vfm-form-item>
-          </div>
-        </div>
+    <div nz-row nzGutter="10">
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Type" i18n-label>
+          <vfm-text-input
+            id="fuelType"
+            formControlName="fuelType"
+          >
+          </vfm-text-input>
+        </vfm-form-item>
       </div>
-    </div>
-    <div nz-col nzSpan="24" *ngIf="form.value['fuels'].length === 0">
-      Empty
+      <div nz-col nzSpan="6">
+        <vfm-form-item label="Kind" i18n-label>
+          <vfm-select id="fuelKind" formControlName="fuelKind" [options]="fuelKindOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="5">
+        <vfm-form-item label="Supplier" i18n-label>
+          <vfm-select id="fuelSupplier" formControlName="fuelSupplier" [options]="fuelSupplierOptions" i18n>
+          </vfm-select>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Amount" i18n-label>
+          <vfm-number-input
+            id="fuelAmount"
+            formControlName="fuelAmount"
+          >
+          </vfm-number-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="4">
+        <vfm-form-item label="Price" i18n-label>
+          <vfm-number-input
+            id="fuelPrice"
+            formControlName="fuelPrice"
+          >
+          </vfm-number-input>
+        </vfm-form-item>
+      </div>
     </div>
   </nz-card>
   <div nz-row nzGutter="12">
@@ -161,24 +115,24 @@
     <div nz-col nzSpan="6">
       <vfm-form-item label="Created date" controlSpan="24" i18n-label>
         <vfm-text-input
-          id="createdDate"
-          formControlName="createdDate"
+          id="createdAt"
+          formControlName="createdAt"
         ></vfm-text-input>
       </vfm-form-item>
     </div>
     <div nz-col nzSpan="6">
       <vfm-form-item label="Modify by" controlSpan="24" i18n-label>
         <vfm-text-input
-          id="modifyBy"
-          formControlName="modifyBy"
+          id="updatedBy"
+          formControlName="updatedBy"
         ></vfm-text-input>
       </vfm-form-item>
     </div>
     <div nz-col nzSpan="6">
       <vfm-form-item label="Modify date" controlSpan="24" i18n-label>
         <vfm-text-input
-          id="modifyDate"
-          formControlName="modifyDate"
+          id="updatedAt"
+          formControlName="updatedAt"
         ></vfm-text-input>
       </vfm-form-item>
     </div>
@@ -194,3 +148,5 @@
     </div>
   </div>
 </form>
+
+

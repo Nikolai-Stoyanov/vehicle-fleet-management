@@ -56,6 +56,15 @@ const routes: Routes = [
         },
       },
       {
+        path: 'car-persons',
+        loadChildren: () => import('../pages/nomenclatures/car-persons').then((m) => m.CarPersonsModule),
+        canActivate: [PermissionGuard],
+        data: {
+          expectedPermission: ['USER','ADMIN'],
+          module: $localize`Car persons`
+        },
+      },
+      {
         path: 'car-record',
         loadChildren: () => import('../pages/car-records').then((m) => m.CarRecordModule),
         canActivate: [PermissionGuard],

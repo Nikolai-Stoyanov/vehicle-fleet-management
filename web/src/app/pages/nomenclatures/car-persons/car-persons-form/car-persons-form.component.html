@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+  <nz-card>
+    <div nz-row nzGutter="24">
+      <div nz-col nzSpan="12">
+        <vfm-form-item label="ID" controlSpan="16" labelSpan="8" i18n-label>
+          <vfm-text-input id="id" formControlName="id"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <vfm-form-item label="First name" controlSpan="16" labelSpan="8" i18n-label>
+          <vfm-text-input id="firstName" formControlName="firstName"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <vfm-form-item label="Last name" controlSpan="16" labelSpan="8" i18n-label>
+          <vfm-text-input id="lastName" formControlName="lastName"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <vfm-form-item label="Phone number" controlSpan="16" labelSpan="8" i18n-label>
+          <vfm-text-input id="phoneNumber" formControlName="phoneNumber"></vfm-text-input>
+        </vfm-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <vfm-form-item controlSpan="16" labelSpan="8">
+          <label nz-checkbox id="status" formControlName="status"  i18n
+            >Active</label
+          >
+        </vfm-form-item>
+      </div>
+    </div>
+  </nz-card>
+
+  <div nz-row nzGutter="20" nzJustify="end" style="margin: 10px">
+    <div nz-col>
+      <button nz-button type="submit" nzType="primary" *ngIf="form.getRawValue().id" i18n>
+        Edit
+      </button>
+      <button nz-button type="submit" nzType="primary" *ngIf="!form.getRawValue().id" i18n>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

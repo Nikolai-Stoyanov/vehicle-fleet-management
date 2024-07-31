@@ -8,7 +8,7 @@ import { DeclarationsService } from '../declarations.service';
 import {DeclarationList} from "../declarations";
 
 import { TableColumnInterface } from '../../../shared/dummy-table';
-import {RegistrationNumberService} from "../../../shared/services";
+import {CarRecordService} from "../../car-records/car-record.service";
 
 @Component({
   selector: 'vfm-declarations-list',
@@ -29,7 +29,7 @@ export class DeclarationsListComponent implements OnInit {
     private svc: DeclarationsService,
     private message: NzMessageService,
     private modalService: NzModalService,
-    private registrationNumberService: RegistrationNumberService,
+    private carRecordService: CarRecordService,
   ) {}
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class DeclarationsListComponent implements OnInit {
     });
 
     this.loading = true;
-    this.svc.fetchLatest().subscribe((res) => {
+    this.svc.fetchLatestDeclarations().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
     });
@@ -49,8 +49,9 @@ export class DeclarationsListComponent implements OnInit {
     if (item) {
       title = $localize`Edit declaration for: ${item.registrationNumber}`;
     } else {
-      title = $localize`New declaration (${this.currentRegistrationNumber.registrationNumber}) `;
+      title = $localize`New declaration for ${this.currentRegistrationNumber.registrationNumber}`;
     }
+
     this.createModalVisible=false
     const modal = this.modalService.create({
       nzTitle: title,
@@ -59,14 +60,14 @@ export class DeclarationsListComponent implements OnInit {
       nzStyle: { top: '0' },
       nzData: {
         currentId: item?.id,
-        registrationNumber: this.currentRegistrationNumber,
+        registrationNumberObject: this.currentRegistrationNumber
       },
       nzFooter: null,
     });
     modal.afterClose.subscribe((res) => {
-      if (res) {
-        this.message.info($localize`Функцията не е имплементирана!`);
-      }
+      this.svc.fetchLatestDeclarations().subscribe((res:DeclarationList[]) => {
+        this.currentItems = res;
+      });
     });
   }
 
@@ -78,16 +79,14 @@ export class DeclarationsListComponent implements OnInit {
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteDeclaration(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', $localize`Declaration successfully deleted.`);
-            this.svc.fetchLatest();
+          next: (res) => {
+            this.message.success(res.message);
+            this.svc.fetchLatestDeclarations().subscribe((res:DeclarationList[]) => {
+              this.currentItems = res;
+            });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error($localize`Declaration not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },
@@ -106,19 +105,20 @@ export class DeclarationsListComponent implements OnInit {
   }
 
   createModal() {
-      this.registrationNumberService.fetchAllNumber().subscribe((res:any)=>{
-        res.forEach((item:any )=> {
-          this.registrationNumberOptions.push({
-            label:item.registrationNumber,value:item
-          })
-          this.createModalVisible=true
+    this.carRecordService.fetchAllRegistrationNumbers().subscribe((res:any)=>{
+      res.forEach((item:any )=> {
+        this.registrationNumberOptions.push({
+          label:item.registrationNumber,value:item
         })
-
+        this.createModalVisible=true
       })
+
+    })
   }
 
   closeModal() {
     this.createModalVisible=false
     this.currentRegistrationNumber=null;
+    this.registrationNumberOptions=[]
   }
 }

@@ -52,7 +52,7 @@ export class CarRecordListComponent implements OnInit {
       nzWidth: '75vw',
       nzStyle: { top: '0' },
       nzData: {
-        currentItem: item?.id,
+        id: item?.id,
       },
       nzFooter: null,
     });
@@ -71,18 +71,14 @@ export class CarRecordListComponent implements OnInit {
 
       nzOnOk: () => {
         const sub2 = this.svc.deleteRecord(this.currentItem?.id).subscribe({
-          next: () => {
-            this.message.create('success', $localize`Car record successfully deleted.`);
+          next: (res) => {
+            this.message.success(res.message);
             this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
               this.currentItems = res;
             });
           },
           error: (error) => {
-            if (error.status === 404) {
-              this.message.error($localize`Record not found`);
-            } else {
-              this.message.error(error);
-            }
+            this.message.error(error.status + ' ' + error.error.message);
           }
         });
       },

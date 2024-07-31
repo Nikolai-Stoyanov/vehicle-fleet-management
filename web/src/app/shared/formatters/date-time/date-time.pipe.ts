@@ -4,7 +4,7 @@ import {format} from 'date-fns';
 
 @Pipe({ name: 'vfmDateTime' })
 export class DateTimePipe implements PipeTransform {
-  public transform(value: string): string|null {
+  public transform(value: string): string|null|Date {
     if (value == null || value === '' || value !== value) return null;
 
     if (value.toString().indexOf('[') !== -1) {
@@ -12,8 +12,9 @@ export class DateTimePipe implements PipeTransform {
       return format(new Date(date),'dd.MM.yyyy');
     }
     if (value.toString().indexOf('-') > 0) {
-      return format(new Date(value),'dd.MM.yyyy');
+      return value;
     }
+
     return format(new Date(value),'dd.MM.yyyy');
   }
 }

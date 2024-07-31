@@ -47,7 +47,7 @@ export class CarModelsService {
     {
       id: '4',
       title: $localize`Brand`,
-      propsName: 'brand',
+      propsName: 'brandName',
       width: '130px',
       sortFn: (a: any, b: any) =>
         a.brand.localeCompare(b.brand),

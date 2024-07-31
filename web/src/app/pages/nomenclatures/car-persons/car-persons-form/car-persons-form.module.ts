@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import {NzModalComponent, NzModalContentDirective, NzModalService} from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -14,21 +14,18 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 
-import {
-  DatepickerModule,
-  TextInputModule,
-  NumberInputModule,
-  TextAreaModule, SelectModule
-} from '../../../shared/input';
-import { FormsModule as LibFormModule } from '../../../shared/forms';
 
-
-import { DeclarationsFormComponent } from './declarations-form.component';
-import {DateTimeForBackendPipe, DateTimePipe} from "../../../shared/formatters";
-import {FuelService} from "../../nomenclatures/fuel/fuel.service";
+import { CarPersonsFormComponent } from './car-persons-form.component';
+import {FormsModule as SharedFormsModule} from "../../../../shared/forms";
+import {TextInputModule} from "../../../../shared/input";
+import {DatepickerModule} from "../../../../shared/input";
+import {SelectModule} from "../../../../shared/input";
+import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
+import {DateTimeForBackendPipe, DateTimeModule} from "../../../../shared/formatters";
+import {DateTimePipe} from "../../../../shared/formatters";
 
 @NgModule({
-  declarations: [DeclarationsFormComponent],
+  declarations: [CarPersonsFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,16 +40,14 @@ import {FuelService} from "../../nomenclatures/fuel/fuel.service";
     NzCardModule,
     NzDescriptionsModule,
     NzSpaceModule,
+    SharedFormsModule,
     TextInputModule,
-    LibFormModule,
     DatepickerModule,
-    NumberInputModule,
-    TextAreaModule,
     SelectModule,
-    NzModalComponent,
-    NzModalContentDirective
+    NzDatePickerComponent,
+    DateTimeModule
   ],
-  exports: [DeclarationsFormComponent],
-  providers: [NzModalService,DateTimeForBackendPipe,FuelService,DateTimePipe]
+  exports: [CarPersonsFormComponent],
+  providers: [NzModalService,DateTimePipe,DateTimeForBackendPipe]
 })
-export class DeclarationsFormModule {}
+export class CarPersonsFormModule {}

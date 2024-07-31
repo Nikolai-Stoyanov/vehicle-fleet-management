@@ -27,9 +27,9 @@ export interface CarRecord {
   primaryColor: string;
   additionalColor: string;
   loadCapacity: number;
-  ownerName:Owner;
+
   department: string;
-  headquarters:Headquarter
+
   stay: string;
   totalMileage: number;
   developmentFromMileage: number;
@@ -57,22 +57,41 @@ export interface Fuel {
 
 export enum Fuels{
 
-  DIESEL= `Disel`, LPG= `LPG`, GASOLINE= `Gasoline`, METHANOL= `Methanol`,
-}
-
-export enum Headquarter{
-HEADQUARTER1='Headquarter 1',HEADQUARTER2='Headquarter 2',HEADQUARTER3='Headquarter 3',HEADQUARTER4='Headquarter 4',HEADQUARTER5='Headquarter 5'
-}
-
-export enum Owner{
-FIRSTOWNER='First owner',SECONDOWNER='Second owner',THIRDOWNER='Third owner',FOURTHOWNER='Fourth owner'
+  // @ts-ignore
+  DIESEL= $localize`diesel`, LPG= $localize`LPG`, GASOLINE= $localize`gasoline`, METHANOL= $localize`methanol`,
 }
 
 export enum VehicleType{
 
-  CAR=`Car`, TRUCK= `Truck`
+  // @ts-ignore
+  CAR=$localize`CAR`, TRUCK= $localize`TRUCK`
 }
 
 export enum DrivingCategoryType{
   AM='AM', A1='A1', A2='A2', A='A', B1='B1', B='B', C1='C1', C='C', D1='D1', D='D', BE='BE', C1E='C1E', D1E='D1E', DE='DE', Ttm='Ttm', Tkt='Tkt'
 }
+
+export const FUELOPTIONS = [
+  {value: {id:1,name:Fuels.DIESEL}, label: Fuels.DIESEL},
+  {value: {id:2,name:Fuels.GASOLINE}, label: Fuels.GASOLINE},
+  {value: {id:3,name:Fuels.LPG}, label: Fuels.LPG},
+  {value: {id:4,name:Fuels.METHANOL}, label: Fuels.METHANOL},
+];
+
+export const VEHICLEOPTIONS = [
+  {value: {id:1,name:VehicleType.CAR}, label: VehicleType.CAR},
+  {value: {id:2,name:VehicleType.TRUCK}, label: VehicleType.TRUCK},
+];
+
+export const CATEGORYOPTIONS = [
+  {value: {id:1,name:DrivingCategoryType.A}, label: DrivingCategoryType.A},
+  {value: {id:2,name:DrivingCategoryType.B}, label: DrivingCategoryType.B},
+  {value: {id:3,name:DrivingCategoryType.BE}, label: DrivingCategoryType.BE},
+  {value: {id:4,name:DrivingCategoryType.C}, label: DrivingCategoryType.C},
+  {value: {id:5,name:DrivingCategoryType.C1E}, label: DrivingCategoryType.C1E},
+  {value: {id:6,name:DrivingCategoryType.D}, label: DrivingCategoryType.D},
+  {value: {id:7,name:DrivingCategoryType.D1E}, label: DrivingCategoryType.D1E},
+  {value: {id:8,name:DrivingCategoryType.DE}, label: DrivingCategoryType.DE},
+  {value: {id:9,name:DrivingCategoryType.Ttm}, label: DrivingCategoryType.Ttm},
+  {value: {id:10,name:DrivingCategoryType.Tkt}, label: DrivingCategoryType.Tkt},
+];

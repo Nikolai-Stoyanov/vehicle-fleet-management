@@ -16,42 +16,42 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 import { FormsModule as LibFormModule } from '../../../shared/forms';
 
-import { ReferenceListModule } from '../../../shared/reference-list/reference-list.module';
-
-
 import { CarRecordFormComponent } from './car-record-form.component';
 import {FormsModule as SharedForms} from "../../../shared/forms";
 import {DatepickerModule, NumberInputModule, SelectModule, TextInputModule} from "../../../shared/input";
+import {DateTimeForBackendPipe, DateTimePipe} from "../../../shared/formatters";
+import {FuelsPipe} from "../../../shared/formatters/fuels";
+import {VehicleTypePipe} from "../../../shared/formatters/vehicle-type";
+import {CategoryTypePipe} from "../../../shared/formatters/category-type";
 
 @NgModule({
   declarations: [CarRecordFormComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NzGridModule,
-    NzButtonModule,
-    NzIconModule,
-    NzCheckboxModule,
-    NzInputModule,
-    NzToolTipModule,
-    NzDividerModule,
-    NzCardModule,
-    NzDescriptionsModule,
-    NzSpaceModule,
-    TextInputModule,
-    LibFormModule,
-    DatepickerModule,
-    NumberInputModule,
-    ReferenceListModule,
-    SharedForms,
-    FormsModule,
-    TextInputModule,
-    NumberInputModule,
-    DatepickerModule,
-    SelectModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NzGridModule,
+        NzButtonModule,
+        NzIconModule,
+        NzCheckboxModule,
+        NzInputModule,
+        NzToolTipModule,
+        NzDividerModule,
+        NzCardModule,
+        NzDescriptionsModule,
+        NzSpaceModule,
+        TextInputModule,
+        LibFormModule,
+        DatepickerModule,
+        NumberInputModule,
+        SharedForms,
+        FormsModule,
+        TextInputModule,
+        NumberInputModule,
+        DatepickerModule,
+        SelectModule,
+    ],
   exports: [CarRecordFormComponent],
-  providers: [NzModalService]
+  providers: [NzModalService,DateTimeForBackendPipe,DateTimePipe,FuelsPipe,VehicleTypePipe,CategoryTypePipe]
 })
 export class CarRecordFormModule {}

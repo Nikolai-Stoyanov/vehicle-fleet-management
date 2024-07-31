@@ -35,7 +35,7 @@ export class CarRecordService {
     {
       id: '3',
       title: $localize`Brand`,
-      propsName: 'brand',
+      propsName: 'carBrand',
       width: '100px',
       sortFn: (a: any, b: any) => a.brand.localeCompare(b.brand),
       showSortFn: true,
@@ -44,7 +44,7 @@ export class CarRecordService {
     {
       id: '4',
       title: $localize`Model`,
-      propsName: 'model',
+      propsName: 'carModel',
       width: '100px',
       sortFn: (a: any, b: any) => a.model.localeCompare(b.model),
       showSortFn: true,
@@ -71,41 +71,6 @@ export class CarRecordService {
 
   ];
 
-  public carRecords: CarRecordList[] = [
-    {
-      id: 1,
-      registrationNumber: 'В0011ВВ',
-      brand: 'Skoda',
-      model: 'Octavia',
-      owner: 'Firm1',
-      status: Status.ACTIVE
-    },
-    {
-      id: 2,
-      registrationNumber: 'В9595СТ',
-      brand: 'Dacia',
-      model: 'Sandero',
-      owner: 'Firm2',
-      status: Status.ACTIVE
-    },
-    {
-      id: 3,
-      registrationNumber: 'В6632АС',
-      brand: 'Ford',
-      model: 'Transit',
-      owner: 'Firm2',
-      status: Status.ACTIVE
-    },
-    {
-      id: 4,
-      registrationNumber: 'В5215ТС',
-      brand: 'Toyota',
-      model: 'Hilux',
-      owner: 'Firm3',
-      status: Status.ACTIVE
-    }
-  ]
-
   constructor(private http: HttpClient) {
   }
 
@@ -128,12 +93,20 @@ export class CarRecordService {
     return this.http.get<CarRecord>(`${this.endpoint}/${id}`);
   }
 
-  updateRecords(id:number, body: any) {
+  updateRecords(id:any, body: any) {
     return this.http.put(`${this.endpoint}/${id}`, body);
   }
 
   createRecords(body:any) {
     return this.http.post(`${this.endpoint}`, body);
+  }
+
+  fetchAllRegistrationNumbers() {
+    return this.http.get<any>(`${this.endpoint}/registrationNumber`);
+  }
+
+  getCarRecordInfo(id:any) {
+    return this.http.get<any>(`${this.endpoint}/registrationCertificateData/${id}`);
   }
 }
 
