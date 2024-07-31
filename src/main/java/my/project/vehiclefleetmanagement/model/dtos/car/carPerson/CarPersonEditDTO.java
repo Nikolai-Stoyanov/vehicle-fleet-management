@@ -16,8 +16,11 @@ public class CarPersonEditDTO {
   @NotEmpty
   private long id;
   @NotEmpty
-  @Size(min = 5, max = 20)
-  private String name;
+  @Size(min = 3, max = 20)
+  private String firstName;
+  @NotEmpty
+  @Size(min = 3, max = 20)
+  private String lastName;
   @NotEmpty
   private String phoneNumber;
   @NotEmpty

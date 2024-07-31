@@ -16,6 +16,6 @@ public class CarModelListDTO {
   private String name;
   private String description;
   private LocalDate year;
-  private String brand;
+  private String brandName;
   private boolean status;
 }

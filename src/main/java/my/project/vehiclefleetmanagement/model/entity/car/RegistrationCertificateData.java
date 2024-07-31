@@ -17,9 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RegistrationCertificateData extends BaseEntity {
 
-    @Column(name = "registration_number")
-    @OneToMany(mappedBy = "registrationCertificateData")
-    private List<RegistrationNumber> registrationNumbers;
+    @Column(name = "registration_number",unique = true,nullable = false)
+    private String registrationNumber;
+
+    @Column(name = "first_registration",nullable = false)
+    private LocalDate firstRegistration;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "model_id")
@@ -51,9 +53,6 @@ public class RegistrationCertificateData extends BaseEntity {
 
     @Column(nullable = false,name = "load_capacity")
     private int loadCapacity;
-
-    @Column(nullable = false,name = "first_registration_date")
-    private LocalDate firstRegistrationDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "vehicle_type")

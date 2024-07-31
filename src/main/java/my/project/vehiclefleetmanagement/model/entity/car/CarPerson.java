@@ -11,16 +11,22 @@ import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 @AllArgsConstructor
 public class CarPerson extends BaseEntity {
 
-    @Column(nullable = false)
-    private String name;
+    @Column(nullable = false,name = "first_name")
+    private String firstName;
 
-    @Column(nullable = false, name = "phone_number")
+    @Column(nullable = false,name = "last_name")
+    private String lastName;
+
+    @Column(nullable = false, name = "phone_number",unique = true)
     private String phoneNumber;
 
     @Column(nullable = false)
     private boolean status;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @Transient
+    private String FullName;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

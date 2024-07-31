@@ -1,11 +1,10 @@
 package my.project.vehiclefleetmanagement.model.dtos.declaration;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.entity.car.DeclarationFuel;
+import my.project.vehiclefleetmanagement.model.entity.car.CarPerson;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +20,7 @@ public class DeclarationDTO {
   private LocalDate date;
   private long lastMileage;
   private long newMileage;
-  private String responsible;
+  private CarPerson responsible;
   private String registrationNumber;
   private List<DeclarationFuelDTO> fuelsList;
 }

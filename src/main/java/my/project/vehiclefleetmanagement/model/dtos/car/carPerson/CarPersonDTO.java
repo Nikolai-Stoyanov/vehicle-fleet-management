@@ -11,7 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CarPersonDTO {
   private int id;
-  private String name;
+  private String firstName;
+  private String lastName;
   private String phoneNumber;
+  private String FullName;
   private boolean status;
 }
