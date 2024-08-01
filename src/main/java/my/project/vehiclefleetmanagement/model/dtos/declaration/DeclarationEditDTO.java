@@ -6,10 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
-import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierDTO;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter

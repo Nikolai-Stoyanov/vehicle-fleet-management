@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -76,6 +77,14 @@ public class FuelServiceImpl implements FuelService {
         if (optionalFuel.isEmpty()) {
             throw new AppException("Fuel is not found!", HttpStatus.NOT_FOUND);
         }
+
+        Optional<FuelEntity> fuelByName = this.fuelRepository.findByName(fuelEditDTO.getName());
+        if (!Objects.equals(fuelEditDTO.getName(), optionalFuel.get().getName()) && fuelByName.isPresent()) {
+            throw new AppException(
+                    String.format("Fuel with name %s is already exists!",fuelEditDTO.getName()),
+                    HttpStatus.BAD_REQUEST);
+        }
+
         FuelEntity mappedEntity = modelMapper.map(fuelEditDTO, FuelEntity.class);
         this.fuelRepository.save(mappedEntity);
         throw new AppException("Fuel successfully updated!", HttpStatus.OK);

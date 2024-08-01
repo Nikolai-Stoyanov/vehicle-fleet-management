@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -101,6 +102,14 @@ public class FuelSupplierServiceImpl implements FuelSupplierService {
         if (fuelSupplierOptional.isEmpty()) {
             throw new AppException("Fuel supplier is not found!", HttpStatus.NOT_FOUND);
         }
+
+        Optional<FuelSupplier> fuelSupplierByName = this.fuelSupplierRepository.findByName(fuelSupplierEditDTO.getName());
+        if (!Objects.equals(fuelSupplierEditDTO.getName(), fuelSupplierOptional.get().getName()) && fuelSupplierByName.isPresent()) {
+            throw new AppException(
+                    String.format("Fuel supplier with name %s already exists!",fuelSupplierEditDTO.getName()),
+                    HttpStatus.BAD_REQUEST);
+        }
+
         FuelSupplier mappedEntity = modelMapper.map(fuelSupplierEditDTO, FuelSupplier.class);
         List<FuelEntity> fuelEntities = new ArrayList<>();
         for (long fuelId : fuelSupplierEditDTO.getFuelList()) {

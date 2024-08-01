@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarModelListDTO;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter

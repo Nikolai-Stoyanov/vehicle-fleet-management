@@ -7,7 +7,6 @@ import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
 import my.project.vehiclefleetmanagement.model.enums.VehicleTypeEnum;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "registration_certificate_data")

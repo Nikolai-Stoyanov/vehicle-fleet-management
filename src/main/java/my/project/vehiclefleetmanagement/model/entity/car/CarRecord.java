@@ -7,7 +7,6 @@ import my.project.vehiclefleetmanagement.model.enums.DrivingCategoryType;
 import my.project.vehiclefleetmanagement.model.enums.FuelType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "car_records")

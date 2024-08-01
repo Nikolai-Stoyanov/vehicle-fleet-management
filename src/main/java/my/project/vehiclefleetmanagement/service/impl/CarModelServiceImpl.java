@@ -14,8 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -59,6 +61,7 @@ public class CarModelServiceImpl implements CarModelService {
 
         CarModel mappedEntity = modelMapper.map(carModelCreateDTO, CarModel.class);
         mappedEntity.setBrand(carBrandOptional.get());
+        mappedEntity.setYear(LocalDate.parse(carModelCreateDTO.getYear()));
         this.carModelRepository.save(mappedEntity);
         throw new AppException("Car model successfully created", HttpStatus.OK);
     }
@@ -70,10 +73,19 @@ public class CarModelServiceImpl implements CarModelService {
         if (carModelOptional.isEmpty()) {
             throw new AppException("Car model is not found!", HttpStatus.NOT_FOUND);
         }
+
         if (carBrandOptional.isEmpty()) {
             throw new AppException("Car brand not found!", HttpStatus.BAD_REQUEST);
         }
+
+        Optional<CarModel> modelByName = this.carModelRepository.findByName(carModelEditDTO.getName());
+        if (!Objects.equals(carModelEditDTO.getName(), carModelOptional.get().getName()) && modelByName.isPresent()) {
+            throw new AppException(
+                    String.format("Car model with name %s is already exists!",carModelEditDTO.getName()),
+                    HttpStatus.BAD_REQUEST);
+        }
         CarModel mappedEntity = modelMapper.map(carModelEditDTO, CarModel.class);
+        mappedEntity.setYear(LocalDate.parse(carModelEditDTO.getYear()));
         mappedEntity.setBrand(carBrandOptional.get());
         this.carModelRepository.save(mappedEntity);
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -75,6 +76,13 @@ public class CarPersonServiceImpl implements CarPersonService {
         Optional<CarPerson> carPersonOptional = this.carPersonRepository.findById(id);
         if (carPersonOptional.isEmpty()) {
             throw new AppException("Person is not found!", HttpStatus.NOT_FOUND);
+        }
+
+        Optional<CarPerson> personByPhoneNumber = this.carPersonRepository.findByPhoneNumber(carPersonEditDTO.getPhoneNumber());
+        if (!Objects.equals(carPersonEditDTO.getPhoneNumber(), carPersonOptional.get().getPhoneNumber()) && personByPhoneNumber.isPresent()) {
+            throw new AppException(
+                    String.format("Person with phone number %s is already exists!",carPersonEditDTO.getPhoneNumber()),
+                    HttpStatus.BAD_REQUEST);
         }
 
         CarPerson mappedEntity = modelMapper.map(carPersonEditDTO, CarPerson.class);

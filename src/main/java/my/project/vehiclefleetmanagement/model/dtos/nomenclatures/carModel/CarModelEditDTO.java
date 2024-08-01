@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public class CarModelEditDTO {
   private String name;
   private String description;
   @NotEmpty
-  private LocalDate year;
+  private String year;
   @NotEmpty
   private long brand;
   @NotEmpty

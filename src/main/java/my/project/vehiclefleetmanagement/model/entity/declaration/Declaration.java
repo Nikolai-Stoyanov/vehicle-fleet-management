@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import my.project.vehiclefleetmanagement.model.entity.BaseEntity;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelSupplier;
 
 import java.time.LocalDate;
 

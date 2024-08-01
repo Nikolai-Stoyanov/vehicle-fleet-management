@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -106,14 +107,29 @@ public class UserServiceImpl implements UserService {
         if (userEntityOptional.isEmpty()) {
             throw new AppException("User is not found!", HttpStatus.NOT_FOUND);
         }
-        userEntityOptional.get().setUsername(userEditDTO.getUsername());
-        userEntityOptional.get().setEmail(userEditDTO.getEmail());
+        Optional<UserEntity> userByEmail = this.userRepository.findByEmail(userEditDTO.getEmail());
+        if (!Objects.equals(userEditDTO.getEmail(), userEntityOptional.get().getEmail()) &&  userByEmail.isPresent()) {
+            throw new AppException(
+                    String.format("User with email %s is already exists!",userEditDTO.getEmail()),
+                    HttpStatus.BAD_REQUEST);
+        }
+        Optional<UserEntity> userByUsername = this.userRepository.findByUsername(userEditDTO.getUsername());
+        if (!Objects.equals(userEditDTO.getUsername(), userEntityOptional.get().getUsername()) && userByUsername.isPresent()) {
+            throw new AppException(
+                    String.format("User with username %s is already exists!",userEditDTO.getUsername()),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity user=userEntityOptional.get();
+        user.setUsername(userEditDTO.getUsername());
+        user.setEmail(userEditDTO.getEmail());
         List<UserRole> userRoles = new ArrayList<>();
         for (UserRoleDto roleDto : userEditDTO.getRoles()) {
             userRoles.add(modelMapper.map(roleDto, UserRole.class));
         }
-        userEntityOptional.get().setRoles(userRoles);
-        this.userRepository.save(userEntityOptional.get());
+
+        user.setRoles(userRoles);
+        this.userRepository.save(user);
         throw new AppException("User successfully updated!", HttpStatus.OK);
     }
 
