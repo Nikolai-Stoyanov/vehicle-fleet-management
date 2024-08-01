@@ -2,6 +2,7 @@ package my.project.vehiclefleetmanagement.model.dtos.car.carPerson;
 
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarPersonEditDTO {
-  @NotEmpty
+  @NotNull
   private long id;
   @NotEmpty
   @Size(min = 3, max = 20)
@@ -23,6 +24,5 @@ public class CarPersonEditDTO {
   private String lastName;
   @NotEmpty
   private String phoneNumber;
-  @NotEmpty
   private boolean status;
 }

@@ -1,6 +1,7 @@
 package my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,8 +20,7 @@ public class CarModelCreateDTO {
   private String description;
   @NotEmpty
   private String year;
-  @NotEmpty
-  private long brand;
-  @NotEmpty
+  @NotNull
+  private int brand;
   private boolean status;
 }

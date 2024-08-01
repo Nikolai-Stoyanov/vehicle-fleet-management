@@ -90,18 +90,20 @@ public class FuelServiceImplTest {
     void testGetAllFuels() {
         List<FuelEntity> fuelEntityList = List.of(
                 new FuelEntity("LPG", "lpg", true),
-                new FuelEntity("Diesel", "lpg", true)
+                new FuelEntity("Diesel", "", true)
         );
         List<FuelListDTO> fuelListDTOS = List.of(
-                new FuelListDTO(1, "LPG", "", ""),
-                new FuelListDTO(2, "Diesel", "", "")
+                new FuelListDTO(1, "LPG", "lpg", true),
+                new FuelListDTO(2, "Diesel", "", true)
         );
 
         when(mockFuelRepository.findAll()).thenReturn(fuelEntityList);
 
-        toTest.getAllFuels();
+        List<FuelListDTO> result= toTest.getAllFuels();
 
-        Assertions.assertEquals(fuelListDTOS.toArray().length, fuelEntityList.toArray().length);
+        Assertions.assertEquals(fuelListDTOS.toArray().length, result.toArray().length);
+        Assertions.assertEquals(fuelListDTOS.get(0).getName(), result.get(0).getName());
+        Assertions.assertEquals(fuelListDTOS.get(1).getDescription(), result.get(1).getDescription());
     }
 
     @Test
@@ -113,10 +115,10 @@ public class FuelServiceImplTest {
 
         when(mockFuelRepository.findById(id)).thenReturn(Optional.of(fuelEntity));
 
-        toTest.getFuelById(id);
+        FuelDTO result= toTest.getFuelById(id);
 
-        assertEquals(fuelDTO.getName(), fuelEntity.getName());
-        assertEquals(fuelDTO.getDescription(), fuelEntity.getDescription());
+        assertEquals(fuelDTO.getName(), result.getName());
+        assertEquals(fuelDTO.getDescription(), result.getDescription());
     }
 
     @Test
@@ -214,6 +216,30 @@ public class FuelServiceImplTest {
         );
 
         String expectedMessage = "Fuel is not found!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void testUpdateFuelNameFailedNameExist() {
+        FuelEntity fuelEntity1 = new FuelEntity("LPG", "lpg", true);
+        FuelEntity fuelEntity2 = new FuelEntity("Mega Diesel", "lpg", true);
+        FuelEditDTO fuelEditDTO =
+                new FuelEditDTO(1,"Mega Diesel", "diesel",  true);
+        Long id = 1L;
+
+        when(mockFuelRepository.findById(id))
+                .thenReturn(Optional.of(fuelEntity1));
+        when(mockFuelRepository.findByName(fuelEditDTO.getName()))
+                .thenReturn(Optional.of(fuelEntity2));
+
+
+        Exception exception = Assertions.assertThrows(
+                AppException.class,
+                () -> toTest.updateFuel(id, fuelEditDTO)
+        );
+
+        String expectedMessage = "Fuel with name Mega Diesel is already exists";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }

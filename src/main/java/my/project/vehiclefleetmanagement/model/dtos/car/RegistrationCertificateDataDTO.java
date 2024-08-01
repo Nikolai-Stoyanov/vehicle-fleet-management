@@ -1,6 +1,7 @@
 package my.project.vehiclefleetmanagement.model.dtos.car;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,13 +24,13 @@ public class RegistrationCertificateDataDTO {
     private String frameNumber;
     @NotEmpty
     private String engineNumber;
-    @NotEmpty
+    @NotNull
     private int engineVolume;
-    @NotEmpty
+    @NotNull
     private int horsePower;
-    @NotEmpty
+    @NotNull
     private int enginePower;
-    @NotEmpty
+    @NotNull
     private int seatingCapacity;
     @NotEmpty
     private String primaryColor;

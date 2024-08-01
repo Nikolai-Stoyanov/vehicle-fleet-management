@@ -162,7 +162,7 @@ public class FuelControllerIT {
 
     private void createTestFuelList() {
         fuelRepository.save(
-                new FuelEntity("LPG", "description1", true));
+                new FuelEntity("SuperDiesel", "description1", true));
         fuelRepository.save(
                 new FuelEntity("Diesel", "description8", true));
 

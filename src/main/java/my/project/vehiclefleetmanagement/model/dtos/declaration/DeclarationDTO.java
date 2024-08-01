@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.dtos.car.carPerson.CarPersonDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierDTO;
 

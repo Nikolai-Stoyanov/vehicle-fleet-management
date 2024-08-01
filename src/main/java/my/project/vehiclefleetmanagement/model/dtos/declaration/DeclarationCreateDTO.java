@@ -1,6 +1,7 @@
 package my.project.vehiclefleetmanagement.model.dtos.declaration;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,16 @@ public class DeclarationCreateDTO {
   private String period;
   @NotEmpty
   private String date;
-  @NotEmpty
+  @NotNull
   private int lastMileage;
-  @NotEmpty
+  @NotNull
   private int newMileage;
+  @NotNull
+  private int fuelKind;
+  @NotNull
+  private int fuelSupplier;
   @NotEmpty
-  private long fuelKind;
+  private double fuelAmount;
   @NotEmpty
-  private long fuelSupplier;
-  @NotEmpty
-  private String fuelAmount;
-  @NotEmpty
-  private String fuelPrice;
+  private double fuelPrice;
 }

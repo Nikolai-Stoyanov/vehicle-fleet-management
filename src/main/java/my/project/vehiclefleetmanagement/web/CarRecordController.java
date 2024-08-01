@@ -1,5 +1,6 @@
 package my.project.vehiclefleetmanagement.web;
 
+import jakarta.validation.Valid;
 import my.project.vehiclefleetmanagement.model.dtos.car.*;
 import my.project.vehiclefleetmanagement.service.CarRecordService;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +27,13 @@ public class CarRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCarRecord(@RequestBody CarRecordCreateDTO carPersonCreateDTO) {
+    public ResponseEntity<String> createCarRecord(@RequestBody @Valid CarRecordCreateDTO carPersonCreateDTO) {
         this.carRecordService.createCarRecord(carPersonCreateDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCarRecord(@PathVariable("id") Long id,@RequestBody CarRecordEditDTO carPersonEditDTO) {
+    public ResponseEntity<String> updateCarRecord(@PathVariable("id") Long id,@RequestBody @Valid CarRecordEditDTO carPersonEditDTO) {
         this.carRecordService.updateCarRecord(id, carPersonEditDTO);
         return ResponseEntity.noContent().build();
     }

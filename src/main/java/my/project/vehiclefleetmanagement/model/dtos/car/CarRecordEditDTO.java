@@ -2,36 +2,36 @@ package my.project.vehiclefleetmanagement.model.dtos.car;
 
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import my.project.vehiclefleetmanagement.model.dtos.car.carPerson.CarPersonDTO;
 
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarRecordEditDTO {
+  @NotNull
   private int id;
   @NotEmpty
   private String drivingCategory;
   private String description;
-  @NotEmpty
-  private Long totalMileage;
-  @NotEmpty
-  private Long developmentFromMileage;
-  @NotEmpty
-  private Long developmentToMileage;
+  @NotNull
+  private int totalMileage;
+  @NotNull
+  private int developmentFromMileage;
+  @NotNull
+  private int developmentToMileage;
   @NotEmpty
   private String fuelCard;
   @NotEmpty
   private String fuelType;
-  @NotEmpty
+  @NotNull
   private RegistrationCertificateDataDTO registrationCertificateData;
-  @NotEmpty
   private boolean status;
   @NotEmpty
   private String owner;
@@ -39,13 +39,11 @@ public class CarRecordEditDTO {
   private String department;
   @NotEmpty
   private String stay;
-  @NotEmpty
+  @NotNull
   private CarPersonDTO responsible;
-  @NotEmpty
+  @NotNull
   private CarPersonDTO driver;
-  @NotEmpty
   private String createdBy;
-  @NotEmpty
   private String createdAt;
   private String updatedBy;
   private String updatedAt;

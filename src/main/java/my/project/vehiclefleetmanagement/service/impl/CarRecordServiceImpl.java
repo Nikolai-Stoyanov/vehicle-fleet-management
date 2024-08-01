@@ -2,6 +2,7 @@ package my.project.vehiclefleetmanagement.service.impl;
 
 import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.car.*;
+import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
 import my.project.vehiclefleetmanagement.model.entity.car.RegistrationCertificateData;
 import my.project.vehiclefleetmanagement.model.entity.declaration.Declaration;
@@ -12,13 +13,11 @@ import my.project.vehiclefleetmanagement.repository.RegistrationCertificateDataR
 import my.project.vehiclefleetmanagement.service.CarRecordService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CarRecordServiceImpl implements CarRecordService {
@@ -55,14 +54,17 @@ public class CarRecordServiceImpl implements CarRecordService {
         RegistrationCertificateData registrationCertificateData = registrationCertificateDataRepository
                 .findByRegistrationNumber(carRecordCreateDTO.getRegistrationCertificateData().getRegistrationNumber()).get();
 
-
         CarRecord mappedEntity = modelMapper.map(carRecordCreateDTO, CarRecord.class);
         mappedEntity.setRegistrationCertificateData(registrationCertificateData);
-        mappedEntity.setCreatedBy("currentPrincipalName");
+        mappedEntity.setCreatedBy(getCurrentUserName());
         mappedEntity.setCreatedAt(LocalDate.now());
 
         this.carRecordRepository.save(mappedEntity);
         throw new AppException("Car record successfully created!", HttpStatus.OK);
+    }
+
+    protected String getCurrentUserName() {
+        return   ((UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
     @Override
@@ -112,11 +114,17 @@ public class CarRecordServiceImpl implements CarRecordService {
     public boolean updateCarRecord(Long id, CarRecordEditDTO carPersonEditDTO) {
         Optional<CarRecord> carRecordOptional = this.carRecordRepository.findById(id);
         if (carRecordOptional.isEmpty()) {
-            return false;
+            throw new AppException("Car record is not found!", HttpStatus.NOT_FOUND);
         }
+
+        if (!Objects.equals(carRecordOptional.get().getRegistrationCertificateData().getRegistrationNumber(),
+                carPersonEditDTO.getRegistrationCertificateData().getRegistrationNumber())) {
+            throw new AppException("The registration number cannot be changed!", HttpStatus.BAD_REQUEST);
+        }
+
         CarRecord editedCarRecord = carRecordOptional.get();
         modelMapper.map(carPersonEditDTO, editedCarRecord);
-        editedCarRecord.setUpdatedBy("currentPrincipalName");
+        editedCarRecord.setUpdatedBy(getCurrentUserName());
         editedCarRecord.setUpdatedAt(LocalDate.now());
 
         this.carRecordRepository.save(editedCarRecord);
@@ -149,10 +157,20 @@ public class CarRecordServiceImpl implements CarRecordService {
         carRecordInfoDTO.setResponsible(carRecord.getResponsible().getFullName());
         carRecordInfoDTO.setFuelType(String.valueOf(carRecord.getFuelType()));
 
-        List<Declaration> declarationList = this.declarationRepository.findAll();
-        Declaration lastDeclaration = declarationList.stream().sorted(Comparator.comparing(Declaration::getDate))
-                .toList().get(declarationList.size()-1);
-        carRecordInfoDTO.setLastMileage(lastDeclaration.getNewMileage());
+        List<Declaration> declarationList = this.declarationRepository.findAll().stream()
+                .filter(d ->
+                        Objects.equals(d.getCarRecord().getRegistrationCertificateData().getRegistrationNumber(),
+                                data.get().getRegistrationNumber()))
+                .sorted(Comparator.comparing(Declaration::getDate))
+                .toList();
+
+        if (!declarationList.isEmpty()){
+            carRecordInfoDTO.setLastMileage(declarationList.get(declarationList.size() - 1).getNewMileage());
+        }else {
+            carRecordInfoDTO.setLastMileage(carRecord.getTotalMileage());
+        }
+
+
         return carRecordInfoDTO;
     }
 

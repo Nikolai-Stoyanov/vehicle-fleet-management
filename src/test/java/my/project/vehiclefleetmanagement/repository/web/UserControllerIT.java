@@ -50,8 +50,8 @@ public class UserControllerIT {
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$.[0].username", is("Gosho")))
                 .andExpect(jsonPath("$.[0].email", is("gosho@abv.bg")))
-                .andExpect(jsonPath("$.[1].username", is("Pesho")))
-                .andExpect(jsonPath("$.[1].email", is("pesho@abv.bg")));
+                .andExpect(jsonPath("$.[1].username", is("Ivan")))
+                .andExpect(jsonPath("$.[1].email", is("Ivan@abv.bg")));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class UserControllerIT {
                 new UserEntity("gosho@abv.bg", "1234", "Gosho",
                         List.of(new UserRole(1L, UserRoleEnum.ADMIN))));
         userRepository.save(
-                new UserEntity("pesho@abv.bg", "1234", "Pesho",
+                new UserEntity("Ivan@abv.bg", "1234", "Ivan",
                         List.of(new UserRole(2L, UserRoleEnum.USER))));
 
     }

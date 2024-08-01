@@ -39,11 +39,11 @@ public class CarRecord extends BaseEntity {
     @Column( name = "updated_at")
     private LocalDate updatedAt;
     @Column(nullable = false)
-    private Long totalMileage;
+    private int totalMileage;
     @Column(nullable = false)
-    private Long developmentFromMileage;
+    private int developmentFromMileage;
     @Column(nullable = false)
-    private Long developmentToMileage;
+    private int developmentToMileage;
     @Column( nullable = false)
     private String owner;
     @Column( nullable = false)

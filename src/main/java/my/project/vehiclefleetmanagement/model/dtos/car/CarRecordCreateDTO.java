@@ -2,6 +2,7 @@ package my.project.vehiclefleetmanagement.model.dtos.car;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,19 +19,18 @@ public class CarRecordCreateDTO {
   @NotEmpty
   private String drivingCategory;
   private String description;
-  @NotEmpty
-  private Long totalMileage;
-  @NotEmpty
-  private Long developmentFromMileage;
-  @NotEmpty
-  private Long developmentToMileage;
+  @NotNull
+  private int totalMileage;
+  @NotNull
+  private int developmentFromMileage;
+  @NotNull
+  private int developmentToMileage;
   @NotEmpty
   private String fuelCard;
   @NotEmpty
   private String fuelType;
-  @NotEmpty
+  @NotNull
   private RegistrationCertificateDataDTO registrationCertificateData;
-  @NotEmpty
   private boolean status;
   @NotEmpty
   private String owner;
@@ -38,8 +38,8 @@ public class CarRecordCreateDTO {
   private String department;
   @NotEmpty
   private String stay;
-  @NotEmpty
+  @NotNull
   private CarPersonDTO responsible;
-  @NotEmpty
+  @NotNull
   private CarPersonDTO driver;
 }

@@ -2,6 +2,7 @@ package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
 
 import com.jayway.jsonpath.JsonPath;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarBrand;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
 import my.project.vehiclefleetmanagement.repository.CarBrandRepository;
 import my.project.vehiclefleetmanagement.repository.CarModelRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +41,6 @@ public class CarBrandControllerIT {
 
     @AfterEach
     public void tearDown() {
-        carModelRepository.deleteAll();
         carBrandRepository.deleteAll();
     }
 
@@ -154,14 +154,13 @@ public class CarBrandControllerIT {
     }
 
     private CarBrand createTestBrand() {
-        return carBrandRepository.save(
-                new CarBrand("Kia", "description", "Kia OOD", List.of(),true)
-        );
+        CarBrand carBrand = new CarBrand("Kia1", "description", "Kia OOD", List.of(),true);
+        return carBrandRepository.save(carBrand);
     }
 
     private void createTestCarBrandList() {
         carBrandRepository.save(
-                new CarBrand("Kia", "description", "Kia OOD", List.of(),true));
+                new CarBrand("Kia1", "description", "Kia OOD", List.of(),true));
         carBrandRepository.save(
                 new CarBrand("Opel", "description", "Opel OOD", List.of(),true));
 

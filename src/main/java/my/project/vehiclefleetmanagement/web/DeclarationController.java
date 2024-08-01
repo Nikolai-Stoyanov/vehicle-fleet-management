@@ -1,5 +1,6 @@
 package my.project.vehiclefleetmanagement.web;
 
+import jakarta.validation.Valid;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationEditDTO;
@@ -29,13 +30,13 @@ public class DeclarationController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createDeclaration(@RequestBody DeclarationCreateDTO declarationCreateDTO) {
+    public ResponseEntity<String> createDeclaration(@RequestBody @Valid DeclarationCreateDTO declarationCreateDTO) {
         declarationService.createDeclaration(declarationCreateDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateDeclaration(@PathVariable("id") Long id,@RequestBody DeclarationEditDTO declarationEditDTO) {
+    public ResponseEntity<String> updateDeclaration(@PathVariable("id") Long id,@RequestBody @Valid DeclarationEditDTO declarationEditDTO) {
         declarationService.updateDeclaration(id,declarationEditDTO);
         return ResponseEntity.noContent().build();
     }

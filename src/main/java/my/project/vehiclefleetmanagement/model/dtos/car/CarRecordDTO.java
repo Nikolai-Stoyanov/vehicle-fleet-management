@@ -17,9 +17,9 @@ public class CarRecordDTO {
   private int id;
   private String drivingCategory;
   private String description;
-  private Long totalMileage;
-  private Long developmentFromMileage;
-  private Long developmentToMileage;
+  private int totalMileage;
+  private int developmentFromMileage;
+  private int developmentToMileage;
   private String fuelCard;
   private String fuelType;
   private RegistrationCertificateDataDTO registrationCertificateData;

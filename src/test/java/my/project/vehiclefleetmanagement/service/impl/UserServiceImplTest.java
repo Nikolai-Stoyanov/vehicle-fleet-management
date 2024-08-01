@@ -110,7 +110,7 @@ public class UserServiceImplTest {
     @Test
     void testUserFindByUsername() {
         UserEntity user = new UserEntity("pesho@example.com", "1234", "Pesho", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
-        UserDto userDto = new UserDto(1L, "pesho@example.com", "1234", "Pesho", List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN)));
+        UserDto userDto = new UserDto(1L, "Pesho","pesho@example.com", "", List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN)));
         String username = "Pesho";
 
         when(mockUserRepository.findByUsername(username))
@@ -119,8 +119,8 @@ public class UserServiceImplTest {
                 .thenReturn(userDto);
 
         toTest.findByUsername(username);
-        Assertions.assertEquals(userDto.getUsername(), userDto.getUsername());
-        Assertions.assertEquals(userDto.getEmail(), userDto.getEmail());
+        Assertions.assertEquals(user.getUsername(), userDto.getUsername());
+        Assertions.assertEquals(user.getEmail(), userDto.getEmail());
     }
 
     @Test
@@ -203,9 +203,11 @@ public class UserServiceImplTest {
 
         when(mockUserRepository.findAll()).thenReturn(users);
 
-        toTest.getAllUsers();
+        List<UserListDTO> result = toTest.getAllUsers();
 
-        Assertions.assertEquals(users.toArray().length, userListDTOS.toArray().length);
+        Assertions.assertEquals(users.toArray().length, result.toArray().length);
+        Assertions.assertEquals(users.get(0).getUsername(), result.get(0).getUsername());
+        Assertions.assertEquals(users.get(1).getRoles().size(), result.get(1).getRoles().size());
     }
 
     @Test
@@ -260,6 +262,56 @@ public class UserServiceImplTest {
     }
 
     @Test
+    void testUpdateUserNameFailedUserNameExist() {
+        UserEntity user1 = new UserEntity("pesho1@example.com", "1234", "Pesho1", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
+        UserEntity user2 = new UserEntity("pesho2@example.com", "1234", "Pesho2", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
+        UserEditDTO userEditDTO =
+                new UserEditDTO(1L, "Pesho2", "pesho1@example.com",
+                        List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN), new UserRoleDto(2L, UserRoleEnum.USER)));
+        Long userId = 1L;
+
+        when(mockUserRepository.findById(userId))
+                .thenReturn(Optional.of(user1));
+        when(mockUserRepository.findByUsername(userEditDTO.getUsername()))
+                .thenReturn(Optional.of(user2));
+
+
+        Exception exception = Assertions.assertThrows(
+                AppException.class,
+                () -> toTest.updateUser(userId, userEditDTO)
+        );
+
+        String expectedMessage = "User with username Pesho2 is already exists!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void testUpdateUserEmailFailedUserEmailExist() {
+        UserEntity user1 = new UserEntity("pesho1@example.com", "1234", "Pesho2", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
+        UserEntity user2 = new UserEntity("pesho2@example.com", "1234", "Pesho2", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
+        UserEditDTO userEditDTO =
+                new UserEditDTO(1L, "Pesho2", "pesho2@example.com",
+                        List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN), new UserRoleDto(2L, UserRoleEnum.USER)));
+        Long userId = 1L;
+
+        when(mockUserRepository.findById(userId))
+                .thenReturn(Optional.of(user1));
+        when(mockUserRepository.findByEmail(userEditDTO.getEmail()))
+                .thenReturn(Optional.of(user2));
+
+
+        Exception exception = Assertions.assertThrows(
+                AppException.class,
+                () -> toTest.updateUser(userId, userEditDTO)
+        );
+
+        String expectedMessage = "User with email pesho2@example.com is already exists!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void testGetUserById() {
         UserEntity user = new UserEntity("pesho@example.com", "1234", "Pesho",
                 List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
@@ -270,11 +322,12 @@ public class UserServiceImplTest {
 
         when(mockUserRepository.findById(userId))
                 .thenReturn(Optional.of(user));
-        toTest.getUserById(userId);
 
-        assertEquals(userByIdDto.getUsername(), user.getUsername());
-        assertEquals(userByIdDto.getEmail(), user.getEmail());
-        assertEquals(userByIdDto.getRoles().toArray().length, user.getRoles().toArray().length);
+        UserByIdDto result = toTest.getUserById(userId);
+
+        assertEquals(userByIdDto.getUsername(), result.getUsername());
+        assertEquals(userByIdDto.getEmail(), result.getEmail());
+        assertEquals(userByIdDto.getRoles().toArray().length, result.getRoles().toArray().length);
     }
 
     @Test

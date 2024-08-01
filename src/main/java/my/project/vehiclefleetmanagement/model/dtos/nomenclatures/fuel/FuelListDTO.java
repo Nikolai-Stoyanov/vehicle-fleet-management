@@ -15,6 +15,5 @@ public class FuelListDTO {
   private int id;
   private String name;
   private String description;
-  private String fuelSupplier;
   private boolean status;
 }

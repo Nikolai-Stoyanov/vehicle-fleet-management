@@ -1,10 +1,10 @@
 package my.project.vehiclefleetmanagement.service.impl;
 
 import my.project.vehiclefleetmanagement.exceptions.AppException;
-import my.project.vehiclefleetmanagement.model.dtos.car.carPerson.CarPersonDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.*;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuel.FuelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.fuelSupplier.FuelSupplierDTO;
+import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
 import my.project.vehiclefleetmanagement.model.entity.car.CarRecord;
 import my.project.vehiclefleetmanagement.model.entity.car.RegistrationCertificateData;
 import my.project.vehiclefleetmanagement.model.entity.declaration.Declaration;
@@ -14,6 +14,7 @@ import my.project.vehiclefleetmanagement.repository.*;
 import my.project.vehiclefleetmanagement.service.DeclarationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -53,6 +54,7 @@ public class DeclarationServiceImpl implements DeclarationService {
 
         CarRecord carRecord =
                 this.carRecordRepository.findByRegistrationCertificateData(optionalData.get());
+
         Optional<Declaration> optionalDeclaration =
                 this.declarationRepository.findByPeriodAndCarRecord(
                         declarationCreateDTO.getPeriod(), carRecord);
@@ -66,7 +68,7 @@ public class DeclarationServiceImpl implements DeclarationService {
         Declaration mappedEntity = modelMapper.map(declarationCreateDTO, Declaration.class);
         mappedEntity.setCarRecord(carRecord);
         mappedEntity.setDate(LocalDate.parse(declarationCreateDTO.getDate()));
-        mappedEntity.setCreatedBy("currentPrincipalName");
+        mappedEntity.setCreatedBy(getCurrentUserName());
         mappedEntity.setCreatedAt(LocalDate.now());
 
 
@@ -79,16 +81,17 @@ public class DeclarationServiceImpl implements DeclarationService {
         List<Declaration> declarationList = this.declarationRepository.findAll();
 
         List<DeclarationListDTO> declarationListDTOS = new ArrayList<>();
-        for (Declaration declaration : declarationList) {
-            DeclarationListDTO model = modelMapper.map(declaration, DeclarationListDTO.class);
+        if (!declarationList.isEmpty()) {
+            for (Declaration declaration : declarationList) {
+                DeclarationListDTO model = modelMapper.map(declaration, DeclarationListDTO.class);
 
-            CarRecord carRecord = this.carRecordRepository.findById(declaration.getCarRecord().getId()).get();
-            model.setRegistrationNumber(carRecord.getRegistrationCertificateData().getRegistrationNumber());
-            model.setResponsible(carRecord.getResponsible().getFullName());
-            model.setDriver(carRecord.getDriver().getFullName());
-            declarationListDTOS.add(model);
+                Optional<CarRecord> carRecord = this.carRecordRepository.findById(declaration.getCarRecord().getId());
+                model.setRegistrationNumber(carRecord.get().getRegistrationCertificateData().getRegistrationNumber());
+                model.setResponsible(carRecord.get().getResponsible().getFullName());
+                model.setDriver(carRecord.get().getDriver().getFullName());
+                declarationListDTOS.add(model);
+            }
         }
-
         return declarationListDTOS;
     }
 
@@ -104,8 +107,8 @@ public class DeclarationServiceImpl implements DeclarationService {
         declarationDTO.setRegistrationNumber(carRecord.getRegistrationCertificateData().getRegistrationNumber());
         declarationDTO.setResponsible(carRecord.getResponsible().getFullName());
         declarationDTO.setFuelType(String.valueOf(carRecord.getFuelType()));
-        Optional<FuelEntity> fuel=this.fuelRepository.findById(declaration.get().getFuelKind());
-        Optional<FuelSupplier> fuelSupplier=this.fuelSupplierRepository.findById(declaration.get().getFuelSupplier());
+        Optional<FuelEntity> fuel = this.fuelRepository.findById(declaration.get().getFuelKind());
+        Optional<FuelSupplier> fuelSupplier = this.fuelSupplierRepository.findById(declaration.get().getFuelSupplier());
         declarationDTO.setFuelKind(modelMapper.map(fuel, FuelDTO.class));
         declarationDTO.setFuelSupplier(modelMapper.map(fuelSupplier, FuelSupplierDTO.class));
         return declarationDTO;
@@ -131,7 +134,7 @@ public class DeclarationServiceImpl implements DeclarationService {
         if (!Objects.equals(declarationEditDTO.getPeriod(), optionalDeclaration.get().getPeriod())) {
             Optional<Declaration> optionalDeclarationWithSamePeriodAndCarRecord
                     = this.declarationRepository
-                    .findByPeriodAndCarRecord(declarationEditDTO.getPeriod(),optionalDeclaration.get().getCarRecord());
+                    .findByPeriodAndCarRecord(declarationEditDTO.getPeriod(), optionalDeclaration.get().getCarRecord());
 
             if (optionalDeclarationWithSamePeriodAndCarRecord.isPresent()) {
                 throw new AppException(String.format("Declaration for registration number %s and period %s is already exists!"
@@ -140,13 +143,16 @@ public class DeclarationServiceImpl implements DeclarationService {
             }
         }
 
-
         Declaration editedDeclaration = optionalDeclaration.get();
         modelMapper.map(declarationEditDTO, editedDeclaration);
-        editedDeclaration.setUpdatedBy("currentPrincipalName");
+        editedDeclaration.setUpdatedBy(getCurrentUserName());
         editedDeclaration.setUpdatedAt(LocalDate.now());
 
         this.declarationRepository.save(editedDeclaration);
         throw new AppException("Declaration successfully updated!", HttpStatus.OK);
+    }
+
+    private String getCurrentUserName() {
+        return   ((UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 }

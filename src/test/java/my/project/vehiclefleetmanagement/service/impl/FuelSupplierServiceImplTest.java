@@ -97,7 +97,8 @@ public class FuelSupplierServiceImplTest {
     void testGetAllSuppliers() {
         List<FuelSupplier> fuelSupplierList = List.of(
                 new FuelSupplier("OMV", "", List.of(new FuelEntity()), true),
-                new FuelSupplier("Shell", "", List.of(new FuelEntity()), true)
+                new FuelSupplier("Shell", "",
+                        List.of(new FuelEntity("LPG", "lpg", true)), true)
         );
         List<FuelSupplierListDTO> fuelSupplierListDTOS = List.of(
                 new FuelSupplierListDTO(1, "OMV", "", List.of("Disel"), true),
@@ -106,9 +107,11 @@ public class FuelSupplierServiceImplTest {
 
         when(mockFuelSupplierRepository.findAll()).thenReturn(fuelSupplierList);
 
-        toTest.getAllFuelSuppliers();
+        List<FuelSupplierListDTO> result = toTest.getAllFuelSuppliers();
 
-        Assertions.assertEquals(fuelSupplierListDTOS.toArray().length, fuelSupplierList.toArray().length);
+        Assertions.assertEquals(fuelSupplierListDTOS.toArray().length, result.toArray().length);
+        Assertions.assertEquals(fuelSupplierListDTOS.get(0).getName(), result.get(0).getName());
+        Assertions.assertEquals(fuelSupplierListDTOS.get(1).getFuelList(), result.get(1).getFuelList());
     }
 
     @Test
@@ -122,11 +125,11 @@ public class FuelSupplierServiceImplTest {
         when(mockFuelSupplierRepository.findById(id))
                 .thenReturn(Optional.of(fuelSupplier));
 
-        toTest.getFuelSupplierById(id);
+        FuelSupplierDTO result = toTest.getFuelSupplierById(id);
 
-        assertEquals(fuelSupplierDTO.getName(), fuelSupplier.getName());
-        assertEquals(fuelSupplierDTO.getDescription(), fuelSupplier.getDescription());
-        assertEquals(fuelSupplierDTO.getFuelList().size(), fuelSupplier.getFuelList().size());
+        assertEquals(fuelSupplierDTO.getName(), result.getName());
+        assertEquals(fuelSupplierDTO.getDescription(), result.getDescription());
+        assertEquals(fuelSupplierDTO.getFuelList().size(), result.getFuelList().size());
     }
 
     @Test
@@ -192,7 +195,7 @@ public class FuelSupplierServiceImplTest {
         when(mockFuelSupplierRepository.findById(id))
                 .thenReturn(Optional.of(fuelSupplier));
 
-       when(mockFuelRepository.findById(fuelSupplierEditDTO.getFuelList().get(0)))
+        when(mockFuelRepository.findById(fuelSupplierEditDTO.getFuelList().get(0)))
                 .thenReturn(Optional.of(fuelEntity));
 
         Exception exception = Assertions.assertThrows(
@@ -229,6 +232,30 @@ public class FuelSupplierServiceImplTest {
         );
 
         String expectedMessage = "Fuel supplier is not found!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void testUpdateSupplierNameFailedSupplierNameExist() {
+        FuelSupplier fuelSupplier1 = new FuelSupplier("OMV", "", List.of(new FuelEntity()), true);
+        FuelSupplier fuelSupplier2 = new FuelSupplier("Petrol", "", List.of(new FuelEntity()), true);
+        FuelSupplierEditDTO fuelSupplierEditDTO =
+                new FuelSupplierEditDTO(1, "Petrol", "desc", true, List.of(1L));
+        Long id = 1L;
+
+        when(mockFuelSupplierRepository.findById(id))
+                .thenReturn(Optional.of(fuelSupplier1));
+        when(mockFuelSupplierRepository.findByName(fuelSupplierEditDTO.getName()))
+                .thenReturn(Optional.of(fuelSupplier2));
+
+
+        Exception exception = Assertions.assertThrows(
+                AppException.class,
+                () -> toTest.updateFuelSupplier(id, fuelSupplierEditDTO)
+        );
+
+        String expectedMessage = "Fuel supplier with name Petrol already exists!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }

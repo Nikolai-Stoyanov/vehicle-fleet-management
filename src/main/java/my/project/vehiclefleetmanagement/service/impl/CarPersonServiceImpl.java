@@ -32,7 +32,9 @@ public class CarPersonServiceImpl implements CarPersonService {
         Optional<CarPerson> carPersonOptional = this.carPersonRepository.findByPhoneNumber( carPersonCreateDTO.getPhoneNumber());
 
         if (carPersonOptional.isPresent() ) {
-            throw new AppException("Person already exists", HttpStatus.BAD_REQUEST);
+            throw new AppException(
+                    String.format("Person with phone number %s is already exists!",carPersonCreateDTO.getPhoneNumber()),
+                    HttpStatus.BAD_REQUEST);
         }
 
         CarPerson mappedEntity = modelMapper.map(carPersonCreateDTO, CarPerson.class);

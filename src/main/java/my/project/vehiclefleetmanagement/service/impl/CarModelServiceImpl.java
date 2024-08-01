@@ -50,7 +50,7 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public void createModel(CarModelCreateDTO carModelCreateDTO) {
         Optional<CarModel> carModelOptional = this.carModelRepository.findByName( carModelCreateDTO.getName());
-        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById( carModelCreateDTO.getBrand());
+        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById((long) carModelCreateDTO.getBrand());
 
         if (carModelOptional.isPresent()) {
             throw new AppException("Car model already exists", HttpStatus.BAD_REQUEST);
@@ -69,7 +69,7 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public void updateModel(Long id, CarModelEditDTO carModelEditDTO) {
         Optional<CarModel> carModelOptional = this.carModelRepository.findById( id);
-        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById( carModelEditDTO.getBrand());
+        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById((long) carModelEditDTO.getBrand());
         if (carModelOptional.isEmpty()) {
             throw new AppException("Car model is not found!", HttpStatus.NOT_FOUND);
         }
