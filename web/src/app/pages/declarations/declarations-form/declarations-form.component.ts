@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
@@ -10,19 +10,21 @@ import {DateTimeForBackendPipe, DateTimePipe} from "../../../shared/formatters";
 import {format} from "date-fns";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Declaration} from "../declarations";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'ap-declarations-form',
   templateUrl: './declarations-form.component.html',
   styleUrls: ['./declarations-form.component.scss'],
 })
-export class DeclarationsFormComponent implements OnInit {
+export class DeclarationsFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public currentItem!: Declaration;
   public currentItemId: any;
   public registrationNumberObject: any
   public fuelKindOptions: any = [];
   public fuelSupplierOptions: any = [];
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -41,15 +43,15 @@ export class DeclarationsFormComponent implements OnInit {
   ngOnInit(): void {
     this.getOptions()
     if (this.currentItemId) {
-      this.svc.fetchDeclarationById(this.currentItemId).subscribe((res: any) => {
+      this.subscriptions.push(this.svc.fetchDeclarationById(this.currentItemId).subscribe((res: any) => {
         this.currentItem = res;
         this.getForm()
-      });
+      }));
     } else {
-      this.carRecordService.getCarRecordInfo(this.registrationNumberObject.id).subscribe((res: any) => {
-        this.currentItem=res
+      this.subscriptions.push(this.carRecordService.getCarRecordInfo(this.registrationNumberObject.id).subscribe((res: any) => {
+        this.currentItem = res
         this.getForm()
-      })
+      }));
     }
   }
 
@@ -66,7 +68,7 @@ export class DeclarationsFormComponent implements OnInit {
       newMileage: this.fb.control(
         this.currentItem?.newMileage || null, Validators.required),
       registrationNumber: this.fb.control(
-        {value: this.currentItem?.registrationNumber || null, disabled: false}, Validators.required),
+        {value: this.currentItem?.registrationNumber || null, disabled: true}, Validators.required),
       mileage: this.fb.control(
         this.currentItem?.mileage || null, Validators.required),
       fuelType: this.fb.control({value: this.currentItem?.fuelType || null, disabled: true}, Validators.required),
@@ -108,7 +110,7 @@ export class DeclarationsFormComponent implements OnInit {
       if (this.form.get('updatedAt')) {
         form.updatedAt = this.dateForBackendPipe.transform(this.form.value['updatedAt']);
       }
-      const sub1 = this.svc.updateDeclaration(this.currentItemId, form).subscribe({
+      this.subscriptions.push(this.svc.updateDeclaration(this.currentItemId, form).subscribe({
         next: (res: any) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -116,10 +118,9 @@ export class DeclarationsFormComponent implements OnInit {
         error: (error) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      });
-      // this.subscriptions.push(sub1);
+      }));
     } else {
-      const sub2 = this.svc.createDeclaration(form).subscribe({
+      this.subscriptions.push(this.svc.createDeclaration(form).subscribe({
         next: (res: any) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -127,23 +128,24 @@ export class DeclarationsFormComponent implements OnInit {
         error: (error) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      });
-      // this.subscriptions.push(sub2);
+      }));
     }
   }
 
   private getOptions() {
-    this.fuelService.fetchLatestFuels().subscribe((res) => {
+    this.subscriptions.push(this.fuelService.fetchLatestFuels().subscribe((res) => {
       res.forEach((item: FuelType) => {
         this.fuelKindOptions.push({value: item, label: item.name});
       })
-
-    })
-    this.fuelService.fetchLatestSuppliers().subscribe((res) => {
+    }));
+    this.subscriptions.push(this.fuelService.fetchLatestSuppliers().subscribe((res) => {
       res.forEach((item: FuelProviderType) => {
         this.fuelSupplierOptions.push({value: item, label: item.name});
       })
+    }));
+  }
 
-    })
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

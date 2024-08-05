@@ -50,18 +50,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.loading = true;
 
 
-    const sub1 = this.authService.register(this.registerForm.value).subscribe({
-        next: (res) => {
-          console.log(res)
-          this.router.navigate(['/login']);
+    this.subscriptions.push(this.authService.register(this.registerForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['/login']).then();
         },
         error: (error: any) => {
-          console.log(error);
           this.message.error(error.status + ' ' + error.error.message);
         }
       }
-    );
-    this.subscriptions.push(sub1);
+    ));
     this.loading = false;
   }
 

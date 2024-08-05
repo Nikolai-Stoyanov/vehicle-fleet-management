@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {AuthenticationService} from "../../auth/auth.service";
 
 @Component({
@@ -9,11 +8,12 @@ import {AuthenticationService} from "../../auth/auth.service";
 })
 export class HomeComponent implements OnInit {
   public currentUser:any;
+  public roles:any[]=[];
   constructor(
-    private httpClient: HttpClient,
     private authService: AuthenticationService
   ) {
     this.currentUser=this.authService.currentUserValue
+    this.roles = this.currentUser?.roles || [];
   }
 
   ngOnInit() {

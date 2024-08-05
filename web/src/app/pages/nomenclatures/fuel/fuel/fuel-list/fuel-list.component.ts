@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -7,17 +7,19 @@ import { TableColumnInterface } from '../../../../../shared/dummy-table';
 
 import { FuelFormComponent } from '../fuel-form';
 import { FuelService } from '../../fuel.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-fuel-list',
   templateUrl: './fuel-list.component.html',
   styleUrls: ['./fuel-list.component.scss'],
 })
-export class FuelListComponent implements OnInit {
+export class FuelListComponent implements OnInit, OnDestroy {
   public currentItems: any;
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
   currentItem: any;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private svc: FuelService,
@@ -26,15 +28,15 @@ export class FuelListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.svc.getFuelColumns().subscribe((res) => {
+    this.subscriptions.push(this.svc.getFuelColumns().subscribe((res) => {
       this.allTableColumns = res;
-    });
+    }));
 
     this.loading = true;
-    this.svc.fetchLatestFuels().subscribe((res) => {
+    this.subscriptions.push(this.svc.fetchLatestFuels().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
-    });
+    }));
   }
 
   editFuel(item?: any) {
@@ -54,11 +56,11 @@ export class FuelListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
-      this.svc.fetchLatestFuels().subscribe((res) => {
+    this.subscriptions.push(modal.afterClose.subscribe(() => {
+      this.subscriptions.push(this.svc.fetchLatestFuels().subscribe((res) => {
         this.currentItems = res;
-      });
-    });
+      }));
+    }));
   }
 
   currentItemSelect(item: any) {
@@ -77,21 +79,25 @@ export class FuelListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteFuel(this.currentItem?.id).subscribe({
+        this.subscriptions.push(this.svc.deleteFuel(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.svc.fetchLatestFuels().subscribe((res) => {
+            this.subscriptions.push(this.svc.fetchLatestFuels().subscribe((res) => {
               this.currentItems = res;
-            });
+            }));
           },
           error: (error) => {
             this.message.error(error.status + ' ' + error.error.message);
           }
-        });
+        }));
       },
       nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

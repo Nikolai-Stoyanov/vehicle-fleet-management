@@ -30,7 +30,4 @@ export class DefaultLayoutComponent implements OnInit {
     this.authService.logout();
   }
 
-  changeSelection($event: Event) {
-    console.log($event)
-  }
 }

@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {FuelService} from "../../fuel.service";
 import {FuelProviderType, FuelType} from "../../fuel";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-fuel-provider-form',
   templateUrl: './fuel-provider-form.component.html',
   styleUrls: ['./fuel-provider-form.component.scss']
 })
-export class FuelProviderFormComponent implements OnInit {
+export class FuelProviderFormComponent implements OnInit, OnDestroy  {
   public form!: FormGroup;
   public currentItem: any;
   public currentItemId
   public fuelOptions: any[]=[];
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,16 +29,16 @@ export class FuelProviderFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.svc.fetchLatestFuels().subscribe((res:FuelType[]) => {
+    this.subscriptions.push(this.svc.fetchLatestFuels().subscribe((res:FuelType[]) => {
       res.forEach(item => {
         this.fuelOptions.push({ label: item.name,value: item});
       })
-    })
+    }));
     if (this.currentItemId) {
-      this.svc.fetchSupplierById(this.currentItemId).subscribe((res:FuelProviderType) => {
+      this.subscriptions.push(this.svc.fetchSupplierById(this.currentItemId).subscribe((res:FuelProviderType) => {
         this.currentItem = res;
         this.getForm();
-      })
+      }));
     }else {
       this.getForm();
     }
@@ -44,17 +46,9 @@ export class FuelProviderFormComponent implements OnInit {
 
   getForm(){
     this.form = this.fb.group({
-      id: this.fb.control({
-        value: this.currentItem?.id || null,
-        disabled: true
-      }),
-      name: this.fb.control(
-        this.currentItem?.name || null,
-        Validators.required
-      ),
-      description: this.fb.control(
-        this.currentItem?.description || null
-      ),
+      id: this.fb.control({value: this.currentItem?.id || null, disabled: true}),
+      name: this.fb.control(this.currentItem?.name || null, Validators.required),
+      description: this.fb.control(this.currentItem?.description || null),
       fuelOptions: this.fb.array(
         this.currentItem?.fuelList
           ? this.currentItem.fuelList.map((options: any) =>
@@ -101,7 +95,7 @@ export class FuelProviderFormComponent implements OnInit {
     }
 
     if (!this.currentItem?.id) {
-      this.svc.createSupplier(formObject).subscribe({
+      this.subscriptions.push(this.svc.createSupplier(formObject).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -109,9 +103,9 @@ export class FuelProviderFormComponent implements OnInit {
         error: (error: any) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      })
+      }));
     }else {
-      this.svc.updateSupplier(this.currentItem?.id,formObject).subscribe({
+      this.subscriptions.push(this.svc.updateSupplier(this.currentItem?.id,formObject).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -119,8 +113,11 @@ export class FuelProviderFormComponent implements OnInit {
         error: (error: any) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      })
+      }));
     }
+  }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

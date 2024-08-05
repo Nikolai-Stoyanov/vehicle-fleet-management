@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -8,18 +8,20 @@ import { CarPersonsService } from '../car-persons.service';
 import {CarPerson} from "../car-person";
 
 import { TableColumnInterface } from '../../../../shared/dummy-table';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-car-persons-list',
   templateUrl: './car-persons-list.component.html',
   styleUrls: ['./car-persons-list.component.scss'],
 })
-export class CarPersonsListComponent implements OnInit {
+export class CarPersonsListComponent implements OnInit, OnDestroy {
 
   public currentItems: CarPerson[] | undefined;
   public currentItem:any;
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private svc: CarPersonsService,
@@ -28,16 +30,15 @@ export class CarPersonsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.svc.getColumns().subscribe((res) => {
+    this.subscriptions.push(this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
-
-    });
+    }));
 
     this.loading = true;
-    this.svc.fetchLatest().subscribe((res) => {
+    this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
-    });
+    }));
   }
 
   editPerson(item?: CarPerson) {
@@ -57,11 +58,11 @@ export class CarPersonsListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
-      this.svc.fetchLatest().subscribe((res) => {
+    this.subscriptions.push(modal.afterClose.subscribe(() => {
+      this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
         this.currentItems = res;
-      });
-    });
+      }));
+    }));
   }
 
   removePerson() {
@@ -71,17 +72,17 @@ export class CarPersonsListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deletePerson(this.currentItem?.id).subscribe({
+        this.subscriptions.push( this.svc.deletePerson(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.svc.fetchLatest().subscribe((res) => {
+            this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
               this.currentItems = res;
-            });
+            }));
           },
           error: (error) => {
             this.message.error(error.status + ' ' + error.error.message);
           }
-        });
+        }));
       },
       nzCancelText: $localize`No`,
       nzOnCancel: () => {
@@ -95,5 +96,9 @@ export class CarPersonsListComponent implements OnInit {
     }else {
       this.currentItem = item;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

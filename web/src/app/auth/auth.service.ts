@@ -1,11 +1,13 @@
 import {Injectable, Inject} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {BehaviorSubject, Observable} from 'rxjs';
-import {mergeMap, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 
 import {ENVIRONMENT} from '../shared/shared';
 import {Router} from "@angular/router";
+
+import {decodeJwt} from 'jose';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -14,7 +16,7 @@ export class AuthenticationService {
 
   constructor(
     private httpClient: HttpClient,
-    @Inject(ENVIRONMENT) protected env: any, // private appConfigService: AppConfigService
+    @Inject(ENVIRONMENT) protected env: any,
     private router: Router
   ) {
     // @ts-ignore
@@ -50,18 +52,31 @@ export class AuthenticationService {
   }
 
 
-  logout(error?: any) {
-    try {
-      localStorage.removeItem('currentUser');
-      this.currentUserSubject.next(null);
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
+    return true
 
-      this.httpClient.post<any>('/logout', null);
-      this.router.navigate(['/home']).then(() => {
-        window.location.reload();
-      });
-      return true;
-    } catch (err) {
-      return false;
+  }
+
+  isTokenValid() {
+    // @ts-ignore
+    const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+    if (token) {
+      let claims;
+      try {
+        claims = decodeJwt(token)
+      } catch (error) {
+        console.log(error);
+      }
+      const now = Date.now()
+      if (now < claims.exp) {
+        return;
+      }
     }
+    this.logout()
   }
 }

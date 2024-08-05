@@ -3,12 +3,15 @@ import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from '@ang
 
 import {catchError} from 'rxjs/operators';
 import {throwError, Observable} from 'rxjs';
+import {AuthenticationService} from "../auth/auth.service";
 
 
 @Injectable({providedIn: 'root'})
 export class ResponseInterceptor implements HttpInterceptor {
 
-  constructor(  ) {
+  constructor(
+    private authService: AuthenticationService,
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -18,7 +21,7 @@ export class ResponseInterceptor implements HttpInterceptor {
           case 400:
             return this.handle400Error(error);
           case 401:
-            return this.handle401Error(error);
+            return this.handle401Error(req, next, error);
           default:
             return this.handleDefault(error);
         }
@@ -30,7 +33,8 @@ export class ResponseInterceptor implements HttpInterceptor {
     return throwError(error);
   }
 
-  handle401Error(errorObj: any): Observable<any> {
+  handle401Error(req: HttpRequest<any>, next: HttpHandler, errorObj: any): Observable<any> {
+    this.authService.isTokenValid();
     return throwError(errorObj);
   }
 

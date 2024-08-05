@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -7,18 +7,20 @@ import {FuelService} from "../../fuel.service";
 import {TableColumnInterface} from "../../../../../shared/dummy-table";
 import {FuelProviderType} from "../../fuel";
 import {FuelProviderFormComponent} from "../fuel-provider-form";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-fuel-provider-list',
   templateUrl: './fuel-provider-list.component.html',
   styleUrls: ['./fuel-provider-list.component.scss'],
 })
-export class FuelProviderListComponent implements OnInit {
+export class FuelProviderListComponent implements OnInit, OnDestroy {
 
   public currentItems: FuelProviderType[]=[];
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
   public currentItem: any;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private svc: FuelService,
@@ -27,15 +29,15 @@ export class FuelProviderListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.svc.getFuelProviderColumns().subscribe((res) => {
+    this.subscriptions.push(this.svc.getFuelProviderColumns().subscribe((res) => {
       this.allTableColumns = res;
-    });
+    }));
 
     this.loading = true;
-    this.svc.fetchLatestSuppliers().subscribe((res) => {
+    this.subscriptions.push(this.svc.fetchLatestSuppliers().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
-    });
+    }));
   }
 
   editFuelProvider(item?: FuelProviderType) {
@@ -55,11 +57,11 @@ export class FuelProviderListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
-      this.svc.fetchLatestSuppliers().subscribe((res) => {
+    this.subscriptions.push( modal.afterClose.subscribe(() => {
+      this.subscriptions.push(this.svc.fetchLatestSuppliers().subscribe((res) => {
         this.currentItems = res;
-      });
-    });
+      }));
+    }));
   }
 
   currentItemSelect(item: FuelProviderType) {
@@ -77,21 +79,25 @@ export class FuelProviderListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteSupplier(this.currentItem?.id).subscribe({
+        this.subscriptions.push(this.svc.deleteSupplier(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.svc.fetchLatestSuppliers().subscribe((res) => {
+            this.subscriptions.push( this.svc.fetchLatestSuppliers().subscribe((res) => {
               this.currentItems = res;
-            });
+            }));
           },
           error: (error) => {
             this.message.error(error.status + ' ' + error.error.message);
           }
-        });
+        }));
       },
       nzCancelText: $localize`No`,
       nzOnCancel: () => {
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

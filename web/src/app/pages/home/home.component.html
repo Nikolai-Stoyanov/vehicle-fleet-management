@@ -1,22 +1,30 @@
-<div class="wrapper" >
-  <div style="color: aquamarine; background: rgba(198,195,195,0.89); text-align: center;vertical-align:auto;width: 40%">
-    <h1 >
+<div class="wrapper">
+  <div style="background: rgba(198,195,195,0.89);vertical-align:auto;width: 40%">
+    <h1 style="text-align: center;">
       <span i18n>Hello to our site </span>
-      <span *ngIf="currentUser?.username">{{ currentUser?.username}}</span>
-      <span *ngIf="!currentUser?.username" i18n>Guest</span>
+      <span *ngIf="currentUser?.username"> {{ currentUser?.username }}</span>
+      <span *ngIf="!currentUser?.username" i18n> Guest</span>
     </h1>
-    <div  *ngIf="currentUser?.username">
-      <ul style=" text-align: left;align-content: center">
-        <h2> Here you can manage: </h2>
-        <li>add car brand, and models,</li>
-        <li>add car brand, and models.</li>
-        <li>add car records and waybills</li>
+    <div *ngIf="currentUser?.username">
+      <h2 style="margin-left: 20px" i18n> Here you can manage: </h2>
+      <ul class="ul-center">
+        <div class="li-right">
+          <li i18n>add car brand, and models,</li>
+          <li i18n>add fuels, and fuel suppliers.</li>
+          <li i18n>add persons, for drivers or/and responsible.</li>
+          <li i18n>add car records and waybills</li>
+        </div>
       </ul>
+      <h3 style="margin-left: 20px" *ngIf="roles.indexOf('ADMIN')>-1" i18n>Аnd if you are admin you can manage users!</h3>
     </div>
 
-    <h3 *ngIf="!currentUser?.username">Please
-      <span class="link" routerLink="/register">register</span>  /
-      <span class="link" routerLink="/login">login</span> to view more!</h3>
+    <h3 *ngIf="!currentUser?.username" style="text-align: center;">
+      <span i18n>Please</span>
+      <span class="link" routerLink="/register" i18n>register</span>
+      <span> / </span>
+      <span class="link" routerLink="/login" i18n>login</span>
+      <span i18n> to view more!</span>
+    </h3>
   </div>
 </div>
 
