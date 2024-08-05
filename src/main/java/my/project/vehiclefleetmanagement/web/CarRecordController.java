@@ -1,9 +1,7 @@
 package my.project.vehiclefleetmanagement.web;
 
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordCreateDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordEditDTO;
-import my.project.vehiclefleetmanagement.model.dtos.car.CarRecordListDTO;
+import jakarta.validation.Valid;
+import my.project.vehiclefleetmanagement.model.dtos.car.*;
 import my.project.vehiclefleetmanagement.service.CarRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +27,13 @@ public class CarRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCarRecord(@RequestBody CarRecordCreateDTO carPersonCreateDTO) {
-
+    public ResponseEntity<String> createCarRecord(@RequestBody @Valid CarRecordCreateDTO carPersonCreateDTO) {
         this.carRecordService.createCarRecord(carPersonCreateDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCarRecord(@PathVariable("id") Long id,@RequestBody CarRecordEditDTO carPersonEditDTO) {
-
+    public ResponseEntity<String> updateCarRecord(@PathVariable("id") Long id,@RequestBody @Valid CarRecordEditDTO carPersonEditDTO) {
         this.carRecordService.updateCarRecord(id, carPersonEditDTO);
         return ResponseEntity.noContent().build();
     }
@@ -54,5 +50,17 @@ public class CarRecordController {
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @GetMapping("/registrationNumber")
+    public ResponseEntity<List<RegistrationNumberDTO>> getById() {
+        return ResponseEntity
+                .ok(this.carRecordService.getAllRegistrationNumber());
+    }
+
+    @GetMapping("/registrationCertificateData/{id}")
+    public ResponseEntity<CarRecordInfoDTO> getInfoById(@PathVariable("id") Long id) {
+        return ResponseEntity
+                .ok(this.carRecordService.getCarRecordInfoByRegistrationCertificateDataId(id));
     }
 }

@@ -7,7 +7,6 @@ import my.project.vehiclefleetmanagement.model.enums.DrivingCategoryType;
 import my.project.vehiclefleetmanagement.model.enums.FuelType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "car_records")
@@ -40,11 +39,11 @@ public class CarRecord extends BaseEntity {
     @Column( name = "updated_at")
     private LocalDate updatedAt;
     @Column(nullable = false)
-    private Long totalMileage;
+    private int totalMileage;
     @Column(nullable = false)
-    private Long developmentFromMileage;
+    private int developmentFromMileage;
     @Column(nullable = false)
-    private Long developmentToMileage;
+    private int developmentToMileage;
     @Column( nullable = false)
     private String owner;
     @Column( nullable = false)

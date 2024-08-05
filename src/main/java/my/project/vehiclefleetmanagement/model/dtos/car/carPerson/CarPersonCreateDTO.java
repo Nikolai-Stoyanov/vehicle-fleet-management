@@ -21,6 +21,5 @@ public class CarPersonCreateDTO {
   private String lastName;
   @NotEmpty
   private String phoneNumber;
-  @NotEmpty
   private boolean status;
 }

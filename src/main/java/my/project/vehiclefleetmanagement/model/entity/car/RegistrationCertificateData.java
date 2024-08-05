@@ -7,7 +7,6 @@ import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
 import my.project.vehiclefleetmanagement.model.enums.VehicleTypeEnum;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "registration_certificate_data")
@@ -42,7 +41,7 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(nullable = false,name = "engine_power")
     private int enginePower;
 
-    @Column(name = "seating_capacity")
+    @Column(nullable = false,name = "seating_capacity")
     private int seatingCapacity;
 
     @Column(nullable = false,name = "primary_color")
@@ -51,7 +50,7 @@ public class RegistrationCertificateData extends BaseEntity {
     @Column(name = "additional_color")
     private String additionalColor;
 
-    @Column(nullable = false,name = "load_capacity")
+    @Column(name = "load_capacity")
     private int loadCapacity;
 
     @Enumerated(EnumType.STRING)

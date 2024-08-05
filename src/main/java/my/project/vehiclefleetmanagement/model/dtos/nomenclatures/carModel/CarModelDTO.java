@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.BrandDTO;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -16,7 +15,7 @@ public class CarModelDTO {
   private int id;
   private String name;
   private String description;
-  private LocalDate year;
+  private String year;
   private BrandDTO brand;
   private boolean status;
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -81,10 +82,18 @@ public class CarBrandServiceImpl implements CarBrandService {
 
     @Override
     public void updateBrand(Long id, CarBrandEditDTO carBrandEditDTO) {
-        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById((long) carBrandEditDTO.getId());
+        Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById(carBrandEditDTO.getId());
         if (carBrandOptional.isEmpty()) {
             throw new AppException("Car brand is not found!", HttpStatus.NOT_FOUND);
         }
+
+        Optional<CarBrand> brandByName = this.carBrandRepository.findByName(carBrandEditDTO.getName());
+        if (!Objects.equals(carBrandEditDTO.getName(), carBrandOptional.get().getName()) && brandByName.isPresent()) {
+            throw new AppException(
+                    String.format("Car brand with name %s is already exists!",carBrandEditDTO.getName()),
+                    HttpStatus.BAD_REQUEST);
+        }
+
         CarBrand mappedEntity = modelMapper.map(carBrandEditDTO, CarBrand.class);
         mappedEntity.setModels(carBrandOptional.get().getModels());
         this.carBrandRepository.save(mappedEntity);

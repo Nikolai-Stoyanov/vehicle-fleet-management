@@ -1,11 +1,11 @@
 package my.project.vehiclefleetmanagement.web;
 
+import jakarta.validation.Valid;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationEditDTO;
 import my.project.vehiclefleetmanagement.model.dtos.declaration.DeclarationListDTO;
 import my.project.vehiclefleetmanagement.service.DeclarationService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,38 +30,25 @@ public class DeclarationController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createDeclaration(@RequestBody DeclarationCreateDTO declarationCreateDTO) {
-
-        boolean success = declarationService.createDeclaration(declarationCreateDTO);
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Declaration already exist!");
-        }
+    public ResponseEntity<String> createDeclaration(@RequestBody @Valid DeclarationCreateDTO declarationCreateDTO) {
+        declarationService.createDeclaration(declarationCreateDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateDeclaration(@PathVariable("id") Long id,@RequestBody DeclarationEditDTO declarationEditDTO) {
-
-        boolean success = declarationService.updateDeclaration(id,declarationEditDTO);
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Declaration not found!");
-        }
+    public ResponseEntity<String> updateDeclaration(@PathVariable("id") Long id,@RequestBody @Valid DeclarationEditDTO declarationEditDTO) {
+        declarationService.updateDeclaration(id,declarationEditDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DeclarationDTO> getById(@PathVariable("id") Long id) {
-        return ResponseEntity
-                .ok(declarationService.getDeclarationById(id));
+        return ResponseEntity.ok(declarationService.getDeclarationById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
         declarationService.deleteDeclaration(id);
-        return ResponseEntity
-                .noContent()
-                .build();
+        return ResponseEntity.noContent().build();
     }
 }

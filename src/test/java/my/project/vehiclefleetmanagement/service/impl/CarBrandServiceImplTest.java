@@ -2,11 +2,12 @@ package my.project.vehiclefleetmanagement.service.impl;
 
 import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandCreateDTO;
+import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandEditDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandListDTO;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarBrand;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.CarBrandRepository;
+import my.project.vehiclefleetmanagement.repository.CarBrandRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,9 +105,11 @@ public class CarBrandServiceImplTest {
 
         when(mockCarBrandRepository.findAll()).thenReturn(carBrandList);
 
-        toTest.getAllBrands();
+        List<CarBrandListDTO> result=  toTest.getAllBrands();
 
-        Assertions.assertEquals(carBrandListDTOS.toArray().length, carBrandList.toArray().length);
+        Assertions.assertEquals(carBrandListDTOS.toArray().length, result.toArray().length);
+        Assertions.assertEquals(carBrandListDTOS.get(0).getName(), result.get(0).getName());
+        Assertions.assertEquals(carBrandListDTOS.get(1).getCompany(), result.get(1).getCompany());
     }
 
     @Test
@@ -114,7 +117,7 @@ public class CarBrandServiceImplTest {
         CarBrand carBrand = new CarBrand("Opel", "Opel", "Opel",
                 List.of(new CarModel("Corsa", "", LocalDate.now(), new CarBrand(), true)), true);
 
-        CarBrandListDTO carBrandListDTO = new CarBrandListDTO(1, "Opel", "", "Opel",
+        CarBrandDTO carBrandListDTO = new CarBrandDTO(1, "Opel", "", "Opel",
                 List.of("Corsa"), true);
 
         Long id = 1L;
@@ -123,11 +126,11 @@ public class CarBrandServiceImplTest {
                 .thenReturn(Optional.of(carBrand));
 
 
-        toTest.getBrandById(id);
+        CarBrandDTO result=  toTest.getBrandById(id);
 
-        assertEquals(carBrandListDTO.getName(), carBrand.getName());
-        assertEquals(carBrandListDTO.getCompany(), carBrand.getCompany());
-        assertEquals(carBrandListDTO.getModels().toArray().length, carBrand.getModels().toArray().length);
+        assertEquals(carBrandListDTO.getName(), result.getName());
+        assertEquals(carBrandListDTO.getCompany(), result.getCompany());
+        assertEquals(carBrandListDTO.getModels().toArray().length, result.getModels().toArray().length);
     }
 
     @Test
@@ -212,6 +215,29 @@ public class CarBrandServiceImplTest {
         );
 
         String expectedMessage = "Car brand is not found!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    @Test
+    void testUpdateBrandNameFailedBrandNameExist() {
+        CarBrand carBrand1 = new CarBrand("Opel", "Opel", "Opel",
+                List.of(new CarModel()), true);
+        CarBrand carBrand2= new CarBrand("Honda", "Honda", "Honda", List.of(new CarModel()), true);
+        CarBrandEditDTO carBrandEditDTO =
+                new CarBrandEditDTO(1,"Honda", "op", "Opel AD", List.of("Corsa"), true);
+        Long id = 1L;
+
+        when(mockCarBrandRepository.findById(id))
+                .thenReturn(Optional.of(carBrand1));
+        when(mockCarBrandRepository.findByName(carBrandEditDTO.getName()))
+                .thenReturn(Optional.of(carBrand2));
+
+        Exception exception = Assertions.assertThrows(
+                AppException.class,
+                () -> toTest.updateBrand(id, carBrandEditDTO)
+        );
+
+        String expectedMessage = "Car brand with name Honda is already exists";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }

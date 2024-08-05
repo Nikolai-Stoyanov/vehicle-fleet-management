@@ -1,5 +1,6 @@
 package my.project.vehiclefleetmanagement.web;
 
+import jakarta.validation.Valid;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarModelCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarModelDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carModel.CarModelEditDTO;
@@ -27,13 +28,13 @@ public class CarModelController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCarModel(@RequestBody CarModelCreateDTO carModelCreateDTO) {
+    public ResponseEntity<String> createCarModel(@RequestBody @Valid CarModelCreateDTO carModelCreateDTO) {
         carModelService.createModel(carModelCreateDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCarModel(@PathVariable("id") Long id, @RequestBody CarModelEditDTO carModelEditDTO) {
+    public ResponseEntity<String> updateCarModel(@PathVariable("id") Long id, @RequestBody @Valid CarModelEditDTO carModelEditDTO) {
         carModelService.updateModel(id, carModelEditDTO);
         return ResponseEntity.noContent().build();
     }

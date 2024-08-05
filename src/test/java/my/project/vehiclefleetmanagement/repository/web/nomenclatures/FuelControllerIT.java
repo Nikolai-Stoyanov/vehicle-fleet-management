@@ -1,9 +1,9 @@
-package my.project.vehiclefleetmanagement.web.nomenclatures;
+package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
 
 import com.jayway.jsonpath.JsonPath;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelRepository;
-import my.project.vehiclefleetmanagement.repository.nomenclatures.FuelSupplierRepository;
+import my.project.vehiclefleetmanagement.repository.FuelRepository;
+import my.project.vehiclefleetmanagement.repository.FuelSupplierRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -162,7 +162,7 @@ public class FuelControllerIT {
 
     private void createTestFuelList() {
         fuelRepository.save(
-                new FuelEntity("LPG", "description1", true));
+                new FuelEntity("SuperDiesel", "description1", true));
         fuelRepository.save(
                 new FuelEntity("Diesel", "description8", true));
 

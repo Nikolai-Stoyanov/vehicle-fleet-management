@@ -1,31 +1,32 @@
 package my.project.vehiclefleetmanagement.model.dtos.declaration;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import my.project.vehiclefleetmanagement.model.entity.car.DeclarationFuel;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeclarationCreateDTO {
-
   @NotEmpty
-  private long carRecordId;
+  private String registrationNumber;
   private String period;
   @NotEmpty
-  private LocalDate date;
+  private String date;
+  @NotNull
+  private int lastMileage;
+  @NotNull
+  private int newMileage;
+  @NotNull
+  private int fuelKind;
+  @NotNull
+  private int fuelSupplier;
   @NotEmpty
-  private long lastMileage;
+  private double fuelAmount;
   @NotEmpty
-  private long newMileage;
-  @NotEmpty
-  private List<DeclarationFuel> fuels;
+  private double fuelPrice;
 }
