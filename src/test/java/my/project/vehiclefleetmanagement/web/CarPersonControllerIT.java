@@ -1,9 +1,8 @@
-package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
+package my.project.vehiclefleetmanagement.web;
 
 import com.jayway.jsonpath.JsonPath;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
-import my.project.vehiclefleetmanagement.repository.FuelRepository;
-import my.project.vehiclefleetmanagement.repository.FuelSupplierRepository;
+import my.project.vehiclefleetmanagement.model.entity.car.CarPerson;
+import my.project.vehiclefleetmanagement.repository.CarPersonRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,64 +27,61 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(
         username = "Pesho",
         roles = {"USER", "ADMIN"})
-public class FuelControllerIT {
+public class CarPersonControllerIT {
     @Autowired
-    private FuelRepository fuelRepository;
+    private CarPersonRepository carPersonRepository;
 
-    @Autowired
-    private FuelSupplierRepository fuelSupplierRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
     @AfterEach
     public void tearDown() {
-
-        fuelSupplierRepository.deleteAll();
-        fuelRepository.deleteAll();
+        carPersonRepository.deleteAll();
     }
 
 
     @Test
-    public void testGetAllFuels() throws Exception {
-        createTestFuelList();
+    public void testGetAllCarPersons() throws Exception {
+        createCarPersonList();
 
-        mockMvc.perform(get("/fuel")
+        mockMvc.perform(get("/carPerson")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$.[0].name", is("LPG")))
-                .andExpect(jsonPath("$.[1].name", is("Diesel")));
+                .andExpect(jsonPath("$.[0].phoneNumber", is("0899112233")))
+                .andExpect(jsonPath("$.[1].phoneNumber", is("0899115544")));
     }
 
     @Test
-    public void testGetFuelById() throws Exception {
-        FuelEntity actualEntity = createTestFuel();
+    public void testGetCarPersonById() throws Exception {
+        CarPerson actualEntity = createCarPerson();
 
-        mockMvc.perform(get("/fuel/{id}", actualEntity.getId())
+        mockMvc.perform(get("/carPerson/{id}", actualEntity.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(actualEntity.getId().intValue())))
-                .andExpect(jsonPath("$.name", is(actualEntity.getName())))
-                .andExpect(jsonPath("$.description", is(actualEntity.getDescription())));
+                .andExpect(jsonPath("$.firstName", is(actualEntity.getFirstName())))
+                .andExpect(jsonPath("$.phoneNumber", is(actualEntity.getPhoneNumber())));
     }
 
     @Test
-    public void testGetFuelByIdNotFound() throws Exception {
+    public void testGetCarPersonByIdNotFound() throws Exception {
         mockMvc
-                .perform(get("/fuel/{id}", "1000000")
+                .perform(get("/carPerson/{id}", "1000000")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testCreateFuel() throws Exception {
-        MvcResult result = mockMvc.perform(post("/fuel")
+    public void testCreateCarPerson() throws Exception {
+        MvcResult result = mockMvc.perform(post("/carPerson")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                   {
-                    "name": "Disel",
-                    "description": "description",
+                    "firstName": "Georgi",
+                    "lastName": "Petrov",
+                    "phoneNumber": "0888585252",
                     "status": "true"
                   }
                 """)
@@ -97,22 +93,22 @@ public class FuelControllerIT {
         String message = JsonPath.read(body, "$.message");
 
 
-        Optional<FuelEntity> optionalFuel = fuelRepository.findByName("Disel");
+        Optional<CarPerson> optional = carPersonRepository.findByPhoneNumber("0888585252");
 
-        Assertions.assertTrue(optionalFuel.isPresent());
+        Assertions.assertTrue(optional.isPresent());
 
-        FuelEntity fuel = optionalFuel.get();
+        CarPerson fuel = optional.get();
 
-        Assertions.assertEquals("Fuel successfully created", message);
-        Assertions.assertEquals("Disel", fuel.getName());
-        Assertions.assertEquals("description", fuel.getDescription());
+        Assertions.assertEquals("Person successfully created", message);
+        Assertions.assertEquals("Petrov", fuel.getLastName());
+        Assertions.assertEquals("0888585252", fuel.getPhoneNumber());
 
     }
 
 //    @Test
 //    public void testUpdateFuel() throws Exception {
 //        FuelEntity actualEntity = createTestFuel();
-//        MvcResult result = mockMvc.perform(put("/fuel/{id}",actualEntity.getId())
+//        MvcResult result = mockMvc.perform(put("/carPerson/{id}",actualEntity.getId())
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content("""
 //                  {
@@ -143,28 +139,28 @@ public class FuelControllerIT {
 //    }
 
     @Test
-    public void testDeleteFuel() throws Exception {
+    public void testDeleteCarPerson() throws Exception {
 
-        FuelEntity actualEntity = createTestFuel();
+        CarPerson actualEntity = createCarPerson();
 
-        mockMvc.perform(delete("/fuel/{id}", actualEntity.getId())
+        mockMvc.perform(delete("/carPerson/{id}", actualEntity.getId())
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
 
-        Assertions.assertTrue(fuelRepository.findById(actualEntity.getId()).isEmpty());
+        Assertions.assertTrue(carPersonRepository.findById(actualEntity.getId()).isEmpty());
     }
 
-    private FuelEntity createTestFuel() {
-        return fuelRepository.save(
-                new FuelEntity("LPG", "description",true)
+    private CarPerson createCarPerson() {
+        return carPersonRepository.save(
+                new CarPerson("Ivan", "Petrov", "0899112233", true, "Ivan Petrov")
         );
     }
 
-    private void createTestFuelList() {
-        fuelRepository.save(
-                new FuelEntity("SuperDiesel", "description1", true));
-        fuelRepository.save(
-                new FuelEntity("Diesel", "description8", true));
+    private void createCarPersonList() {
+        carPersonRepository.save(
+                new CarPerson("Ivan", "Petrov", "0899112233", true, "Ivan Petrov"));
+        carPersonRepository.save(
+                new CarPerson("Petar", "Ivanov", "0899115544", true, "Petar Ivanov"));
 
     }
 }

@@ -1,15 +1,17 @@
-package my.project.vehiclefleetmanagement.web;
+package my.project.vehiclefleetmanagement.repository.web;
 
-import my.project.vehiclefleetmanagement.model.dtos.user.CredentialsDto;
 import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
+import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
+import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
+import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,7 +29,20 @@ public class AuthControllerIT {
     private UserRepository userRepository;
 
     @Autowired
+    private UserRolesRepository userRolesRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    public void setUp() {
+        userRolesRepository.save(
+                new UserRole(1L, UserRoleEnum.ADMIN)
+        );
+        userRolesRepository.save(
+                new UserRole(2L, UserRoleEnum.USER)
+        );
+    }
 
     @Test
     void testRegister() throws Exception {

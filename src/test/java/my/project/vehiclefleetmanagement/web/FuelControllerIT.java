@@ -1,7 +1,7 @@
-package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
+package my.project.vehiclefleetmanagement.web;
 
 import com.jayway.jsonpath.JsonPath;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelSupplier;
+import my.project.vehiclefleetmanagement.model.entity.nomenclatures.FuelEntity;
 import my.project.vehiclefleetmanagement.repository.FuelRepository;
 import my.project.vehiclefleetmanagement.repository.FuelSupplierRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +15,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(
         username = "Pesho",
         roles = {"USER", "ADMIN"})
-public class FuelSupplierControllerIT {
+public class FuelControllerIT {
     @Autowired
     private FuelRepository fuelRepository;
 
@@ -46,23 +45,24 @@ public class FuelSupplierControllerIT {
         fuelRepository.deleteAll();
     }
 
-    @Test
-    public void testGetAllSuppliers() throws Exception {
-        createTestSupplierList();
 
-        mockMvc.perform(get("/fuelSupplier")
+    @Test
+    public void testGetAllFuels() throws Exception {
+        createTestFuelList();
+
+        mockMvc.perform(get("/fuel")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$.[0].name", is("OMV")))
-                .andExpect(jsonPath("$.[1].name", is("Petrol")));
+                .andExpect(jsonPath("$.[0].name", is("SuperDiesel")))
+                .andExpect(jsonPath("$.[1].name", is("Diesel")));
     }
 
     @Test
-    public void testGetSupplierById() throws Exception {
-        FuelSupplier actualEntity = createTestSupplier();
+    public void testGetFuelById() throws Exception {
+        FuelEntity actualEntity = createTestFuel();
 
-        mockMvc.perform(get("/fuelSupplier/{id}", actualEntity.getId())
+        mockMvc.perform(get("/fuel/{id}", actualEntity.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(actualEntity.getId().intValue())))
@@ -71,25 +71,24 @@ public class FuelSupplierControllerIT {
     }
 
     @Test
-    public void testGetSupplierByIdNotFound() throws Exception {
+    public void testGetFuelByIdNotFound() throws Exception {
         mockMvc
-                .perform(get("/fuelSupplier/{id}", "1000000")
+                .perform(get("/fuel/{id}", "1000000")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testCreateSupplier() throws Exception {
-        MvcResult result = mockMvc.perform(post("/fuelSupplier")
+    public void testCreateFuel() throws Exception {
+        MvcResult result = mockMvc.perform(post("/fuel")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                  {
-                                    "name": "OMV",
-                                    "description": "description",
-                                    "fuelList": [],
-                                    "status": "true"
-                                  }
-                                """)
+                  {
+                    "name": "Disel",
+                    "description": "description",
+                    "status": "true"
+                  }
+                """)
                 ).andExpect(status().isOk())
                 .andReturn();
 
@@ -97,30 +96,30 @@ public class FuelSupplierControllerIT {
 
         String message = JsonPath.read(body, "$.message");
 
-        Optional<FuelSupplier> optionalFuelSupplier = fuelSupplierRepository.findByName("OMV");
 
-        Assertions.assertTrue(optionalFuelSupplier.isPresent());
+        Optional<FuelEntity> optionalFuel = fuelRepository.findByName("Disel");
 
-        FuelSupplier fuel = optionalFuelSupplier.get();
+        Assertions.assertTrue(optionalFuel.isPresent());
 
-        Assertions.assertEquals("Fuel supplier successfully created", message);
-        Assertions.assertEquals("OMV", fuel.getName());
+        FuelEntity fuel = optionalFuel.get();
+
+        Assertions.assertEquals("Fuel successfully created", message);
+        Assertions.assertEquals("Disel", fuel.getName());
         Assertions.assertEquals("description", fuel.getDescription());
 
     }
 
 //    @Test
-//    public void testUpdateSupplier() throws Exception {
-//        FuelSupplier actualEntity = createTestSupplier();
-//        MvcResult result = mockMvc.perform(put("/fuelSupplier/{id}",actualEntity.getId())
+//    public void testUpdateFuel() throws Exception {
+//        FuelEntity actualEntity = createTestFuel();
+//        MvcResult result = mockMvc.perform(put("/fuel/{id}",actualEntity.getId())
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content("""
 //                  {
 //                    "id": %d
-//                    "name": "OMV",
-//                    "description": "description2",
-//                    "fuelList": [],
-//                    "status": "true"
+//                    "name": "Disel",
+//                    "description": "description",
+//                    "status": true
 //                  }
 //                """.formatted(actualEntity.getId()))
 //                ).andExpect(status().isOk())
@@ -131,41 +130,41 @@ public class FuelSupplierControllerIT {
 //        String message = JsonPath.read(body, "$.message");
 //
 //
-//        Optional<FuelSupplier> optionalFuelSupplier = fuelSupplierRepository.findByName("OMV");
+//        Optional<FuelEntity> optionalFuel = fuelRepository.findByName("Disel");
 //
-//        Assertions.assertTrue(optionalFuelSupplier.isPresent());
+//        Assertions.assertTrue(optionalFuel.isPresent());
 //
-//        FuelSupplier fuel = optionalFuelSupplier.get();
+//        FuelEntity fuel = optionalFuel.get();
 //
 //        Assertions.assertEquals("Fuel successfully updated", message);
-//        Assertions.assertEquals("OMV", fuel.getName());
-//        Assertions.assertEquals("description2", fuel.getDescription());
+//        Assertions.assertEquals("Disel", fuel.getName());
+//        Assertions.assertEquals("description", fuel.getDescription());
 //
 //    }
 
     @Test
-    public void testDeleteSupplier() throws Exception {
+    public void testDeleteFuel() throws Exception {
 
-        FuelSupplier actualEntity = createTestSupplier();
+        FuelEntity actualEntity = createTestFuel();
 
-        mockMvc.perform(delete("/fuelSupplier/{id}", actualEntity.getId())
+        mockMvc.perform(delete("/fuel/{id}", actualEntity.getId())
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
 
         Assertions.assertTrue(fuelRepository.findById(actualEntity.getId()).isEmpty());
     }
 
-    private FuelSupplier createTestSupplier() {
-        return fuelSupplierRepository.save(
-                new FuelSupplier("OMV", "description1", List.of(), true)
+    private FuelEntity createTestFuel() {
+        return fuelRepository.save(
+                new FuelEntity("LPG", "description",true)
         );
     }
 
-    private void createTestSupplierList() {
-        fuelSupplierRepository.save(
-                new FuelSupplier("OMV", "description1", List.of(), true));
-        fuelSupplierRepository.save(
-                new FuelSupplier("Petrol", "description8", List.of(), true));
+    private void createTestFuelList() {
+        fuelRepository.save(
+                new FuelEntity("SuperDiesel", "description1", true));
+        fuelRepository.save(
+                new FuelEntity("Diesel", "description8", true));
 
     }
 }

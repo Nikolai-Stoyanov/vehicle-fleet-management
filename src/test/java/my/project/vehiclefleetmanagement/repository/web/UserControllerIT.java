@@ -1,11 +1,13 @@
-package my.project.vehiclefleetmanagement.web;
+package my.project.vehiclefleetmanagement.repository.web;
 
 import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
 import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
+import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,12 +34,27 @@ public class UserControllerIT {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Autowired
+    private UserRolesRepository userRolesRepository;
+
     @Autowired
     private MockMvc mockMvc;
+
+    @BeforeEach
+    public void setUp() {
+        userRolesRepository.save(
+                new UserRole(1L, UserRoleEnum.ADMIN)
+        );
+        userRolesRepository.save(
+                new UserRole(2L, UserRoleEnum.USER)
+        );
+    }
 
     @AfterEach
     public void tearDown() {
         userRepository.deleteAll();
+        userRolesRepository.deleteAll();
     }
 
     @Test
@@ -121,17 +138,17 @@ public class UserControllerIT {
     private UserEntity createTestUser() {
         return userRepository.save(
                 new UserEntity("gosho@abv.bg", "1234", "Gosho",
-                        List.of(new UserRole(1L, UserRoleEnum.ADMIN)))
+                        List.of())
         );
     }
 
     private void createTestUserList() {
         userRepository.save(
                 new UserEntity("gosho@abv.bg", "1234", "Gosho",
-                        List.of(new UserRole(1L, UserRoleEnum.ADMIN))));
+                        List.of()));
         userRepository.save(
                 new UserEntity("Ivan@abv.bg", "1234", "Ivan",
-                        List.of(new UserRole(2L, UserRoleEnum.USER))));
+                        List.of()));
 
     }
 }

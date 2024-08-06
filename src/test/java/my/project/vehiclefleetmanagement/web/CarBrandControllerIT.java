@@ -1,8 +1,7 @@
-package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
+package my.project.vehiclefleetmanagement.web;
 
 import com.jayway.jsonpath.JsonPath;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarBrand;
-import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarModel;
 import my.project.vehiclefleetmanagement.repository.CarBrandRepository;
 import my.project.vehiclefleetmanagement.repository.CarModelRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         username = "Pesho",
         roles = {"USER", "ADMIN"})
 public class CarBrandControllerIT {
+
     @Autowired
     private CarBrandRepository carBrandRepository;
 
@@ -41,6 +42,7 @@ public class CarBrandControllerIT {
 
     @AfterEach
     public void tearDown() {
+        carModelRepository.deleteAll();
         carBrandRepository.deleteAll();
     }
 
@@ -48,7 +50,7 @@ public class CarBrandControllerIT {
     public void testGetAllBrands() throws Exception {
         createTestCarBrandList();
 
-        mockMvc.perform(get("/carBrand")
+        mockMvc.perform(MockMvcRequestBuilders.get("/carBrand")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -154,13 +156,13 @@ public class CarBrandControllerIT {
     }
 
     private CarBrand createTestBrand() {
-        CarBrand carBrand = new CarBrand("Kia1", "description", "Kia OOD", List.of(),true);
+        CarBrand carBrand = new CarBrand("Kia", "description", "Kia OOD", List.of(),true);
         return carBrandRepository.save(carBrand);
     }
 
     private void createTestCarBrandList() {
         carBrandRepository.save(
-                new CarBrand("Kia1", "description", "Kia OOD", List.of(),true));
+                new CarBrand("Kia", "description", "Kia OOD", List.of(),true));
         carBrandRepository.save(
                 new CarBrand("Opel", "description", "Opel OOD", List.of(),true));
 

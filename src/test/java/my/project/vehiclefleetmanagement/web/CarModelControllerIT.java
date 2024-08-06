@@ -1,4 +1,4 @@
-package my.project.vehiclefleetmanagement.repository.web.nomenclatures;
+package my.project.vehiclefleetmanagement.web;
 
 import com.jayway.jsonpath.JsonPath;
 import my.project.vehiclefleetmanagement.model.entity.nomenclatures.CarBrand;
