@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -8,18 +8,20 @@ import { CarBrandsService } from '../car-brands.service';
 import {CarBrand} from "../car-brands";
 
 import { TableColumnInterface } from '../../../../shared/dummy-table';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-car-persons-list',
   templateUrl: './car-brands-list.component.html',
   styleUrls: ['./car-brands-list.component.scss'],
 })
-export class CarBrandsListComponent implements OnInit {
+export class CarBrandsListComponent implements OnInit, OnDestroy {
 
   public currentItems: CarBrand[] | undefined;
   public currentItem:any;
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private svc: CarBrandsService,
@@ -28,15 +30,15 @@ export class CarBrandsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.svc.getColumns().subscribe((res) => {
+    this.subscriptions.push(this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
-    });
+    }));
 
     this.loading = true;
-    this.svc.fetchLatest().subscribe((res) => {
+    this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
-    });
+    }));
   }
 
   editBrand(item?: CarBrand) {
@@ -56,11 +58,11 @@ export class CarBrandsListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe(() => {
-        this.svc.fetchLatest().subscribe((res) => {
+    this.subscriptions.push(modal.afterClose.subscribe(() => {
+      this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
           this.currentItems = res;
-        });
-    });
+        }));
+    }));
   }
 
   removeBrand() {
@@ -70,17 +72,17 @@ export class CarBrandsListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteBrand(this.currentItem?.id).subscribe({
+        this.subscriptions.push(this.svc.deleteBrand(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.svc.fetchLatest().subscribe((res) => {
+            this.subscriptions.push( this.svc.fetchLatest().subscribe((res) => {
               this.currentItems = res;
-            });
+            }));
           },
           error: (error) => {
             this.message.error(error.status + ' ' + error.error.message);
           }
-        });
+        }));
       },
       nzCancelText: $localize`No`,
       nzOnCancel: () => {
@@ -94,5 +96,9 @@ export class CarBrandsListComponent implements OnInit {
     }else {
       this.currentItem = item;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

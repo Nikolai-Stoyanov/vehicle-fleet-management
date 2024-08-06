@@ -230,8 +230,8 @@
         </vfm-form-item>
       </div>
       <div nz-col nzSpan="4">
-        <vfm-form-item label="" controlSpan="24" i18n-label>
-          <label nz-checkbox id="status" formControlName="status"
+        <vfm-form-item label="" controlSpan="24" >
+          <label nz-checkbox id="status" formControlName="status" i18n
           >Is active</label>
         </vfm-form-item>
       </div>
@@ -240,19 +240,19 @@
 
   <ng-template #cardTitleTemplate>
     <div nz-row nzGutter="12">
-      <div nz-col nzSpan="6">
+      <div nz-col nzSpan="4">
         <vfm-form-item label="Id" labelSpan="4" controlSpan="20" i18n-label>
           <vfm-text-input id="id" formControlName="id"></vfm-text-input>
         </vfm-form-item>
       </div>
-      <div nz-col nzSpan="5">
+      <div nz-col nzSpan="4">
         <vfm-form-item label="Driving category" labelSpan="12" controlSpan="12" i18n-label>
           <vfm-select id="drivingCategory" formControlName="drivingCategory" [options]="categoryOptions" i18n>
           </vfm-select>
         </vfm-form-item>
       </div>
       <ng-container formGroupName="registrationCertificateData">
-        <div nz-col nzSpan="6">
+        <div nz-col nzSpan="7">
           <vfm-form-item label="Registration number" labelSpan="12" controlSpan="12" i18n-label>
             <vfm-text-input
               id="registrationNumber"
@@ -261,7 +261,7 @@
           </vfm-form-item>
         </div>
 
-        <div nz-col nzSpan="7">
+        <div nz-col nzSpan="9">
           <vfm-form-item label="First registration date" labelSpan="10" controlSpan="14" i18n-label>
             <vfm-datepicker
               id="firstRegistrationDate"

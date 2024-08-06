@@ -1,20 +1,22 @@
-import { Component ,OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FuelType} from "../../fuel";
 import {FuelService} from "../../fuel.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-fuel-form',
   templateUrl: './fuel-form.component.html',
   styleUrls: ['./fuel-form.component.scss']
 })
-export class FuelFormComponent implements OnInit {
+export class FuelFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public currentItem: any;
   public currentItemId:any;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,29 +29,20 @@ export class FuelFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.currentItemId) {
-      this.svc.fetchFuelById(this.currentItemId).subscribe((res:FuelType) => {
+      this.subscriptions.push(  this.svc.fetchFuelById(this.currentItemId).subscribe((res:FuelType) => {
         this.currentItem = res;
         this.getForm();
-      })
+      }));
     }else {
       this.getForm();
     }
-
   }
 
   getForm(): void {
     this.form = this.fb.group({
-      id: this.fb.control({
-        value: this.currentItem?.id || null,
-        disabled: true
-      }),
-      name: this.fb.control(
-        this.currentItem?.name || null,
-        Validators.required
-      ),
-      description: this.fb.control(
-        this.currentItem?.description || null
-      ),
+      id: this.fb.control({value: this.currentItem?.id || null, disabled: true}),
+      name: this.fb.control(this.currentItem?.name || null, Validators.required),
+      description: this.fb.control(this.currentItem?.description || null),
       status: this.fb.control(this.currentItem?.status || null)
     });
   }
@@ -68,7 +61,7 @@ export class FuelFormComponent implements OnInit {
     }
 
     if (!this.currentItem?.id) {
-      this.svc.createFuel(formObject).subscribe({
+      this.subscriptions.push( this.svc.createFuel(formObject).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -76,9 +69,9 @@ export class FuelFormComponent implements OnInit {
         error: (error: any) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      })
+      }));
     }else {
-      this.svc.updateFuel(this.currentItem?.id,formObject).subscribe({
+      this.subscriptions.push( this.svc.updateFuel(this.currentItem?.id,formObject).subscribe({
         next: (res) => {
           this.message.success(res.message);
           this.modal.destroy();
@@ -86,8 +79,11 @@ export class FuelFormComponent implements OnInit {
         error: (error: any) => {
           this.message.error(error.status + ' ' + error.error.message);
         }
-      })
+      }));
     }
+  }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

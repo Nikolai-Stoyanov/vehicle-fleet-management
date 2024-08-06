@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -8,18 +8,20 @@ import { TableColumnInterface } from '../../../shared/dummy-table';
 import { CarRecordService } from '../car-record.service';
 import { CarRecordFormComponent } from '../car-record-form';
 import {CarRecordList} from "../car-record";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'vfm-car-record-list',
   templateUrl: './car-record-list.component.html',
   styleUrls: ['./car-record-list.component.scss'],
 })
-export class CarRecordListComponent implements OnInit {
+export class CarRecordListComponent implements OnInit , OnDestroy{
   public currentItems: CarRecordList[]=[];
   public options: string[] = [];
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
   public currentItem: any;
+  public subscriptions: Subscription[] = [];
 
   constructor(
 
@@ -29,14 +31,14 @@ export class CarRecordListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.svc.getColumns().subscribe((res) => {
+    this.subscriptions.push( this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
-    });
+    }));
     this.loading = true;
-    this.svc.fetchLatestRecords().subscribe((res:any) => {
+    this.subscriptions.push(this.svc.fetchLatestRecords().subscribe((res:any) => {
       this.currentItems = res;
       this.loading = false;
-    });
+    }));
   }
 
   editRecord(item?: CarRecordList) {
@@ -56,11 +58,11 @@ export class CarRecordListComponent implements OnInit {
       },
       nzFooter: null,
     });
-    modal.afterClose.subscribe((res) => {
+    this.subscriptions.push(modal.afterClose.subscribe(() => {
       this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
         this.currentItems = res;
       });
-    });
+    }));
   }
 
   removeRecord() {
@@ -70,17 +72,17 @@ export class CarRecordListComponent implements OnInit {
       nzOkDanger: true,
 
       nzOnOk: () => {
-        const sub2 = this.svc.deleteRecord(this.currentItem?.id).subscribe({
+        this.subscriptions.push( this.svc.deleteRecord(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
+            this.subscriptions.push( this.svc.fetchLatestRecords().subscribe((res:CarRecordList[]) => {
               this.currentItems = res;
-            });
+            }));
           },
           error: (error) => {
             this.message.error(error.status + ' ' + error.error.message);
           }
-        });
+        }));
       },
       nzCancelText: $localize`No`,
       nzOnCancel: () => {
@@ -94,5 +96,9 @@ export class CarRecordListComponent implements OnInit {
     }else {
       this.currentItem = item;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

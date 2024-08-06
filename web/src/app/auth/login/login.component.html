@@ -2,11 +2,11 @@
   <h1 class="greetings" i18n>Log in</h1>
   <div class="inner-content ">
     <form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
-      <vfm-form-item label="Username" [labelSpan]="6" [controlSpan]="18" i18n-label>
+      <vfm-form-item label="Username" [labelSpan]="10" [controlSpan]="14" i18n-label>
         <vfm-text-input id="username" formControlName="username" prefixIcon="user"></vfm-text-input>
       </vfm-form-item>
 
-      <vfm-form-item label="Password" [labelSpan]="6" [controlSpan]="18" i18n-label>
+      <vfm-form-item label="Password" [labelSpan]="10" [controlSpan]="14" i18n-label>
         <vfm-text-input
           [type]="passwordVisible ? 'text' : 'password'"
           [suffix]="suffixTemplate"

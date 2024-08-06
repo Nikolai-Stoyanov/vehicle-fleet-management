@@ -66,7 +66,7 @@ export class MenuComponent implements OnInit {
           permission: 'ALL',
         },
         {
-          title: $localize`Car persons`,
+          title: $localize`Persons`,
           icon: 'user-add',
           routerLink: '/car-persons',
           permission: 'ALL',

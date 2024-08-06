@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     if (this.loginForm.valid) {
-      const sub1 = this.authService.login(this.loginForm.getRawValue()).subscribe(
+      this.subscriptions.push( this.authService.login(this.loginForm.getRawValue()).subscribe(
         () => {
             this.router.navigate(['/home']).then(() => {
               window.location.reload();
@@ -50,8 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log(error);
           this.message.error(error.status + " "+error.error.message);
         }
-      );
-      this.subscriptions.push(sub1);
+      ));
     }
     this.loading = false;
   }
