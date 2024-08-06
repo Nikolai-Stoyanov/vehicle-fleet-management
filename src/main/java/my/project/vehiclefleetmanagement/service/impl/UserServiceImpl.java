@@ -7,6 +7,7 @@ import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
 import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
+import my.project.vehiclefleetmanagement.security.UserAuthenticationProvider;
 import my.project.vehiclefleetmanagement.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -25,37 +26,40 @@ public class UserServiceImpl implements UserService {
     private final UserRolesRepository userRolesRepository;
     private final UserMapper userMapper;
     private final ModelMapper modelMapper;
+    private final UserAuthenticationProvider userAuthenticationProvider;
 
     public UserServiceImpl(
             PasswordEncoder passwordEncoder,
             UserRepository userRepository,
             UserRolesRepository userRolesRepository,
             UserMapper userMapper,
-            ModelMapper modelMapper
+            ModelMapper modelMapper, UserAuthenticationProvider userAuthenticationProvider
     ) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRolesRepository = userRolesRepository;
         this.userMapper = userMapper;
         this.modelMapper = modelMapper;
+        this.userAuthenticationProvider = userAuthenticationProvider;
     }
 
 
     @Override
     public UserDto login(CredentialsDto credentialsDto) {
-        UserEntity user = userRepository.findByUsername(credentialsDto.username())
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(credentialsDto.username());
 
-        if (passwordEncoder.matches(credentialsDto.password(), user.getPassword())) {
-            return userMapper.toUserDto(user);
+        if (optionalUser.isEmpty() || !passwordEncoder.matches(credentialsDto.password(), optionalUser.get().getPassword())) {
+            throw new AppException("Invalid username or password", HttpStatus.BAD_REQUEST);
         }
-        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+        UserDto userDto = userMapper.toUserDto(optionalUser.get());
+        userDto.setToken(userAuthenticationProvider.createToken(userDto));
+        return userDto;
     }
 
     @Override
     public UserDto register(SignUpDto signUpDto) {
-        Optional<UserEntity> optionalUser = userRepository.findByUsernameOrEmail(signUpDto.getUsername(),signUpDto.getEmail());
-        boolean isPasswordsSame=signUpDto.getPassword().equals(signUpDto.getConfirmPassword());
+        Optional<UserEntity> optionalUser = userRepository.findByUsernameOrEmail(signUpDto.getUsername(), signUpDto.getEmail());
+        boolean isPasswordsSame = signUpDto.getPassword().equals(signUpDto.getConfirmPassword());
         if (optionalUser.isPresent()) {
             throw new AppException("User already exists", HttpStatus.BAD_REQUEST);
         }
@@ -66,10 +70,10 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userMapper.signUpToUser(signUpDto);
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         Optional<UserRole> userRole;
-        if (!userRepository.findAll().isEmpty()){
-             userRole=this.userRolesRepository.findById(2L);
-        }else {
-             userRole=this.userRolesRepository.findById(1L);
+        if (!userRepository.findAll().isEmpty()) {
+            userRole = this.userRolesRepository.findById(2L);
+        } else {
+            userRole = this.userRolesRepository.findById(1L);
         }
         user.setRoles(List.of(userRole.get()));
         UserEntity savedUser = userRepository.save(user);
@@ -85,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserListDTO> getAllUsers() {
-        List<UserEntity> userEntityList=  userRepository.findAll();
+        List<UserEntity> userEntityList = userRepository.findAll();
         List<UserListDTO> userListDTOS = new ArrayList<>();
         for (UserEntity user : userEntityList) {
             UserListDTO userListDTO = modelMapper.map(user, UserListDTO.class);
@@ -108,19 +112,19 @@ public class UserServiceImpl implements UserService {
             throw new AppException("User is not found!", HttpStatus.NOT_FOUND);
         }
         Optional<UserEntity> userByEmail = this.userRepository.findByEmail(userEditDTO.getEmail());
-        if (!Objects.equals(userEditDTO.getEmail(), userEntityOptional.get().getEmail()) &&  userByEmail.isPresent()) {
+        if (!Objects.equals(userEditDTO.getEmail(), userEntityOptional.get().getEmail()) && userByEmail.isPresent()) {
             throw new AppException(
-                    String.format("User with email %s is already exists!",userEditDTO.getEmail()),
+                    String.format("User with email %s is already exists!", userEditDTO.getEmail()),
                     HttpStatus.BAD_REQUEST);
         }
         Optional<UserEntity> userByUsername = this.userRepository.findByUsername(userEditDTO.getUsername());
         if (!Objects.equals(userEditDTO.getUsername(), userEntityOptional.get().getUsername()) && userByUsername.isPresent()) {
             throw new AppException(
-                    String.format("User with username %s is already exists!",userEditDTO.getUsername()),
+                    String.format("User with username %s is already exists!", userEditDTO.getUsername()),
                     HttpStatus.BAD_REQUEST);
         }
 
-        UserEntity user=userEntityOptional.get();
+        UserEntity user = userEntityOptional.get();
         user.setUsername(userEditDTO.getUsername());
         user.setEmail(userEditDTO.getEmail());
         List<UserRole> userRoles = new ArrayList<>();
@@ -137,7 +141,7 @@ public class UserServiceImpl implements UserService {
     public UserByIdDto getUserById(Long id) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
         return userEntityOptional.map(user -> modelMapper.map(user, UserByIdDto.class))
-                .orElseThrow( () -> new AppException("User is not found!", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new AppException("User is not found!", HttpStatus.NOT_FOUND));
     }
 
     @Override
@@ -152,7 +156,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserRoleDto> getAllRoles() {
-        List<UserRole> userRoles=  userRolesRepository.findAll();
+        List<UserRole> userRoles = userRolesRepository.findAll();
         List<UserRoleDto> userRoleDtos = new ArrayList<>();
         for (UserRole role : userRoles) {
             userRoleDtos.add(modelMapper.map(role, UserRoleDto.class));

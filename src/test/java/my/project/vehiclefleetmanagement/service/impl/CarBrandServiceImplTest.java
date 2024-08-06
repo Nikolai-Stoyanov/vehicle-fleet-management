@@ -237,7 +237,7 @@ public class CarBrandServiceImplTest {
                 () -> toTest.updateBrand(id, carBrandEditDTO)
         );
 
-        String expectedMessage = "Car brand with name Honda is already exists";
+        String expectedMessage = "Car brand with this name already exists!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }

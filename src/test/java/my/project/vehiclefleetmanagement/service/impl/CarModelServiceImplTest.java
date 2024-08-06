@@ -128,8 +128,8 @@ public class CarModelServiceImplTest {
                                  List.of(new CarModel()), true), true)
         );
         List<CarModelListDTO> carModelListDTOS = List.of(
-                new CarModelListDTO(1, "Corsa", "", "2024-08-01", "Opel", true),
-                new CarModelListDTO(2, "Ka", "", "2024-08-01", "Ford", true)
+                new CarModelListDTO(1, "Corsa", "", LocalDate.now().toString(), "Opel", true),
+                new CarModelListDTO(2, "Ka", "", LocalDate.now().toString(), "Ford", true)
         );
         CarBrand carBrand = new CarBrand("Opel", "Opel", "Opel",
                 List.of(new CarModel()), true);
@@ -149,7 +149,7 @@ public class CarModelServiceImplTest {
         CarModel carModel = new CarModel("Opel", "Opel", LocalDate.now(),
                 new CarBrand(), true);
 
-        CarModelDTO carModelDTO = new CarModelDTO(1, "Opel", "Opel", "2024-08-01",
+        CarModelDTO carModelDTO = new CarModelDTO(1, "Opel", "Opel", LocalDate.now().toString(),
               new BrandDTO(), true);
 
         Long id = 1L;

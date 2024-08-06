@@ -18,4 +18,8 @@ spring:
     init:
       mode: never
 
-security.jwt.token.secret-key: my-secret-key
+security.jwt.token.secret-key: my-key
+
+
+#current-language: en
+current-language: bg

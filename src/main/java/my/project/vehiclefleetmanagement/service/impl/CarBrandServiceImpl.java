@@ -1,5 +1,6 @@
 package my.project.vehiclefleetmanagement.service.impl;
 
+import my.project.vehiclefleetmanagement.config.Messages;
 import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandCreateDTO;
 import my.project.vehiclefleetmanagement.model.dtos.nomenclatures.carBrand.CarBrandDTO;
@@ -33,12 +34,12 @@ public class CarBrandServiceImpl implements CarBrandService {
         Optional<CarBrand> carBrandOptional = this.carBrandRepository.findByName( carBrandCreateDTO.getName());
 
         if (carBrandOptional.isPresent()) {
-            throw new AppException("Car brand already exists", HttpStatus.BAD_REQUEST);
+            throw new AppException(Messages.getLocaleMessage("Car_brand_already_exists!"), HttpStatus.BAD_REQUEST);
         }
 
         CarBrand mappedEntity = modelMapper.map(carBrandCreateDTO, CarBrand.class);
         this.carBrandRepository.save(mappedEntity);
-        throw new AppException("Car brand successfully created", HttpStatus.OK);
+        throw new AppException(Messages.getLocaleMessage("Car_brand_successfully_created!"), HttpStatus.OK);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class CarBrandServiceImpl implements CarBrandService {
     public CarBrandDTO getBrandById(Long id) {
         Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById(id);
         if (carBrandOptional.isEmpty()) {
-            throw new AppException("Car brand is not found!", HttpStatus.NOT_FOUND);
+            throw new AppException(Messages.getLocaleMessage("Car_brand_is_not_found!"), HttpStatus.NOT_FOUND);
         }
         return carBrandOptional
                 .map(carBrand -> modelMapper.map(carBrand, CarBrandDTO.class))
@@ -74,23 +75,23 @@ public class CarBrandServiceImpl implements CarBrandService {
     public void deleteBrand(Long id) {
         Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById(id);
         if (carBrandOptional.isEmpty()) {
-            throw new AppException("Car brand is not found!", HttpStatus.NOT_FOUND);
+            throw new AppException(Messages.getLocaleMessage("Car_brand_is_not_found!"), HttpStatus.NOT_FOUND);
         }
         this.carBrandRepository.deleteById(id);
-        throw new AppException("Car brand successfully deleted!", HttpStatus.OK);
+        throw new AppException(Messages.getLocaleMessage("Car_brand_successfully_deleted!"), HttpStatus.OK);
     }
 
     @Override
     public void updateBrand(Long id, CarBrandEditDTO carBrandEditDTO) {
         Optional<CarBrand> carBrandOptional = this.carBrandRepository.findById(carBrandEditDTO.getId());
         if (carBrandOptional.isEmpty()) {
-            throw new AppException("Car brand is not found!", HttpStatus.NOT_FOUND);
+            throw new AppException(Messages.getLocaleMessage("Car_brand_is_not_found!"), HttpStatus.NOT_FOUND);
         }
 
         Optional<CarBrand> brandByName = this.carBrandRepository.findByName(carBrandEditDTO.getName());
         if (!Objects.equals(carBrandEditDTO.getName(), carBrandOptional.get().getName()) && brandByName.isPresent()) {
             throw new AppException(
-                    String.format("Car brand with name %s is already exists!",carBrandEditDTO.getName()),
+                    Messages.getLocaleMessage("Car_brand_with_this_name_already_exists!"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -98,6 +99,6 @@ public class CarBrandServiceImpl implements CarBrandService {
         mappedEntity.setModels(carBrandOptional.get().getModels());
         this.carBrandRepository.save(mappedEntity);
 
-        throw new AppException("Car brand successfully updated!", HttpStatus.OK);
+        throw new AppException(Messages.getLocaleMessage("Car_brand_successfully_updated!"), HttpStatus.OK);
     }
 }

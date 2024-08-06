@@ -2,9 +2,12 @@ package my.project.vehiclefleetmanagement.security;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import my.project.vehiclefleetmanagement.config.UserMapper;
+import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.user.UserDto;
-import my.project.vehiclefleetmanagement.service.UserService;
+import my.project.vehiclefleetmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -21,14 +24,13 @@ import java.util.Date;
 @Component
 public class UserAuthenticationProvider {
 
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
 
-    private final UserService userService;
-
     @PostConstruct
     protected void init() {
-        // this is to avoid having the raw secret key available in the JVM
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
@@ -69,7 +71,8 @@ public class UserAuthenticationProvider {
 
         DecodedJWT decoded = verifier.verify(token);
 
-        UserDto user = userService.findByUsername(decoded.getSubject());
+        UserDto user = userMapper.toUserDto(userRepository.findByUsername(decoded.getSubject())
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND)));
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }

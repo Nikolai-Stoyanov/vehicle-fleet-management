@@ -8,6 +8,7 @@ import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
 import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
 import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
+import my.project.vehiclefleetmanagement.security.UserAuthenticationProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,8 @@ public class UserServiceImplTest {
     private UserMapper mockUserMapper;
     @Mock
     private UserRolesRepository mockUserRolesRepository;
+    @Mock
+    private  UserAuthenticationProvider userAuthenticationProvider;
 
 
     @BeforeEach
@@ -52,7 +55,8 @@ public class UserServiceImplTest {
                 mockUserRepository,
                 mockUserRolesRepository,
                 mockUserMapper,
-                new ModelMapper());
+                new ModelMapper(),
+                userAuthenticationProvider);
     }
 
     @Test
@@ -138,19 +142,30 @@ public class UserServiceImplTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+    private Long id;
+    private String username;
+    private String email;
+    private String token;
+    private List<UserRoleDto> roles;
 
     @Test
     void testUserLogin() {
         UserEntity user = new UserEntity("pesho@example.com", "1234", "Pesho", List.of(new UserRole(1L, UserRoleEnum.ADMIN)));
         CredentialsDto credentialsDto = new CredentialsDto("Pesho", "1234");
-
+        UserDto userDto=new UserDto(1l,"Pesho","pesho@example.com", "", List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN)));
+        UserDto userDtoWithToken=new UserDto(1l,"Pesho","pesho@example.com", "token", List.of(new UserRoleDto(1L, UserRoleEnum.ADMIN)));
         when(mockUserRepository.findByUsername(credentialsDto.username()))
                 .thenReturn(Optional.of(user));
         when(mockPasswordEncoder.matches(credentialsDto.password(), user.getPassword()))
                 .thenReturn(Objects.equals(credentialsDto.password(), user.getPassword()));
+        when(mockUserMapper.toUserDto(user))
+                .thenReturn(userDto);
+        when(userAuthenticationProvider.createToken(userDto))
+                .thenReturn(String.valueOf(userDtoWithToken));
 
         toTest.login(credentialsDto);
-        Assertions.assertEquals(credentialsDto.username(), user.getUsername());
+        Assertions.assertEquals(userDto.getUsername(), user.getUsername());
+        Assertions.assertEquals(userDto.getEmail(), user.getEmail());
     }
 
     @Test
@@ -185,7 +200,7 @@ public class UserServiceImplTest {
                 () -> toTest.login(credentialsDto)
         );
 
-        String expectedMessage = "Invalid password";
+        String expectedMessage = "Invalid username or password";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
