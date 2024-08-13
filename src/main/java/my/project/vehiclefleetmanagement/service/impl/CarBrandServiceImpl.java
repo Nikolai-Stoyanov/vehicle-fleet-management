@@ -43,8 +43,8 @@ public class CarBrandServiceImpl implements CarBrandService {
     }
 
     @Override
-    public List<CarBrandListDTO> getAllBrands() {
-      List<CarBrand> carBrandList=  carBrandRepository.findAll();
+    public List<CarBrandListDTO> getAllBrands(String filter) {
+      List<CarBrand> carBrandList=  carBrandRepository.findAll(filter);
       List<CarBrandListDTO> carBrandListDTOs = new ArrayList<>();
       for (CarBrand carBrand : carBrandList) {
           CarBrandListDTO carBrandListDTO = modelMapper.map(carBrand, CarBrandListDTO.class);

@@ -23,8 +23,8 @@ public class CarBrandController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CarBrandListDTO>> getAllBrands() {
-        return ResponseEntity.ok(carBrandService.getAllBrands());
+    public ResponseEntity<List<CarBrandListDTO>> getAllBrands(@RequestParam(required = false) String filter) {
+        return ResponseEntity.ok(carBrandService.getAllBrands(filter));
     }
 
     @PostMapping

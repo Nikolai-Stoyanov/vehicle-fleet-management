@@ -267,8 +267,8 @@ public class DeclarationServiceImplTest {
         );
         List<DeclarationListDTO> declarationListDTOS =
                 List.of(
-                        new DeclarationListDTO(1, "Aug.2024", "2024-08-01","Asen Ivanov","Milen Vasilev","C0030CB"),
-                        new DeclarationListDTO(2, "Jul.2024", "2024-08-01","Asen Ivanov","Milen Vasilev","B0030CB" ));
+                        new DeclarationListDTO(1, "Aug.2024", LocalDate.now().toString(),"Asen Ivanov","Milen Vasilev","C0030CB"),
+                        new DeclarationListDTO(2, "Jul.2024", LocalDate.now().toString(),"Asen Ivanov","Milen Vasilev","B0030CB" ));
 
         List<Declaration> declarations =
                 List.of(
@@ -313,7 +313,7 @@ public class DeclarationServiceImplTest {
         FuelSupplier fuelSupplier = new FuelSupplier("OMV", "", List.of(new FuelEntity()), true);
 
         DeclarationDTO declarationDTO =
-                new DeclarationDTO(1, "Aug.2024", "2024-08-01", 1000, 1500,
+                new DeclarationDTO(1, "Aug.2024", LocalDate.now().toString(), 1000, 1500,
                         "Petar Petrov","C0030CB","DIESEL", new FuelDTO(), new FuelSupplierDTO(),
                         30, 3,"User", "", "", "");
 
