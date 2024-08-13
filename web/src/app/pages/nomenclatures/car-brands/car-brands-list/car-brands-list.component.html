@@ -10,7 +10,7 @@
     [titleTemplate]="titleTemplate"
   >
   </vfm-dummy-table-checkboxes>
-  <div nz-row nzGutter="10"  style="margin: 0.5em;">
+  <div nz-row nzGutter="10" style="margin: 0.5em;">
     <div nz-col>
       <button nz-button nzType="default" type="button" id="addButton" (click)="editBrand()">
         <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
@@ -46,5 +46,18 @@
   </div>
 </div>
 <ng-template #titleTemplate>
-  <span style="font-weight: 900;font-style: italic" i18n>Brands table</span>
+
+  <div nz-row nzJustify="space-between">
+    <div nz-col nzSpan="6" style="font-weight: 900;font-style: italic;align-content: center">
+      <span i18n>Brands table</span>
+    </div>
+    <div nz-col nzSpan="6">
+      <vfm-search-input
+        (input)="onSearch($event)"
+        [delay]="200"
+        [minInputLength]="2"
+      ></vfm-search-input>
+    </div>
+
+  </div>
 </ng-template>

@@ -1,0 +1,23 @@
+nz-input-group{
+  &::ng-deep span.ant-input-group-addon:last-child{
+    background: #a0d6bf;
+    color: #cce7ff;
+    border-radius: 0 8px 8px 0!important;
+    &:hover {
+      background: #cce7ff;
+      color: #a0d6bf;
+    }
+    &::ng-deep .search-icon{
+      width: 100%;
+      padding: 8px;
+    }
+
+  }
+
+  &::ng-deep input {
+    border-radius: 8px 0 0 8px!important;
+    width: 100%;
+    padding: 4px 11px;
+  }
+}
+
