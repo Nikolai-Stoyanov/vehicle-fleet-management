@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
-import { CarBrandsFormComponent } from '../car-brands-form';
-import { CarBrandsService } from '../car-brands.service';
+import {CarBrandsFormComponent} from '../car-brands-form';
+import {CarBrandsService} from '../car-brands.service';
 import {CarBrand} from "../car-brands";
 
-import { TableColumnInterface } from '../../../../shared/dummy-table';
+import {TableColumnInterface} from '../../../../shared/dummy-table';
 import {Subscription} from "rxjs";
 
 @Component({
@@ -18,7 +18,7 @@ import {Subscription} from "rxjs";
 export class CarBrandsListComponent implements OnInit, OnDestroy {
 
   public currentItems: CarBrand[] | undefined;
-  public currentItem:any;
+  public currentItem: any;
   public allTableColumns: TableColumnInterface[] = [];
   public loading = false;
   public subscriptions: Subscription[] = [];
@@ -27,15 +27,20 @@ export class CarBrandsListComponent implements OnInit, OnDestroy {
     private svc: CarBrandsService,
     private message: NzMessageService,
     private modalService: NzModalService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.subscriptions.push(this.svc.getColumns().subscribe((res) => {
       this.allTableColumns = res;
     }));
 
+    this.getData();
+  }
+
+  getData(filter?: string) {
     this.loading = true;
-    this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
+    this.subscriptions.push(this.svc.fetchLatest(filter).subscribe((res) => {
       this.currentItems = res;
       this.loading = false;
     }));
@@ -52,7 +57,7 @@ export class CarBrandsListComponent implements OnInit, OnDestroy {
       nzTitle: title,
       nzContent: CarBrandsFormComponent,
       nzWidth: '40vw',
-      nzStyle: { top: '0' },
+      nzStyle: {top: '0'},
       nzData: {
         currentItem: item,
       },
@@ -60,8 +65,8 @@ export class CarBrandsListComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push(modal.afterClose.subscribe(() => {
       this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
-          this.currentItems = res;
-        }));
+        this.currentItems = res;
+      }));
     }));
   }
 
@@ -75,7 +80,7 @@ export class CarBrandsListComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.svc.deleteBrand(this.currentItem?.id).subscribe({
           next: (res) => {
             this.message.success(res.message);
-            this.subscriptions.push( this.svc.fetchLatest().subscribe((res) => {
+            this.subscriptions.push(this.svc.fetchLatest().subscribe((res) => {
               this.currentItems = res;
             }));
           },
@@ -91,11 +96,15 @@ export class CarBrandsListComponent implements OnInit, OnDestroy {
   }
 
   currentItemSelect(item: any) {
-    if (item.id===this.currentItem?.id){
-      this.currentItem=null
-    }else {
+    if (item.id === this.currentItem?.id) {
+      this.currentItem = null
+    } else {
       this.currentItem = item;
     }
+  }
+
+  public onSearch(query: string) {
+    this.getData(query);
   }
 
   ngOnDestroy() {

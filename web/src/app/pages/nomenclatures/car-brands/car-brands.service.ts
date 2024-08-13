@@ -70,44 +70,8 @@ export class CarBrandsService {
       showSortFn: true,
       type: 'status',
       align: 'center',
-      right: true
     }
 
-  ];
-
-  public carBrandsListData: CarBrand[] = [
-    {
-      id: 1,
-      name: 'Skoda',
-      description: '',
-      company: 'Skoda Auto',
-      models: ['Octavia'],
-      status: true
-    },
-    {
-      id: 2,
-      name: 'Ford',
-      description: '',
-      company: 'Ford Motor Company',
-      models: ['Ranger','Transit'],
-      status: true
-    },
-    {
-      id: 3,
-      name: 'Dacia',
-      description: '',
-      company: 'Dacia',
-      models:[ 'Duster','Dokker','Logan','Lodgy','Sandero'],
-      status: true
-    },
-    {
-      id: 4,
-      name: 'Toyota',
-      description: '',
-      company: 'Toyota Motor Corporation',
-      models: ['Hilux'],
-      status: false
-    },
   ];
 
   constructor(private http: HttpClient) {}
@@ -118,8 +82,8 @@ export class CarBrandsService {
 
   // data
 
-  fetchLatest(): Observable<any> {
-    return this.http.get<any>(`${this.endpoint}`)
+  fetchLatest(filter:string=''): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}?filter=${filter}`)
   }
 
   fetchBrandById(brandId: number): Observable<any> {

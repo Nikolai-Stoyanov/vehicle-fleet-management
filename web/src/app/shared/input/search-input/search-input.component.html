@@ -1,0 +1,17 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+  <input
+    type="text"
+    nz-input
+    [placeholder]="placeholder"
+    class="search-input"
+    (input)="onInput($event)"
+    (keyup.enter)="onInput($event)"
+    [ngClass]="{ removeBorderRadiusForSuffix: suffixIconButton }"
+    #input
+  />
+</nz-input-group>
+<ng-template #suffixIconButton>
+
+    <i nz-icon class="search-icon" nzType="search" (click)="onIconClick(input)"></i>
+
+</ng-template>

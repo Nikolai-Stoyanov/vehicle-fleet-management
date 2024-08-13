@@ -17,6 +17,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { CarBrandsListComponent } from './car-brands-list.component';
 import {DummyTableCheckboxesModule} from "../../../../shared/dummy-table";
+import {SearchInputModule} from "../../../../shared/input/search-input";
 
 @NgModule({
   declarations: [CarBrandsListComponent],
@@ -33,7 +34,8 @@ import {DummyTableCheckboxesModule} from "../../../../shared/dummy-table";
         NzPaginationModule,
         NzGridModule,
         NzToolTipModule,
-        DummyTableCheckboxesModule
+        DummyTableCheckboxesModule,
+        SearchInputModule
     ],
   exports: [CarBrandsListComponent],
   providers: [NzMessageService]
