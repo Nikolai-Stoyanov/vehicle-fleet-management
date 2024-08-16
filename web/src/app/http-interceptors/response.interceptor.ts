@@ -37,7 +37,6 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler, errorObj: any): Observable<any> {
     this.authService.isTokenValid();
-    console.log(errorObj)
     this.message.error(errorObj.status + " " + errorObj.error.message);
     return throwError(errorObj);
   }
