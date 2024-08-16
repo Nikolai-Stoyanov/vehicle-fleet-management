@@ -1,17 +1,16 @@
 package my.project.vehiclefleetmanagement.repository;
 
-import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
+import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRolesRepository extends JpaRepository<UserRole, Long> {
 
 
-    UserRole findByRole(String role);
+    UserRole findByRole(UserRoleEnum role);
     List<UserRole> findAll();
 }

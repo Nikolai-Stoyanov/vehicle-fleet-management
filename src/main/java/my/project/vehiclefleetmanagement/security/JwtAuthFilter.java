@@ -40,8 +40,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     }
                 } catch (RuntimeException e) {
                     SecurityContextHolder.clearContext();
-//                    throw e;
-                    throw new AppException("The Token has expired!", HttpStatus.UNAUTHORIZED);
+                    throw e;
+//                    throw new AppException("The Token has expired!", HttpStatus.UNAUTHORIZED);
                 }
             }
         }

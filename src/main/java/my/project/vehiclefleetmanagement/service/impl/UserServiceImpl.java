@@ -5,12 +5,15 @@ import my.project.vehiclefleetmanagement.exceptions.AppException;
 import my.project.vehiclefleetmanagement.model.dtos.user.*;
 import my.project.vehiclefleetmanagement.model.entity.user.UserEntity;
 import my.project.vehiclefleetmanagement.model.entity.user.UserRole;
+import my.project.vehiclefleetmanagement.model.enums.UserRoleEnum;
 import my.project.vehiclefleetmanagement.repository.UserRepository;
 import my.project.vehiclefleetmanagement.repository.UserRolesRepository;
 import my.project.vehiclefleetmanagement.security.UserAuthenticationProvider;
 import my.project.vehiclefleetmanagement.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +91,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isAdmin() {
+        List<UserRoleDto> roles = ((UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+                .getRoles();
+        for (UserRoleDto role : roles) {
+            if (role.getRole().equals(UserRoleEnum.ADMIN)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    @PreAuthorize("@userServiceImpl.isAdmin()")
     public List<UserListDTO> getAllUsers() {
         List<UserEntity> userEntityList = userRepository.findAll();
         List<UserListDTO> userListDTOS = new ArrayList<>();
@@ -106,6 +122,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("@userServiceImpl.isAdmin()")
     public void updateUser(Long id, UserEditDTO userEditDTO) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
         if (userEntityOptional.isEmpty()) {
@@ -138,6 +155,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("@userServiceImpl.isAdmin()")
     public UserByIdDto getUserById(Long id) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
         return userEntityOptional.map(user -> modelMapper.map(user, UserByIdDto.class))
@@ -145,6 +163,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("@userServiceImpl.isAdmin()")
     public void deleteUser(Long id) {
         Optional<UserEntity> userEntityOptional = this.userRepository.findById(id);
         if (userEntityOptional.isEmpty()) {
@@ -155,6 +174,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("@userServiceImpl.isAdmin()")
     public List<UserRoleDto> getAllRoles() {
         List<UserRole> userRoles = userRolesRepository.findAll();
         List<UserRoleDto> userRoleDtos = new ArrayList<>();
