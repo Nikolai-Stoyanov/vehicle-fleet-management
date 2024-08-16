@@ -25,6 +25,10 @@ export class AuthenticationService {
   }
 
   public get currentUserValue(): any {
+
+    if(this.currentUserSubject.value){
+      this.isTokenValid();
+    }
     return this.currentUserSubject.value;
   }
 
@@ -65,6 +69,7 @@ export class AuthenticationService {
   isTokenValid() {
     // @ts-ignore
     const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
     if (token) {
       let claims;
       try {
@@ -73,7 +78,7 @@ export class AuthenticationService {
         console.log(error);
       }
       const now = Date.now()
-      if (now < claims.exp) {
+      if (Math.floor(now/1000) < claims.exp) {
         return;
       }
     }
