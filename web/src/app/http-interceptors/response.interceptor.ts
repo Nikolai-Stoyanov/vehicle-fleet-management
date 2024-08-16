@@ -4,6 +4,7 @@ import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from '@ang
 import {catchError} from 'rxjs/operators';
 import {throwError, Observable} from 'rxjs';
 import {AuthenticationService} from "../auth/auth.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 
 @Injectable({providedIn: 'root'})
@@ -11,6 +12,7 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   constructor(
     private authService: AuthenticationService,
+    private message: NzMessageService,
   ) {
   }
 
@@ -35,6 +37,7 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler, errorObj: any): Observable<any> {
     this.authService.isTokenValid();
+    this.message.error(errorObj.status + " " + errorObj.error.message);
     return throwError(errorObj);
   }
 
