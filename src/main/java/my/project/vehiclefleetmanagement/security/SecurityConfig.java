@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers( "/user/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                        .requestMatchers( "/login", "/register", "/swagger-ui/**", "swagger-ui.html", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
         ;
         return http.build();

@@ -11,7 +11,7 @@ public interface CarBrandService {
 
     void createBrand(CarBrandCreateDTO carBrandCreateDTO);
 
-    List<CarBrandListDTO> getAllBrands();
+    List<CarBrandListDTO> getAllBrands(String filter);
 
     CarBrandDTO getBrandById(Long id);
 

@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  backend:
+    depends_on: [db]
+    image:
+    ports:
+      - "8080:8080"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+  frontend:
+    depends_on: [backend]
+    image:
+    ports:
+      - "8081:8081"

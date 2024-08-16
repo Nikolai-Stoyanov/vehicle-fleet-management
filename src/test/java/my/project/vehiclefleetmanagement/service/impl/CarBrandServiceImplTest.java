@@ -103,9 +103,9 @@ public class CarBrandServiceImplTest {
                 new CarBrandListDTO(2, "Ford", "", "Ford", List.of("Ka"), true)
         );
 
-        when(mockCarBrandRepository.findAll()).thenReturn(carBrandList);
+        when(mockCarBrandRepository.findAll("")).thenReturn(carBrandList);
 
-        List<CarBrandListDTO> result=  toTest.getAllBrands();
+        List<CarBrandListDTO> result=  toTest.getAllBrands("");
 
         Assertions.assertEquals(carBrandListDTOS.toArray().length, result.toArray().length);
         Assertions.assertEquals(carBrandListDTOS.get(0).getName(), result.get(0).getName());
